@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Network ID="Fighters" Version="0.0.0">
+  <Node FactoryPath="container.chain" ID="Fighters" Bypassed="0">
+    <Nodes>
+      <Node ID="gain" FactoryPath="core.gain" Bypassed="0">
+        <Parameters>
+          <Parameter MinValue="-100.0" MaxValue="36.0" StepSize="0.1000000014901161"
+                     SkewFactor="5.422270774841309" ID="Gain" Value="1.490116119384766e-6"/>
+          <Parameter MinValue="0.0" MaxValue="1000.0" StepSize="0.1000000014901161"
+                     SkewFactor="0.3010300099849701" ID="Smoothing" Value="20.0"/>
+          <Parameter MinValue="-100.0" MaxValue="0.0" StepSize="0.1000000014901161"
+                     SkewFactor="5.422270774841309" ID="ResetValue" Value="0.0"/>
+        </Parameters>
+      </Node>
+      <Node ID="faust" FactoryPath="core.faust" Bypassed="0">
+        <Properties>
+          <Property ID="ClassId" Value="Transient"/>
+          <Property ID="NumParameters" Value="1"/>
+        </Properties>
+        <Parameters>
+          <Parameter MinValue="-12.0" MaxValue="12.0" StepSize="0.1000000014901161"
+                     ID="Attack" Value="3.700000233948231"/>
+          <Parameter MinValue="-12.0" MaxValue="12.0" StepSize="0.1000000014901161"
+                     ID="Sustain" Value="2.70000021904707"/>
+          <Parameter MinValue="10.0" MaxValue="20000.0" StepSize="10.0" ID="Low Cutoff"
+                     Value="10.0"/>
+          <Parameter MinValue="20.0" MaxValue="20000.0" StepSize="10.0" ID="High Cutoff"
+                     Value="20000.0"/>
+          <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Monitor selected band"
+                     Value="0.0"/>
+        </Parameters>
+        <SwitchTargets>
+          <SwitchTarget>
+            <Connections/>
+          </SwitchTarget>
+        </SwitchTargets>
+      </Node>
+      <Node ID="branch" FactoryPath="container.branch" Bypassed="0">
+        <Nodes/>
+        <Parameters>
+          <Parameter MinValue="0.0" MaxValue="10.0" StepSize="1.0" ID="Index" Value="0.0"/>
+        </Parameters>
+      </Node>
+    </Nodes>
+    <Parameters/>
+  </Node>
+</Network>
