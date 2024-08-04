@@ -9,19 +9,26 @@
         <Processor Type="ScriptProcessor" ID="Interface" Bypassed="0">
           <ChildProcessors/>
           <Content>
-            <Control type="ScriptSlider" id="Boxer_Punch_knb" value="0.3600000143051147"/>
-            <Control type="ScriptSlider" id="Boxer_Wut_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Boxer_Speed_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Karate_Sustain_knb" value="0.1299999952316284"/>
-            <Control type="ScriptSlider" id="Karate_Focus_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Karate_Air_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Sumo_Heavy_knb" value="0.4399999976158142"/>
-            <Control type="ScriptSlider" id="Sumo_Weight_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.1000000014901161"/>
-            <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.0"/>
+            <Control type="ScriptButton" id="Limit_Button" value="1.0"/>
+            <Control type="ScriptSlider" id="Boxer_Punch_knb" value="0.5899999737739563"/>
+            <Control type="ScriptSlider" id="Boxer_Wut_knb" value="0.449999988079071"/>
+            <Control type="ScriptButton" id="Boxer_6oz_knb" value="0.0"/>
+            <Control type="ScriptSlider" id="Karate_Speed_knb" value="0.7424054741859436"/>
+            <Control type="ScriptSlider" id="Karate_Focus_knb" value="0.2564509809017181"/>
+            <Control type="ScriptSlider" id="Karate_Pressure_knb" value="0.5047571659088135"/>
+            <Control type="ScriptSlider" id="Karate_Air_knb" value="0.9609062075614929"/>
+            <Control type="ScriptSlider" id="Sumo_Heavy_knb" value="0.7290315628051758"/>
+            <Control type="ScriptSlider" id="Sumo_Weight_knb" value="0.8463829159736633"/>
+            <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.1153537109494209"/>
+            <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.3014573752880096"/>
             <Control type="ScriptButton" id="FX_1_btn" value="1.0"/>
             <Control type="ScriptButton" id="FX_2_btn" value="0"/>
             <Control type="ScriptButton" id="FX_3_btn" value="0"/>
+            <Control type="ScriptSlider" id="OutputPeakMeterFillL" value="-100.0"/>
+            <Control type="ScriptSlider" id="OutputPeakMeterPointL" value="-100.0"/>
+            <Control type="ScriptSlider" id="GainSlider" value="1.490116119384766e-6"/>
+            <Control type="ScriptButton" id="wtf_icon_btn" value="1.0"/>
+            <Control type="ScriptButton" id="Close_PresetBrowser_btn" value="0.0"/>
           </Content>
           <UIData Source="KOUIData"/>
         </Processor>
@@ -35,36 +42,30 @@
     </Processor>
     <Processor Type="EffectChain" ID="FX" Bypassed="0">
       <ChildProcessors>
-        <Processor Type="RouteFX" ID="Routing Matrix1" Bypassed="0">
+        <Processor Type="Hardcoded Master FX" ID="BoxerFX" Bypassed="0" Network="Boxer"
+                   Punch="0.5899999737739563" Wut="0.449999988079071" Mix="1.0"
+                   _16oz="0.0">
           <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="2" Channel1="1" Send1="3"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="Hardcoded Master FX" ID="Boxer" Bypassed="0" Network="Boxer"
-                   Punch="0.3600000143051147" Wut="0.0" Speed="0.0" Mix="1.0">
+        <Processor Type="Hardcoded Master FX" ID="KarateFX" Bypassed="1" Network="Karate"
+                   Focus="0.2564509809017181" Mix="1.0" Air="0.0" Pressure="1.0"
+                   Speed="0.7254596948623657">
           <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="Hardcoded Master FX" ID="Karate" Bypassed="1" Network="Karate"
-                   Sustain="0.1299999952316284" Focus="0.0" Mix="1.0" Air="0.0">
+        <Processor Type="Hardcoded Master FX" ID="SumoFX" Bypassed="1" Network="Sumo"
+                   Heavy="0.7290315628051758" Mix="1.0" Weight="0.8463829159736633"
+                   Stomp="0.1153537109494209" Crush="0.3014573752880096">
           <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="Hardcoded Master FX" ID="HardcodedMasterFX1" Bypassed="0"
-                   Network="No network">
+        <Processor Type="Hardcoded Master FX" ID="x" Bypassed="1" Network="wtf">
           <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="Hardcoded Master FX" ID="SoftClip" Bypassed="0" Network="ClipSoftly">
-          <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
-        </Processor>
-        <Processor Type="SimpleGain" ID="WetGain" Bypassed="0" Gain="0.0" Delay="0.0"
-                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
+        <Processor Type="SimpleGain" ID="OutGain" Bypassed="0" Gain="1.0354386859035e-6"
+                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
           <ChildProcessors>
             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
               <ChildProcessors/>
@@ -79,57 +80,27 @@
               <ChildProcessors/>
             </Processor>
           </ChildProcessors>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="SimpleGain" ID="DryGain" Bypassed="0" Gain="0.0" Delay="0.0"
-                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
-          <ChildProcessors>
-            <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Delay Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Width Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Pan Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-          </ChildProcessors>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
-        </Processor>
-        <Processor Type="RouteFX" ID="Routing Matrix2" Bypassed="0">
+        <Processor Type="Hardcoded Master FX" ID="SoftClip" Bypassed="1" Network="ClipSoftly">
           <ChildProcessors/>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="0" Channel3="-1" Send3="1"/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
         </Processor>
-        <Processor Type="SimpleGain" ID="OutGain" Bypassed="0" Gain="0.0" Delay="0.0"
-                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
-          <ChildProcessors>
-            <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Delay Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Width Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-            <Processor Type="ModulatorChain" ID="Pan Modulation" Bypassed="0" Intensity="1.0">
-              <ChildProcessors/>
-            </Processor>
-          </ChildProcessors>
-          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+        <Processor Type="ScriptFX" ID="Script FX1" Bypassed="0">
+          <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
+          <Content/>
+          <Networks>
+            <Network ID="Boxer" Version="0.0.0" AllowCompilation="1"/>
+          </Networks>
+          <UIData>
+            <ContentProperties DeviceType="Desktop"/>
+          </UIData>
         </Processor>
       </ChildProcessors>
     </Processor>
   </ChildProcessors>
-  <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
-                 Channel2="0" Send2="0" Channel3="1" Send3="1"/>
+  <RoutingMatrix NumSourceChannels="2" Channel0="0" Send0="-1" Channel1="1" Send1="-1"/>
   <macro_controls>
     <macro name="Macro 1" value="0.0" midi_cc="-1"/>
     <macro name="Macro 2" value="0.0" midi_cc="-1"/>

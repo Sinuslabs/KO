@@ -5,7 +5,7 @@ namespace Styles {
 	
 	inline function FXSelectorBtn_LAF(g, obj) {
 		
-		local a = StyleHelpers.addPadding(obj.area, 3);
+		local a = StyleHelpers.addPadding(obj.area, 8);
 		local innerA = StyleHelpers.addPadding(a, 3);
 		
 		if (obj.text === 'FX_1_btn') {
@@ -20,7 +20,7 @@ namespace Styles {
 			g.setColour(Primitives.Colors.Purple['500']);
 		}
 	
-		g.drawEllipse(a, 1);
+		g.drawEllipse(a, 2);
 		
 		if (obj.value) {
 			g.fillEllipse(innerA);
@@ -60,20 +60,108 @@ namespace Styles {
 		pathArea = [pathArea[0], pathArea[1], pathArea[2], pathArea[3]];
 		g.drawPath(arcPath_static, pathArea, a[2] * arcThickness );
 		
-		g.setColour(Theme.THEME.Colors.Display.on_display);
 		local arcPath_value = Content.createPath();
 		arcPath_value.addArc(
 			[arcThickness / 2, arcThickness / 2,arcWidth , arcWidth],
 			-start,
 			end
 		 );
+		 
+		 
+ 		g.setColour(Theme.THEME.Colors.Display.on_display);
 		
 		local pathArea2 = arcPath_value.getBounds(a[2]);
 		pathArea2 = [pathArea2[0], pathArea2[1], pathArea2[2], pathArea2[3]];
 		g.drawPath(arcPath_value, pathArea2, a[2] * arcThickness );
+		
+		
+		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		
+		g.setFont(Theme.Regular, 18);
+		g.drawAlignedText(text.toUpperCase(), text_area, 'centred');
+	}
 	
-		g.setFont(Theme.Regular, 14);
-		g.drawAlignedText(text, text_area, 'centred');
+	const var LAF_LimitBtn = Content.createLocalLookAndFeel();
+	LAF_LimitBtn.registerFunction('drawToggleButton', LimitBtn_LAF);
+	
+	inline function LimitBtn_LAF(g, obj) {
+		
+		local a = obj.area;
+		
+		local dotArea = [a[2] - 15, a[3] / 2 - 2.5, 5, 5];
+		
+		if (!obj.value) {
+			g.setColour(Primitives.Colors.Yellow['500']);
+		} else {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		g.setFont(Theme.Regular, 16);
+		g.drawAlignedText('LIMIT', a, 'left');
+		
+		g.fillEllipse(dotArea);
+		
+	}
+	
+	const LAF_displayButtonOutline = Content.createLocalLookAndFeel();
+	LAF_displayButtonOutline.registerFunction('drawToggleButton', displayButtonOutlineLAF);
+	
+	inline function displayButtonOutlineLAF(g, obj) {
+		
+		local a = obj.area;
+		local paddedA = StyleHelpers.addPadding(a, 1);
+		local textA = StyleHelpers.addPadding(paddedA, 9);
+		local BORDER_RADIUS = 2;
+		
+		if (obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		} else {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		}
+		
+		if (!obj.over) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		}
+		
+		g.drawRoundedRectangle(paddedA, BORDER_RADIUS, 2);
+		
+		if (obj.value) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+			g.fillRoundedRectangle(paddedA, BORDER_RADIUS);
+			g.setColour(Theme.THEME.Colors.Display.on_display_contrast);
+		}
+		
+		g.setFont(Theme.Regular, 16);
+		g.drawAlignedText(obj.text, textA, 'centred');
+	}
+	
+	const LAF_wtfBtn = Content.createLocalLookAndFeel();
+	LAF_wtfBtn.registerFunction("drawToggleButton", wtfLAF);
+	inline function wtfLAF(g, obj) {
+		
+		local a = [
+			9,
+			8,
+			15,
+			18
+		];
+		
+		local SIZE = 18;
+		
+		local width = a[2];
+		local height = a[3];
+		
+		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		
+		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
+		
+		
+		if (!obj.value) {
+			g.fillPath(Assets.get['wtf_selected'], a);
+		} else {
+			g.fillPath(Assets.get['wtf_outline'], a);
+		}
+		
 	}
 	
 }

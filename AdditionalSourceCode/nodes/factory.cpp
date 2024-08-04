@@ -27,15 +27,16 @@ struct Factory: public scriptnode::dll::StaticLibraryHostFactory
 		
 		registerPolyNode<project::Tube2<1>, project::Tube2<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Transient<1>, project::Transient<NUM_POLYPHONIC_VOICES>>();
+		registerPolyNode<project::Pressure5<1>, project::Pressure5<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Point<1>, project::Point<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Mojo<1>, project::Mojo<NUM_POLYPHONIC_VOICES>>();
+		registerPolyNode<project::Logical4<1>, project::Logical4<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Focus<1>, project::Focus<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::ClipSoftly<1>, project::ClipSoftly<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Boxer<1>, wrap::illegal_poly<project::Boxer<1>>>();
 		registerPolyNode<project::Karate<1>, wrap::illegal_poly<project::Karate<1>>>();
 		registerPolyNode<project::Sumo<1>, wrap::illegal_poly<project::Sumo<1>>>();
-		registerDataNode<project::_networkdata>();
-		registerDataNode<project::Fighters_networkdata>();
+		registerPolyNode<project::wtf<1>, wrap::illegal_poly<project::wtf<1>>>();
 	}
 };
 }

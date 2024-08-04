@@ -20,12 +20,12 @@
   <RedirectSampleFolder value=""/>
   <AAXCategoryFX value="AAX_ePlugInCategory_Modulation"/>
   <VST3Category value=""/>
-  <SupportMonoFX value="No"/>
+  <SupportMonoFX value="1"/>
   <EnableMidiInputFX value="No"/>
   <EnableMidiOut value="No"/>
   <EnableSoundGeneratorsFX value="No"/>
-  <VST3Support value="No"/>
-  <UseRawFrontend value="No"/>
+  <VST3Support value="1"/>
+  <UseRawFrontend value="0"/>
   <ExpansionType value="Disabled"/>
   <EncryptionKey value=""/>
   <LinkExpansionsToProject value="No"/>

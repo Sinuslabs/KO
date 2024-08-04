@@ -699,6 +699,11 @@ dependencies: \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Focus/Focus.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Focus/Focus.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Focus/FocusProc.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Logical4.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Logical4.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Logical4/Logical4.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Logical4/Logical4.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Logical4/Logical4Proc.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Mojo.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Mojo.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Mojo/Mojo.h \
@@ -709,6 +714,11 @@ dependencies: \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Point/Point.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Point/Point.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Point/PointProc.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Pressure5.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Pressure5.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Pressure5/Pressure5.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Pressure5/Pressure5.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Pressure5/Pressure5Proc.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Transient.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Transient.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/src/Transient.cpp \
@@ -719,4 +729,5 @@ dependencies: \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Tube2/Tube2Proc.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Boxer.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Karate.h \
-  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Sumo.h
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Sumo.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/wtf.h

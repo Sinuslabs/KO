@@ -1,0 +1,11 @@
+Binaries/
+settings.json
+DspNetworks/Binaries/*
+build/
+logs/
+.env
+.DS_Store
+**/.DS_Store
+DspNetwork/.DS_Store
+.DS_Store
+

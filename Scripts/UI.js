@@ -10,7 +10,7 @@ namespace UI {
 		
 		g.fillAll(Theme.THEME.Colors.UI.background);
 		g.addNoise({
-				alpha: 0.06,
+				alpha: 0.08,
 				monochromatic: false,
 				scaleFactor: 1.7,
 				area: a
@@ -26,7 +26,7 @@ namespace UI {
 		g.setColour(Colours.black);
 		g.drawRoundedRectangle(a, Primitives.BorderRadius.lg, Primitives.BorderSize.lg);
 		g.addNoise({
-				alpha: 0.04,
+				alpha: 0.06,
 				monochromatic: false,
 				scaleFactor: 1.7,
 				area: a

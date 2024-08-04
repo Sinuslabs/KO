@@ -2,31 +2,86 @@ namespace KO_graphics {
 	
 	const var KO_panel = Content.getComponent("KO_panel");
 	
-	KO_panel.setPaintRoutine(KO_Routine);	
+	const animation = Animations.kokook;
 	
-	inline function KO_Routine(g) {
+	reg frame = 27;
+	const frames = 83;
+	const speed = 1;
+	const timer = 20;
+	reg frame_stop = 0;
+	reg reverse = false;
+	
+	const animations = ["KO_1", "KO_2", "KO_3"];
+	reg currentAnimation = "KO_1";
+	
+	KO_panel.setAnimation(animation);
+	KO_panel.setTimerCallback(nextFrame);
+	
+	inline function goTo(ani) {
 		
-		local a = this.getLocalBounds(0);
 		
-		local k_area = [-13, -21, 312, 192];
-		local o_area = [31, 192, 320, 112];
-		
-		
-		if (Globals.currentEffect === 'Boxer') {
-			g.setColour(Primitives.Colors.Red['500']);
+		if (currentAnimation == 'KO_1') {
+			if (ani == 'KO_1') {return;}
+			if (ani == 'KO_2') {
+				frame = 9;
+				reverse = false;
+				frame_stop = 27;
+			}
+			if (ani == 'KO_3') {
+				frame = 79;
+				reverse = true;
+				frame_stop = 54;
+			}
+			currentAnimation = ani;
+			KO_panel.startTimer(timer);
+			return;
 		}
 		
-		if (Globals.currentEffect === 'Karate') {
-			g.setColour(Primitives.Colors.Yellow['500']);
+		if (currentAnimation == 'KO_2') {
+			if (ani == 'KO_1') {
+				frame = 27;
+				reverse = true;
+				frame_stop = 5;
+			}
+			if (ani == 'KO_2') {return;}
+			if (ani == 'KO_3') {
+				frame = 33;
+				reverse = false;
+				frame_stop = 54;
+			}
+			currentAnimation = ani;
+			KO_panel.startTimer(timer);
+			return;
 		}
 		
-		if (Globals.currentEffect === 'Sumo') {
-			g.setColour(Primitives.Colors.Purple['500']);
+		if (currentAnimation == 'KO_3') {
+			if (ani == 'KO_1') {
+				frame = 54;
+				reverse = false;
+				frame_stop = 79;
+			}
+			if (ani == 'KO_2') {
+				frame = 54;
+				reverse = true;
+				frame_stop = 27;
+			}
+			if (ani == 'KO_3') { return;}
+			currentAnimation = 'KO_1';
+			KO_panel.startTimer(timer);
+			return;
 		}
-		
-		g.drawPath(Assets.get['k'], k_area, 2);
-		g.drawPath(Assets.get['o'], o_area, 2);
-		
+	}
+	
+	inline function nextFrame() {	
+		KO_panel.setAnimationFrame(frame);
+		if (reverse) {
+			frame -= speed;
+		} else {
+			frame += speed;
+		}
+		if ((reverse && frame <= frame_stop) || (!reverse && frame >= frame_stop)) {
+			KO_panel.stopTimer();
+		}
 	}
 	
 }

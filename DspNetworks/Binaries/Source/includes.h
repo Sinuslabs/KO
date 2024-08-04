@@ -11,8 +11,10 @@
 
 #include "ClipSoftly.h"
 #include "Focus.h"
+#include "Logical4.h"
 #include "Mojo.h"
 #include "Point.h"
+#include "Pressure5.h"
 #include "Transient.h"
 #include "Tube2.h"
 
@@ -21,6 +23,7 @@
 #include "Boxer.h"
 #include "Karate.h"
 #include "Sumo.h"
+#include "wtf.h"
 
 #if (defined (_WIN32) || defined (_WIN64))
 #pragma warning( pop )

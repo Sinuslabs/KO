@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Pressure5.h"
 #include "Focus.h"
 #include "ClipSoftly.h"
 // These will improve the readability of the connection definition
@@ -16,14 +17,6 @@ using namespace snex::Types;
 namespace Karate_impl
 {
 // ==============================| Node & Parameter type declarations |==============================
-
-using faust_multimod = parameter::list<parameter::empty>;
-
-template <int NV>
-using faust_t = project::Transient<NV, faust_multimod>;
-template <int NV>
-using minmax2_t = control::minmax<NV, 
-                                  parameter::plain<faust_t<NV>, 1>>;
 
 DECLARE_PARAMETER_RANGE_SKEW(dry_wet_mixer1_c0Range, 
                              -100., 
@@ -109,8 +102,7 @@ using pma2_t = control::pma<NV,
 
 template <int NV>
 using split_t = container::split<parameter::empty, 
-                                 wrap::fix<1, minmax2_t<NV>>, 
-                                 air_t<NV>, 
+                                 wrap::fix<1, air_t<NV>>, 
                                  pma1_t<NV>, 
                                  pma2_t<NV>>;
 
@@ -157,12 +149,12 @@ using chain_t = container::chain<parameter::empty,
 
 template <int NV>
 using wet_path_t = container::chain<parameter::empty, 
-                                    wrap::fix<2, faust_t<NV>>, 
+                                    wrap::fix<2, project::Pressure5<NV>>, 
                                     wrap::no_process<core::gain<NV>>, 
                                     project::Focus<NV>, 
+                                    chain_t<NV>, 
                                     wrap::no_process<project::ClipSoftly<NV>>, 
                                     core::gain<NV>, 
-                                    chain_t<NV>, 
                                     core::gain<NV>>;
 
 namespace dry_wet1_t_parameters
@@ -179,26 +171,22 @@ namespace Karate_t_parameters
 // Parameter list for Karate_impl::Karate_t --------------------------------------------------------
 
 template <int NV>
-using Sustain = parameter::chain<ranges::Identity, 
-                                 parameter::plain<Karate_impl::minmax1_t<NV>, 0>, 
-                                 parameter::plain<Karate_impl::minmax2_t<NV>, 0>>;
-
-template <int NV>
-using Focus = parameter::chain<ranges::Identity, 
-                               parameter::plain<Karate_impl::pma1_t<NV>, 0>, 
-                               parameter::plain<Karate_impl::pma2_t<NV>, 0>, 
-                               parameter::plain<Karate_impl::minmax_t<NV>, 0>>;
-
+using Focus = parameter::plain<project::Pressure5<NV>, 3>;
 template <int NV>
 using Mix = parameter::plain<Karate_impl::dry_wet1_t<NV>, 
                              0>;
 template <int NV>
 using Air = parameter::plain<Karate_impl::air_t<NV>, 0>;
 template <int NV>
-using Karate_t_plist = parameter::list<Sustain<NV>, 
-                                       Focus<NV>, 
+using Pressure = parameter::plain<project::Pressure5<NV>, 0>;
+template <int NV>
+using Speed = parameter::plain<project::Pressure5<NV>, 1>;
+template <int NV>
+using Karate_t_plist = parameter::list<Focus<NV>, 
                                        Mix<NV>, 
-                                       Air<NV>>;
+                                       Air<NV>, 
+                                       Pressure<NV>, 
+                                       Speed<NV>>;
 }
 
 template <int NV>
@@ -221,16 +209,18 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		
 		SNEX_METADATA_ID(Karate);
 		SNEX_METADATA_NUM_CHANNELS(2);
-		SNEX_METADATA_ENCODED_PARAMETERS(62)
+		SNEX_METADATA_ENCODED_PARAMETERS(78)
 		{
-			0x005B, 0x0000, 0x5300, 0x7375, 0x6174, 0x6E69, 0x0000, 0x0000, 
-            0x0000, 0x8000, 0x003F, 0x8000, 0x003F, 0x8000, 0x003F, 0x0000, 
-            0x5B00, 0x0001, 0x0000, 0x6F46, 0x7563, 0x0073, 0x0000, 0x0000, 
-            0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 
-            0x025B, 0x0000, 0x4D00, 0x7869, 0x0000, 0x0000, 0x0000, 0x8000, 
-            0x003F, 0x8000, 0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0003, 
-            0x0000, 0x6941, 0x0072, 0x0000, 0x0000, 0x0000, 0x3F80, 0x0000, 
-            0x0000, 0x0000, 0x3F80, 0x0000, 0x0000, 0x0000
+			0x005B, 0x0000, 0x4600, 0x636F, 0x7375, 0x0000, 0x0000, 0x0000, 
+            0x8000, 0x293F, 0xA302, 0x003E, 0x8000, 0x003F, 0x0000, 0x5B00, 
+            0x0001, 0x0000, 0x694D, 0x0078, 0x0000, 0x0000, 0x0000, 0x3F80, 
+            0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 0x025B, 0x0000, 
+            0x4100, 0x7269, 0x0000, 0x0000, 0x0000, 0x8000, 0x003F, 0x0000, 
+            0x0000, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0003, 0x0000, 0x7250, 
+            0x7365, 0x7573, 0x6572, 0x0000, 0x0000, 0x0000, 0x8000, 0x2B3F, 
+            0xB5F5, 0x003E, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0004, 0x0000, 
+            0x7053, 0x6565, 0x0064, 0x0000, 0x0000, 0x0000, 0x3F80, 0xB7BA, 
+            0x3F39, 0x0000, 0x3F80, 0x0000, 0x0000, 0x0000
 		};
 	};
 	
@@ -240,10 +230,9 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		
 		auto& modchain = this->getT(0);                                               // Karate_impl::modchain_t<NV>
 		auto& split = this->getT(0).getT(0);                                          // Karate_impl::split_t<NV>
-		auto& minmax2 = this->getT(0).getT(0).getT(0);                                // Karate_impl::minmax2_t<NV>
-		auto& air = this->getT(0).getT(0).getT(1);                                    // Karate_impl::air_t<NV>
-		auto& pma1 = this->getT(0).getT(0).getT(2);                                   // Karate_impl::pma1_t<NV>
-		auto& pma2 = this->getT(0).getT(0).getT(3);                                   // Karate_impl::pma2_t<NV>
+		auto& air = this->getT(0).getT(0).getT(0);                                    // Karate_impl::air_t<NV>
+		auto& pma1 = this->getT(0).getT(0).getT(1);                                   // Karate_impl::pma1_t<NV>
+		auto& pma2 = this->getT(0).getT(0).getT(2);                                   // Karate_impl::pma2_t<NV>
 		auto& split1 = this->getT(0).getT(1);                                         // Karate_impl::split1_t<NV>
 		auto& minmax1 = this->getT(0).getT(1).getT(0);                                // Karate_impl::minmax1_t<NV>
 		auto& minmax = this->getT(0).getT(1).getT(1);                                 // Karate_impl::minmax_t<NV>
@@ -252,29 +241,29 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		auto& dry_wet_mixer = this->getT(1).getT(0).getT(0);                          // Karate_impl::dry_wet_mixer_t<NV>
 		auto& dry_gain = this->getT(1).getT(0).getT(1);                               // core::gain<NV>
 		auto& wet_path = this->getT(1).getT(1);                                       // Karate_impl::wet_path_t<NV>
-		auto& faust = this->getT(1).getT(1).getT(0);                                  // Karate_impl::faust_t<NV>
+		auto& Pressure5 = this->getT(1).getT(1).getT(0);                              // project::Pressure5<NV>
 		auto& gain1 = this->getT(1).getT(1).getT(1);                                  // wrap::no_process<core::gain<NV>>
 		auto& Focus = this->getT(1).getT(1).getT(2);                                  // project::Focus<NV>
-		auto& ClipSoftly = this->getT(1).getT(1).getT(3);                             // wrap::no_process<project::ClipSoftly<NV>>
-		auto& gain = this->getT(1).getT(1).getT(4);                                   // core::gain<NV>
-		auto& chain = this->getT(1).getT(1).getT(5);                                  // Karate_impl::chain_t<NV>
-		auto& dry_wet2 = this->getT(1).getT(1).getT(5).getT(0);                       // Karate_impl::dry_wet2_t<NV>
-		auto& dry_path1 = this->getT(1).getT(1).getT(5).getT(0).getT(0);              // Karate_impl::dry_path1_t<NV>
-		auto& dry_wet_mixer1 = this->getT(1).getT(1).getT(5).getT(0).getT(0).getT(0); // Karate_impl::dry_wet_mixer1_t<NV>
-		auto& dry_gain1 = this->getT(1).getT(1).getT(5).getT(0).getT(0).getT(1);      // core::gain<NV>
-		auto& wet_path1 = this->getT(1).getT(1).getT(5).getT(0).getT(1);              // Karate_impl::wet_path1_t<NV>
-		auto& freq_split3 = this->getT(1).getT(1).getT(5).getT(0).getT(1).getT(0);    // Karate_impl::freq_split3_t<NV>
-		auto& band1 = this->getT(1).getT(1).getT(5).getT(0).getT(1).getT(0).getT(0);  // Karate_impl::band1_t
-		auto& lr1_1 = this->getT(1).getT(1).getT(5).getT(0).                          // jdsp::jlinkwitzriley
+		auto& chain = this->getT(1).getT(1).getT(3);                                  // Karate_impl::chain_t<NV>
+		auto& dry_wet2 = this->getT(1).getT(1).getT(3).getT(0);                       // Karate_impl::dry_wet2_t<NV>
+		auto& dry_path1 = this->getT(1).getT(1).getT(3).getT(0).getT(0);              // Karate_impl::dry_path1_t<NV>
+		auto& dry_wet_mixer1 = this->getT(1).getT(1).getT(3).getT(0).getT(0).getT(0); // Karate_impl::dry_wet_mixer1_t<NV>
+		auto& dry_gain1 = this->getT(1).getT(1).getT(3).getT(0).getT(0).getT(1);      // core::gain<NV>
+		auto& wet_path1 = this->getT(1).getT(1).getT(3).getT(0).getT(1);              // Karate_impl::wet_path1_t<NV>
+		auto& freq_split3 = this->getT(1).getT(1).getT(3).getT(0).getT(1).getT(0);    // Karate_impl::freq_split3_t<NV>
+		auto& band1 = this->getT(1).getT(1).getT(3).getT(0).getT(1).getT(0).getT(0);  // Karate_impl::band1_t
+		auto& lr1_1 = this->getT(1).getT(1).getT(3).getT(0).                          // jdsp::jlinkwitzriley
                       getT(1).getT(0).getT(0).getT(0);
-		auto& band2 = this->getT(1).getT(1).getT(5).getT(0).getT(1).getT(0).getT(1); // Karate_impl::band2_t<NV>
-		auto& lr2_1 = this->getT(1).getT(1).getT(5).getT(0).                         // jdsp::jlinkwitzriley
+		auto& band2 = this->getT(1).getT(1).getT(3).getT(0).getT(1).getT(0).getT(1); // Karate_impl::band2_t<NV>
+		auto& lr2_1 = this->getT(1).getT(1).getT(3).getT(0).                         // jdsp::jlinkwitzriley
                       getT(1).getT(0).getT(1).getT(0);
-		auto& reverb = this->getT(1).getT(1).getT(5).getT(0).                    // fx::reverb
+		auto& reverb = this->getT(1).getT(1).getT(3).getT(0).                    // fx::reverb
                        getT(1).getT(0).getT(1).getT(1);
-		auto& gain2 = this->getT(1).getT(1).getT(5).getT(0).                     // core::gain<NV>
+		auto& gain2 = this->getT(1).getT(1).getT(3).getT(0).                     // core::gain<NV>
                       getT(1).getT(0).getT(1).getT(2);
-		auto& wet_gain1 = this->getT(1).getT(1).getT(5).getT(0).getT(1).getT(1); // core::gain<NV>
+		auto& wet_gain1 = this->getT(1).getT(1).getT(3).getT(0).getT(1).getT(1); // core::gain<NV>
+		auto& ClipSoftly = this->getT(1).getT(1).getT(4);                        // wrap::no_process<project::ClipSoftly<NV>>
+		auto& gain = this->getT(1).getT(1).getT(5);                              // core::gain<NV>
 		auto& wet_gain = this->getT(1).getT(1).getT(6);                          // core::gain<NV>
 		
 		// Parameter Connections -------------------------------------------------------------------
@@ -285,23 +274,18 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		dry_wet2.getParameterT(0).connectT(0, dry_wet_mixer1); // DryWet -> dry_wet_mixer1::Value
 		dry_wet2.getParameterT(0).connectT(0, dry_wet_mixer1); // DryWet -> dry_wet_mixer1::Value
 		dry_wet1.getParameterT(0).connectT(0, dry_wet_mixer);  // DryWet -> dry_wet_mixer::Value
-		auto& Sustain_p = this->getParameterT(0);
-		Sustain_p.connectT(0, minmax1); // Sustain -> minmax1::Value
-		Sustain_p.connectT(1, minmax2); // Sustain -> minmax2::Value
+		this->getParameterT(0).connectT(0, Pressure5);         // Focus -> Pressure5::PawClaw
 		
-		auto& Focus_p = this->getParameterT(1);
-		Focus_p.connectT(0, pma1);   // Focus -> pma1::Value
-		Focus_p.connectT(1, pma2);   // Focus -> pma2::Value
-		Focus_p.connectT(2, minmax); // Focus -> minmax::Value
+		this->getParameterT(1).connectT(0, dry_wet1); // Mix -> dry_wet1::DryWet
 		
-		this->getParameterT(2).connectT(0, dry_wet1); // Mix -> dry_wet1::DryWet
+		this->getParameterT(2).connectT(0, air); // Air -> air::Value
 		
-		this->getParameterT(3).connectT(0, air); // Air -> air::Value
+		this->getParameterT(3).connectT(0, Pressure5); // Pressure -> Pressure5::Pressre
+		
+		this->getParameterT(4).connectT(0, Pressure5); // Speed -> Pressure5::Speed
 		
 		// Modulation Connections ------------------------------------------------------------------
 		
-		auto& faust_p = faust.getWrappedObject().getParameter();
-		minmax2.getWrappedObject().getParameter().connectT(0, faust); // minmax2 -> faust::Sustain
 		auto& dry_wet_mixer1_p = dry_wet_mixer1.getWrappedObject().getParameter();
 		dry_wet_mixer1_p.getParameterT(0).connectT(0, dry_gain1);     // dry_wet_mixer1 -> dry_gain1::Gain
 		dry_wet_mixer1_p.getParameterT(1).connectT(0, wet_gain1);     // dry_wet_mixer1 -> wet_gain1::Gain
@@ -316,13 +300,6 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		
 		// Default Values --------------------------------------------------------------------------
 		
-		;                               // minmax2::Value is automated
-		minmax2.setParameterT(1, -12.); // control::minmax::Minimum
-		minmax2.setParameterT(2, 12.);  // control::minmax::Maximum
-		minmax2.setParameterT(3, 1.);   // control::minmax::Skew
-		minmax2.setParameterT(4, 0.);   // control::minmax::Step
-		minmax2.setParameterT(5, 0.);   // control::minmax::Polarity
-		
 		;                               // air::Value is automated
 		air.setParameterT(1, 0.);       // control::minmax::Minimum
 		air.setParameterT(2, 0.141678); // control::minmax::Maximum
@@ -330,22 +307,22 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		air.setParameterT(4, 0.);       // control::minmax::Step
 		air.setParameterT(5, 0.);       // control::minmax::Polarity
 		
-		;                                   // pma1::Value is automated
+		pma1.setParameterT(0, 0.);          // control::pma::Value
 		pma1.setParameterT(1, 0.124434);    // control::pma::Multiply
 		pma1.setParameterT(2, -0.00294629); // control::pma::Add
 		
-		;                                // pma2::Value is automated
+		pma2.setParameterT(0, 0.);       // control::pma::Value
 		pma2.setParameterT(1, 0.558909); // control::pma::Multiply
 		pma2.setParameterT(2, 0.);       // control::pma::Add
 		
-		;                                  // minmax1::Value is automated
+		minmax1.setParameterT(0, 0.);      // control::minmax::Value
 		minmax1.setParameterT(1, -7.9);    // control::minmax::Minimum
 		minmax1.setParameterT(2, 0.);      // control::minmax::Maximum
 		minmax1.setParameterT(3, 5.42227); // control::minmax::Skew
 		minmax1.setParameterT(4, 0.1);     // control::minmax::Step
 		minmax1.setParameterT(5, 1.);      // control::minmax::Polarity
 		
-		;                                 // minmax::Value is automated
+		minmax.setParameterT(0, 0.);      // control::minmax::Value
 		minmax.setParameterT(1, -4.2);    // control::minmax::Minimum
 		minmax.setParameterT(2, 0.);      // control::minmax::Maximum
 		minmax.setParameterT(3, 5.42227); // control::minmax::Skew
@@ -360,11 +337,12 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		dry_gain.setParameterT(1, 20.); // core::gain::Smoothing
 		dry_gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
-		faust.setParameterT(0, 1.78814e-07); // core::faust::Attack
-		;                                    // faust::Sustain is automated
-		faust.setParameterT(2, 10.);         // core::faust::LowCutoff
-		faust.setParameterT(3, 20000.);      // core::faust::HighCutoff
-		faust.setParameterT(4, 0.);          // core::faust::Monitorselectedband
+		;                                // Pressure5::Pressre is automated
+		;                                // Pressure5::Speed is automated
+		Pressure5.setParameterT(2, 0.);  // project::Pressure5::Mewines
+		;                                // Pressure5::PawClaw is automated
+		Pressure5.setParameterT(4, 0.5); // project::Pressure5::Output
+		Pressure5.setParameterT(5, 1.);  // project::Pressure5::DryWet
 		
 		;                            // gain1::Gain is automated
 		gain1.setParameterT(1, 20.); // core::gain::Smoothing
@@ -375,10 +353,6 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		Focus.setParameterT(2, 0.329293); // project::Focus::Mode
 		Focus.setParameterT(3, 1.);       // project::Focus::Output
 		Focus.setParameterT(4, 1.);       // project::Focus::DryWet
-		
-		;                           // gain::Gain is automated
-		gain.setParameterT(1, 20.); // core::gain::Smoothing
-		gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
 		; // dry_wet2::DryWet is automated
 		
@@ -408,14 +382,19 @@ template <int NV> struct instance: public Karate_impl::Karate_t_<NV>
 		wet_gain1.setParameterT(1, 20.); // core::gain::Smoothing
 		wet_gain1.setParameterT(2, 0.);  // core::gain::ResetValue
 		
+		;                           // gain::Gain is automated
+		gain.setParameterT(1, 20.); // core::gain::Smoothing
+		gain.setParameterT(2, 0.);  // core::gain::ResetValue
+		
 		;                               // wet_gain::Gain is automated
 		wet_gain.setParameterT(1, 20.); // core::gain::Smoothing
 		wet_gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
-		this->setParameterT(0, 1.);
+		this->setParameterT(0, 0.318376);
 		this->setParameterT(1, 1.);
-		this->setParameterT(2, 1.);
-		this->setParameterT(3, 0.);
+		this->setParameterT(2, 0.);
+		this->setParameterT(3, 0.355386);
+		this->setParameterT(4, 0.72546);
 	}
 	
 	static constexpr bool isPolyphonic() { return NV > 1; };

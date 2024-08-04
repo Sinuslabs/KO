@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Network ID="wtf" AllowCompilation="1" Version="0.0.0">
+  <Node FactoryPath="container.chain" ID="wtf" Bypassed="0" ShowParameters="1">
+    <Nodes>
+      <Node ID="soft_bypass" FactoryPath="container.soft_bypass" Bypassed="0">
+        <Properties>
+          <Property ID="SmoothingTime" Value="20"/>
+        </Properties>
+        <Nodes>
+          <Node ID="wet_path" FactoryPath="container.chain" Bypassed="0">
+            <Nodes>
+              <Node ID="freq_split4" FactoryPath="container.split" ShowParameters="1"
+                    Bypassed="0">
+                <Parameters>
+                  <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045584686382"
+                             ID="Band 1" Value="68.06806806806806">
+                    <Connections>
+                      <Connection NodeId="lr1_1" ParameterId="Frequency"/>
+                      <Connection NodeId="lr2_1" ParameterId="Frequency"/>
+                      <Connection NodeId="lr3_1" ParameterId="Frequency"/>
+                    </Connections>
+                  </Parameter>
+                  <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045584686382"
+                             ID="Band 2" Value="1000.0">
+                    <Connections>
+                      <Connection NodeId="lr1_2" ParameterId="Frequency"/>
+                      <Connection NodeId="lr2_2" ParameterId="Frequency"/>
+                      <Connection NodeId="lr3_2" ParameterId="Frequency"/>
+                    </Connections>
+                  </Parameter>
+                </Parameters>
+                <Nodes>
+                  <Node ID="band1" FactoryPath="container.chain" Bypassed="0">
+                    <Nodes>
+                      <Node ID="lr1_1" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4288245351"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="0.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="lr1_2" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4288245351"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="2.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="dummy1" FactoryPath="math.mul" NodeColour="4294967295" Bypassed="0">
+                        <Parameters>
+                          <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Value="1.0"/>
+                        </Parameters>
+                      </Node>
+                    </Nodes>
+                    <Parameters/>
+                  </Node>
+                  <Node ID="band2" FactoryPath="container.chain" Bypassed="0">
+                    <Nodes>
+                      <Node ID="lr2_1" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4284979608"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="1.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="lr2_2" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4284979608"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="0.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="updown_comp1" FactoryPath="dynamics.updown_comp" Bypassed="0">
+                        <ComplexData>
+                          <DisplayBuffers>
+                            <DisplayBuffer Index="-1"/>
+                          </DisplayBuffers>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="-100.0" MaxValue="0.0" SkewFactor="3.492788553237915"
+                                     ID="LowThreshold" Value="-100.0"/>
+                          <Parameter MinValue="0.2000000029802322" MaxValue="100.0" SkewFactor="0.1436184048652649"
+                                     ID="LowRatio" Value="0.2000000029802322"/>
+                          <Parameter MinValue="-100.0" MaxValue="0.0" SkewFactor="11.20230579376221"
+                                     ID="HighThreshold" Value="-5.919812520524603"/>
+                          <Parameter MinValue="0.2000000029802322" MaxValue="100.0" SkewFactor="0.1436184048652649"
+                                     ID="HighRatio" Value="25.51930116552795"/>
+                          <Parameter MinValue="0.0" MaxValue="0.300000011920929" SkewFactor="0.9999999403953552"
+                                     ID="Knee" Value="0.2570403216604485"/>
+                          <Parameter MinValue="0.0" MaxValue="1000.0" SkewFactor="0.2313782125711441"
+                                     ID="Attack" Value="0.0"/>
+                          <Parameter MinValue="0.0" MaxValue="1000.0" SkewFactor="0.2313782125711441"
+                                     ID="Release" Value="11.96139794426082"/>
+                          <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="RMS" Value="1.0"/>
+                        </Parameters>
+                      </Node>
+                    </Nodes>
+                    <Parameters/>
+                  </Node>
+                  <Node ID="band3" FactoryPath="container.chain" Bypassed="0">
+                    <Nodes>
+                      <Node ID="lr3_1" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4284979606"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="2.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="lr3_2" FactoryPath="jdsp.jlinkwitzriley" NodeColour="4284979606"
+                            Folded="1" Bypassed="0">
+                        <ComplexData>
+                          <Filters>
+                            <Filter Index="-1"/>
+                          </Filters>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
+                                     ID="Frequency" Automated="1"/>
+                          <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="1.0"/>
+                        </Parameters>
+                      </Node>
+                      <Node ID="updown_comp2" FactoryPath="dynamics.updown_comp" Bypassed="0">
+                        <ComplexData>
+                          <DisplayBuffers>
+                            <DisplayBuffer Index="-1"/>
+                          </DisplayBuffers>
+                        </ComplexData>
+                        <Parameters>
+                          <Parameter MinValue="-100.0" MaxValue="0.0" SkewFactor="3.492788553237915"
+                                     ID="LowThreshold" Value="-100.0"/>
+                          <Parameter MinValue="0.2000000029802322" MaxValue="100.0" SkewFactor="0.1436184048652649"
+                                     ID="LowRatio" Value="2.275313024633214"/>
+                          <Parameter MinValue="-100.0" MaxValue="0.0" SkewFactor="11.20230579376221"
+                                     ID="HighThreshold" Value="-8.901279409174334"/>
+                          <Parameter MinValue="0.2000000029802322" MaxValue="100.0" SkewFactor="0.1436184048652649"
+                                     ID="HighRatio" Value="5.225102955204266"/>
+                          <Parameter MinValue="0.0" MaxValue="0.300000011920929" SkewFactor="0.9999999403953552"
+                                     ID="Knee" Value="0.1500000059604645"/>
+                          <Parameter MinValue="0.0" MaxValue="1000.0" SkewFactor="0.2313782125711441"
+                                     ID="Attack" Value="0.0"/>
+                          <Parameter MinValue="0.0" MaxValue="1000.0" SkewFactor="0.2313782125711441"
+                                     ID="Release" Value="50.0"/>
+                          <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="RMS" Value="1.0"/>
+                        </Parameters>
+                      </Node>
+                    </Nodes>
+                    <Parameters/>
+                  </Node>
+                </Nodes>
+              </Node>
+              <Node ID="mid_side1" FactoryPath="container.chain" Bypassed="0">
+                <Nodes>
+                  <Node ID="decoder" FactoryPath="routing.ms_decode" Bypassed="0">
+                    <Parameters/>
+                  </Node>
+                  <Node ID="ms_splitter" FactoryPath="container.multi" Bypassed="0">
+                    <Nodes>
+                      <Node ID="mid_chain" FactoryPath="container.chain" Bypassed="0">
+                        <Nodes>
+                          <Node ID="mid_gain" FactoryPath="math.mul" Bypassed="0">
+                            <Parameters>
+                              <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Value="1.0"/>
+                            </Parameters>
+                          </Node>
+                          <Node ID="sampleandhold" FactoryPath="fx.sampleandhold" Bypassed="0">
+                            <Parameters>
+                              <Parameter MinValue="1.0" MaxValue="64.0" StepSize="1.0" ID="Counter" Value="2.0"/>
+                            </Parameters>
+                          </Node>
+                        </Nodes>
+                        <Parameters/>
+                      </Node>
+                      <Node ID="side_chain" FactoryPath="container.chain" Bypassed="0">
+                        <Nodes>
+                          <Node ID="side_gain" FactoryPath="math.mul" Bypassed="0">
+                            <Parameters>
+                              <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Value="1.0"/>
+                            </Parameters>
+                          </Node>
+                          <Node ID="bitcrush" FactoryPath="fx.bitcrush" Bypassed="0">
+                            <Parameters>
+                              <Parameter MinValue="4.0" MaxValue="16.0" StepSize="0.1000000014901161"
+                                         ID="BitDepth" Value="13.00000013411045"/>
+                              <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Mode" Value="0.0"/>
+                            </Parameters>
+                          </Node>
+                        </Nodes>
+                        <Parameters/>
+                      </Node>
+                    </Nodes>
+                    <Parameters/>
+                  </Node>
+                  <Node ID="encoder" FactoryPath="routing.ms_encode" Bypassed="0">
+                    <Parameters/>
+                  </Node>
+                </Nodes>
+                <Parameters/>
+              </Node>
+              <Node ID="ClipSoftly" FactoryPath="project.ClipSoftly" Bypassed="0">
+                <Parameters/>
+              </Node>
+            </Nodes>
+            <Parameters/>
+          </Node>
+        </Nodes>
+        <Parameters/>
+      </Node>
+    </Nodes>
+    <Parameters/>
+  </Node>
+</Network>

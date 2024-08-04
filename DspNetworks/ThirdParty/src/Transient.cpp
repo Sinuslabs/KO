@@ -275,10 +275,10 @@ class _Transient final : public ::faust::dsp {
 		for (int i0 = 0; i0 < count; i0 = i0 + 1) {
 			float fTemp0 = float(input0[i0]);
 			fRec3[0] = fTemp0 - fSlow5 * (fSlow6 * fRec3[2] + fSlow7 * fRec3[1]);
-			float fTemp1 = fSlow5 * (fRec3[2] + fRec3[0] + 2.0f * fRec3[1]);
-			fRec2[0] = fTemp0 - (fTemp1 + fSlow2 * (fSlow8 * fRec2[2] + fSlow9 * fRec2[1]));
-			float fTemp2 = fRec2[2] + fRec2[0] + 2.0f * fRec2[1];
-			fRec1[IOTA0 & 8191] = fRec1[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * fTemp2);
+			float fTemp1 = 2.0f * fRec3[1];
+			fRec2[0] = fTemp0 - (fSlow5 * (fRec3[2] + fRec3[0] + fTemp1) + fSlow2 * (fSlow8 * fRec2[2] + fSlow9 * fRec2[1]));
+			float fTemp2 = 2.0f * fRec2[1];
+			fRec1[IOTA0 & 8191] = fRec1[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * (fRec2[2] + fRec2[0] + fTemp2));
 			float fTemp3 = std::sqrt(fConst2 * (fRec1[IOTA0 & 8191] - fRec1[(IOTA0 - iConst5) & 8191]));
 			fRec4[0] = fConst4 * fTemp3 + fConst3 * fRec4[1];
 			fRec5[0] = fSlow10 + fConst7 * fRec5[1];
@@ -289,18 +289,18 @@ class _Transient final : public ::faust::dsp {
 			fVbargraph0 = FAUSTFLOAT(float(iRec7[0]));
 			int iTemp4 = fVbargraph0 != 1.0f;
 			fRec8[0] = fTemp0 - fSlow2 * (fSlow8 * fRec8[2] + fSlow9 * fRec8[1]);
-			output0[i0] = FAUSTFLOAT(fSlow2 * fRec0[0] * fTemp2 + ((iTemp4) ? fTemp0 + fTemp1 - fSlow2 * (2.0f * fRec8[1] + fRec8[0] + fRec8[2]) : 0.0f));
+			output0[i0] = FAUSTFLOAT(fSlow2 * fRec0[0] * (fRec2[0] + fRec2[2] + fTemp2) + ((iTemp4) ? fTemp0 + fSlow5 * (fRec3[0] + fRec3[2] + fTemp1) - fSlow2 * (fRec8[0] + fRec8[2] + 2.0f * fRec8[1]) : 0.0f));
 			float fTemp5 = float(input1[i0]);
 			fRec12[0] = fTemp5 - fSlow5 * (fSlow6 * fRec12[2] + fSlow7 * fRec12[1]);
 			float fTemp6 = 2.0f * fRec12[1];
 			fRec11[0] = fTemp5 - (fSlow5 * (fRec12[2] + fRec12[0] + fTemp6) + fSlow2 * (fSlow8 * fRec11[2] + fSlow9 * fRec11[1]));
-			float fTemp7 = fRec11[2] + fRec11[0] + 2.0f * fRec11[1];
-			fRec10[IOTA0 & 8191] = fRec10[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * fTemp7);
+			float fTemp7 = 2.0f * fRec11[1];
+			fRec10[IOTA0 & 8191] = fRec10[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * (fRec11[2] + fRec11[0] + fTemp7));
 			float fTemp8 = std::sqrt(fConst2 * (fRec10[IOTA0 & 8191] - fRec10[(IOTA0 - iConst5) & 8191]));
 			fRec13[0] = fConst4 * fTemp8 + fConst3 * fRec13[1];
 			fRec9[0] = fConst4 * (((fTemp8 - fRec13[0]) > 0.0f) ? fRec6[0] : fRec5[0]) + fConst3 * fRec9[1];
 			fRec14[0] = fTemp5 - fSlow2 * (fSlow8 * fRec14[2] + fSlow9 * fRec14[1]);
-			output1[i0] = FAUSTFLOAT(fSlow2 * fRec9[0] * fTemp7 + ((iTemp4) ? fTemp5 + fSlow5 * (fTemp6 + fRec12[0] + fRec12[2]) - fSlow2 * (fRec14[2] + fRec14[0] + 2.0f * fRec14[1]) : 0.0f));
+			output1[i0] = FAUSTFLOAT(fSlow2 * fRec9[0] * (fRec11[0] + fRec11[2] + fTemp7) + ((iTemp4) ? fTemp5 + fSlow5 * (fRec12[0] + fRec12[2] + fTemp6) - fSlow2 * (fRec14[0] + fRec14[2] + 2.0f * fRec14[1]) : 0.0f));
 			IOTA0 = IOTA0 + 1;
 			fRec3[2] = fRec3[1];
 			fRec3[1] = fRec3[0];

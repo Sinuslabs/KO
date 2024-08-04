@@ -1,16 +1,15 @@
 namespace UserSettings {
 	
 	reg settingsObj = {
-		
-		'theme': 'light',
+		'wtf': 0,
 		'zoom': 1
 	};
 	
 	const settingsDir = FileSystem.getFolder(FileSystem.UserPresets).getParentDirectory();
 	const settingsFile = settingsDir.getChildFile('settings.json');
 	
-	inline function save(value, key) {
-		settingsObj[value] = key;
+	inline function save(key, value) {
+		settingsObj[key] = value;
 		settingsFile.writeObject(settingsObj);
 	}
 	
@@ -23,20 +22,13 @@ namespace UserSettings {
 	}
 	
 	inline function restoreParameter() {
-		switch (settingsObj['theme']) {
-			case 'light':
-				Theme.setTheme('light');
-				Header.ThemeSpinner_btn.setValue(1);
-				break;
-			case 'dark':
-				Theme.setTheme('dark');
-				Header.ThemeSpinner_btn.setValue(0);
-				break;
-			
-			Header.ThemeSpinner_btn.changed();
-		}
 		
 		Settings.setZoomLevel(settingsObj['zoom']);
+		
+		Console.print(settingsObj['wtf']);
+		
+		Globals.x = settingsObj['wtf'];
+		x.wtf_icon_btn.set('visible', settingsObj['wtf']);
 	}
 	
 	inline function settingsExist() { return settingsFile.isFile();}

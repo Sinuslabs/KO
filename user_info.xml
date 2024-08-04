@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <UserSettings>
-  <Company value="My Company"/>
-  <CompanyCode value="Abcd"/>
-  <CompanyURL value="http://yourcompany.com"/>
-  <CompanyCopyright value="(c)2017, Company"/>
+  <Company value="Sinuslabs"/>
+  <CompanyCode value="Snlb"/>
+  <CompanyURL value="https://sinuslabs.io"/>
+  <CompanyCopyright value="(c)2024, Sinuslabs"/>
   <TeamDevelopmentID value=""/>
 </UserSettings>

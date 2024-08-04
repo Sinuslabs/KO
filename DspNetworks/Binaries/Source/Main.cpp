@@ -27,13 +27,16 @@ struct Factory: public scriptnode::dll::StaticLibraryHostFactory
 		
 		registerPolyNode<project::Tube2<1>, project::Tube2<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Transient<1>, project::Transient<NUM_POLYPHONIC_VOICES>>();
+		registerPolyNode<project::Pressure5<1>, project::Pressure5<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Point<1>, project::Point<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Mojo<1>, project::Mojo<NUM_POLYPHONIC_VOICES>>();
+		registerPolyNode<project::Logical4<1>, project::Logical4<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Focus<1>, project::Focus<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::ClipSoftly<1>, project::ClipSoftly<NUM_POLYPHONIC_VOICES>>();
 		registerPolyNode<project::Boxer<1>, wrap::illegal_poly<project::Boxer<1>>>();
 		registerPolyNode<project::Karate<1>, wrap::illegal_poly<project::Karate<1>>>();
 		registerPolyNode<project::Sumo<1>, wrap::illegal_poly<project::Sumo<1>>>();
+		registerPolyNode<project::wtf<1>, wrap::illegal_poly<project::wtf<1>>>();
 	}
 };
 }
@@ -54,7 +57,7 @@ DLL_EXPORT size_t getNodeId(int index, char* t)
 
 DLL_EXPORT bool isThirdPartyNode(int index)
 {
-	return index < 6;
+	return index < 8;
 }
 
 DLL_EXPORT int getNumDataObjects(int nodeIndex, int dataTypeAsInt)
@@ -73,12 +76,13 @@ DLL_EXPORT void initOpaqueNode(scriptnode::OpaqueNode* n, int index, bool polyIf
 }
 DLL_EXPORT int getHash(int index)
 {
-	static const int thirdPartyOffset = 6;
-	static const int hashIndexes[3] =
+	static const int thirdPartyOffset = 8;
+	static const int hashIndexes[4] =
 	{
-		1685608230,
-		-1240526098,
-		287783095
+		939754954,
+		814487498,
+		287783095,
+		2004414804
 	};
 	return (index >= thirdPartyOffset) ? hashIndexes[index - thirdPartyOffset] : 0;
 }
