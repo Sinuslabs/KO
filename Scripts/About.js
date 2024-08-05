@@ -1,84 +1,104 @@
 namespace About {
 	
-	const INFO = {
-		name: 'Bandbreite',
-		homepage: 'https://sinuslabs.io',
-		repository: 'https://github.com/Sinuslabs/Bandbreite',
-		latest_release_windows: '/releases/latest/download/Bandbreite-Windows.exe',
-		latest_release_macos: '/releases/latest/download/Bandbreite-MacOS.pkg',
-		latest_release_linux: '/releases/latest/'
-	};
-
 	const var LAF_logo = Content.createLocalLookAndFeel();
+	
+	const var incognito_btn = Content.getComponent("incognito_btn");
+	const var KO_2_pnl = Content.getComponent("KO_2_pnl");
+	
+	const var more_btn = Content.getComponent("more_btn");
+	const var social_btns = [Content.getComponent("youtube_btn"),
+	                         Content.getComponent("instagram_btn"),
+	                         Content.getComponent("soundcloud_btn")];
+	
+	const var version_pnl = Content.getComponent("version_pnl");
+	
+	const var company_btn = Content.getComponent("company_btn");
+	
+	KO_2_pnl.setPaintRoutine(KO_Routine);
+	
+	version_pnl.setPaintRoutine(versionRoutine);
+	
+	more_btn.setLocalLookAndFeel(Styles.LAF_displayButtonOutline);
+	more_btn.setControlCallback(onMore);
+	
+	incognito_btn.setControlCallback(onIncognito);
+	incognito_btn.setLocalLookAndFeel(Styles.LAF_displayIconButton);
+	
+	company_btn.setControlCallback(onMore);
+	company_btn.setLocalLookAndFeel(LAF_logo);
+	
+	for (btn in social_btns) {
+		btn.setLocalLookAndFeel(Styles.LAF_socials);
+		btn.setControlCallback(onSocials);
+	}
+	
+	inline function versionRoutine(g) {
+		
+		local a = this.getLocalBounds(1);
+		local text_a = StyleHelpers.addPadding(a, 5);
+		
+		g.setColour(Primitives.Colors.Red['500']);
+		g.setFont(Theme.SemiBold, 16);
+		g.fillRoundedRectangle(a, 3);
+		g.setColour(Primitives.Colors.Red['100']);
+		g.drawAlignedText('V'+Engine.getVersion(), text_a, 'left');
+		
+	}
+	
+	inline function onIncognito(component, value) {
+		if (!value) return;
+		Engine.openWebsite('https://sinuslabs.io/eastereggs');
+	}
+	
+	inline function onSocials(component, value) {
+		
+		if (!value) return;
+		
+		switch(component.getId()) {
+			case 'youtube_btn':
+				Engine.openWebsite('https://www.youtube.com/channel/UCJfRn0mxY61a5cYVBqEc9Zg');
+			case 'instagram_btn':
+				Engine.openWebsite('https://www.instagram.com/sinuslabs.io/');
+			case 'soundcloud_btn':
+				Engine.openWebsite('https://soundcloud.com/sinuslabs');
+		}
+	}
+	
+	inline function onMore(component, value) {
+		
+		if (!value) return;
+		Engine.openWebsite('https://sinuslabs.io');
+		
+	}
+	
 	LAF_logo.registerFunction('drawToggleButton', logo_laf);
-
+	
 	inline function logo_laf(g, obj) {
 		local a = obj.area;
-		g.setColour(Theme.THEME.Colors.Display.on_display);
+		
+		if (obj.over) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		} else {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		}
+		
 		g.fillPath(Assets.get.logo, a);
 	}
+	
+	inline function KO_Routine(g) {
+		
+		local a = this.getLocalBounds(2);
+		
+		g.setColour(Primitives.Colors.Red['500']);
+		g.drawPath(Assets.get['ko'], a, 2);
+		
+	}
+	
+	
+}
 
-	const var Get_more_btn = Content.getComponent("Get_more_btn");
-	const var Sinuslabs_Logo_btn = Content.getComponent("Sinuslabs_Logo_btn");
-	const var Youtube_btn = Content.getComponent("Youtube_btn");
-	const var Instagram_btn = Content.getComponent("Instagram_btn");
-	const var Soundcloud_btn = Content.getComponent("Soundcloud_btn");
-	const var UpdateNow_btn = Content.getComponent("UpdateNow_btn");
+inline function onUpdate(canUpdate) {
 	
-	UpdateNow_btn.showControl(false);
-	
-	if (Globals.OS === 'LINUX') {
-		UpdateNow_btn.set('text', 'Check update');
-	}
-	
-	Youtube_btn.setLocalLookAndFeel(Styles.LAF_displayButton);
-	Youtube_btn.setControlCallback(onYT);
-	Instagram_btn.setLocalLookAndFeel(Styles.LAF_displayButton);
-	Instagram_btn.setControlCallback(onInsta);
-	Soundcloud_btn.setLocalLookAndFeel(Styles.LAF_displayButton);
-	Soundcloud_btn.setControlCallback(onSoundcloud);
-	UpdateNow_btn.setLocalLookAndFeel(Styles.LAF_displayButtonOutline);
-	UpdateNow_btn.setControlCallback(onUpdateNow);
-	
-	inline function onUpdateNow(component, value) {
-		
-		if (value) {
-		
-			switch(Globals.OS) {
-				case 'WIN':
-					Engine.openWebsite(INFO.repository + INFO.latest_release_windows);
-					break;
-				case 'OSX':
-					Engine.openWebsite(INFO.repository + INFO.latest_release_macos);
-					break;
-				case 'LINUX':
-					Engine.openWebsite(INFO.repository + INFO.latest_release_linux);
-					break;
-			}	
-		}
-		
-	}
-	
-	inline function onYT(component, value) {
-		if (value) {Engine.openWebsite('https://www.youtube.com/channel/UCJfRn0mxY61a5cYVBqEc9Zg');}
-	}
-	
-	inline function onInsta(component, value) {
-		if (value) {Engine.openWebsite('https://www.instagram.com/sinuslabs.io/');}
-	}
-	
-	inline function onSoundcloud(component, value) {
-		if (value) {Engine.openWebsite('https://soundcloud.com/sinuslabs');}
-	}
-	
-	Get_more_btn.setLocalLookAndFeel(Styles.LAF_displayButton);
-	Get_more_btn.setControlCallback(onMore);
-	Sinuslabs_Logo_btn.setLocalLookAndFeel(LAF_logo);
-	Sinuslabs_Logo_btn.setControlCallback(onMore);
-	inline function onMore(component, value) {
-		if (value) {
-			Engine.openWebsite('https://sinuslabs.io');
-		}
-	}
-	
+	Header.Update_btn.showControl(canUpdate);
+	About.UpdateNow_btn.showControl(canUpdate);
 }

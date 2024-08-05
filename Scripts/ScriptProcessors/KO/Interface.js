@@ -2,6 +2,8 @@ include("Core/Primitives.js");
 include("Core/ThemeData.js");
 include("Core/Theme.js");
 
+include("Config.js");
+
 include("StyleHelpers.js");
 include("Styles.js");
 include("Assets.js");
@@ -9,6 +11,7 @@ include("Assets.js");
 include("Animations.js");
 
 include("KO_Graphics.js");
+include("UpdateChecker.js");
 
 include("VuMeterSlider.js");
 
@@ -22,7 +25,11 @@ include("Header.js");
 include("x.js");
 include("FXs.js");
 
+include("About.js");
+include("Supabase.js");
 include("Panic.js");
+
+include("Activation.js");
 
 Content.makeFrontInterface(780, 350);
 
@@ -31,21 +38,24 @@ const var SoftClip = Synth.getEffect("SoftClip");
 
 Globals.x = false;
 Globals.OS = Engine.getOS();
+Globals.activated = false;
+
+Supabase.getActivationStatus();
 UserSettings.load();
 
-inline function onClose_PresetBrowser_btnControl(component, value)
-{
+
+if (Globals.OS === 'LINUX') {
+	Globals.canUpdate = UpdateChecker.checkUpdate(onUpdate);
+}
+
+inline function onClose_PresetBrowser_btnControl(component, value) {
 	Router.goTo('Main');
 };
-
 
 Content.getComponent("Close_PresetBrowser_btn").setControlCallback(onClose_PresetBrowser_btnControl);
 
 
-
-
 Content.callAfterDelay(10, afterDelay, {});
-
 inline function afterDelay() {
 
 	Globals.currentEffect = 'Boxer';
@@ -55,9 +65,40 @@ inline function afterDelay() {
 	FXs.FX_Selector[0].changed();
 	
 	Router.goTo('Main');
-	//Panic.panic();
 	
+	//Panic.panic();
 }
+
+const var GainReduction = Synth.getEffect("DemoGain");
+const var GainReductionTimer = Engine.createTimerObject();
+const var TimeoutCounter = 15000;
+
+var TimeoutCurrent = 0;
+	
+GainReductionTimer.setTimerCallback(function() {
+	
+	if (Globals.isBypassed) {return;}
+
+    TimeoutCurrent += 1000;
+    
+    if (TimeoutCurrent == TimeoutCounter) {
+      TimeoutCurrent = 0;  
+    }
+    if (TimeoutCurrent > 13000) {
+       GainReduction.setBypassed(false);
+    } else {
+        GainReduction.setBypassed(true);
+    }
+});
+
+if (!Globals.activated) {
+	GainReduction.setBypassed(false);
+	GainReductionTimer.startTimer(1000);		
+} else {
+	Activation.unlockDemoLimitations();
+}
+
+
 
 
 

@@ -58,10 +58,7 @@ namespace FXs {
 	}
 	
 	inline function on6oz(component, value) {
-		
 		BoxerFX.setAttribute(BoxerFX._16oz, value);
-		
-		
 	}
 	
 	inline function onBoxerKnbs(component, value) {
@@ -78,10 +75,14 @@ namespace FXs {
 	inline function onKarateKnbs(component, value) {
 		
 		switch(component.getId()) {
-			case 'Karate_Sustain_knb':
+			case 'Karate_Pressure_knb':
 				KarateFX.setAttribute(KarateFX.Pressure, value);
 			case 'Karate_Focus_knb':
 				KarateFX.setAttribute(KarateFX.Focus, value);
+			case 'Karate_Speed_knb':
+				KarateFX.setAttribute(KarateFX.Speed, value);
+			case 'Karate_Air_knb':
+				KarateFX.setAttribute(KarateFX.Air, value);
 		}
 	}
 	

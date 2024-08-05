@@ -15,7 +15,7 @@ namespace UpdateChecker {
 		Server.setBaseURL(GITHUB_API);
 		
 		Server.callWithGET(
-			"/repos/sinuslabs/bandbreite/releases/latest",
+			"/repos/sinuslabs/ko/releases/latest",
 			{},
 			onGithubResponse
 		);

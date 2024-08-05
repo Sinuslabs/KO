@@ -1,5 +1,16 @@
 namespace Header {
 	
+	const var Update_btn = Content.getComponent("Update_btn");
+	Update_btn.setControlCallback(onUpdateBtn);
+	Update_btn.setLocalLookAndFeel(Styles.LAF_displayIconButton);
+	
+	const var About_btn = Content.getComponent("About_btn");
+	
+	About_btn.setControlCallback(onAbout);
+	About_btn.setLocalLookAndFeel(Styles.LAF_displayIconButton);
+	
+	Update_btn.showControl(false);
+	
 	reg clickCounter = 0;
 	const var clickThreshold = 4; // Number of clicks required to trigger custom function
 	const var decreaseInterval = 100;
@@ -25,6 +36,19 @@ namespace Header {
 			easteregg_timer.stopTimer();
 			clickCounter = 0;
 		}
+	}
+	
+	inline function onAbout(component, value) {
+		if (value) {
+			Router.goTo('About');
+		} else {
+			Router.goTo('Main');
+		}
+	
+	}
+	
+	inline function onUpdateBtn(component, value) {
+		Router.goTo('About');
 	}
 	
 }

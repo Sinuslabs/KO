@@ -27,6 +27,33 @@ namespace Styles {
 		}
 	}
 	
+	const LAF_displayIconButton = Content.createLocalLookAndFeel();
+	LAF_displayIconButton.registerFunction("drawToggleButton", displayIconButtonLAF);
+	inline function displayIconButtonLAF(g, obj) {
+		local a = obj.area;
+		local iconArea = StyleHelpers.addPadding(a, 0);
+		local SIZE = 18;
+		
+		local width = a[2];
+		local height = a[3];
+		
+		iconArea = StyleHelpers.withSizeKeepingCentre(a, 18, 18);
+		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		
+		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
+		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		if (obj.text.contains('$outline')) {
+			obj.text = obj.text.replace('$outline', '');
+			g.drawPath(Assets.get[obj.text], [iconArea[0], iconArea[1], SIZE, SIZE], 0.5);								
+		} else {
+			g.fillPath(Assets.get[obj.text], [iconArea[0], iconArea[1], SIZE, SIZE]);
+		}
+	}
+	
 	const var LAF_DisplayKnobSimple = Content.createLocalLookAndFeel();
 	LAF_DisplayKnobSimple.registerFunction('drawRotarySlider', DisplayKnobSimple_LAF);
 	
@@ -119,11 +146,44 @@ namespace Styles {
 			g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		}
 		
-		if (!obj.over) {
+		if (obj.over) {
 			g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		}
 		
-		g.drawRoundedRectangle(paddedA, BORDER_RADIUS, 2);
+		g.drawRoundedRectangle(paddedA, BORDER_RADIUS, 1);
+		
+		if (obj.value) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+			g.fillRoundedRectangle(paddedA, BORDER_RADIUS);
+			g.setColour(Theme.THEME.Colors.Display.on_display_contrast);
+		}
+		
+		g.setFont(Theme.Regular, 18);
+		g.drawAlignedText(obj.text, textA, 'centred');
+	}
+	
+	const LAF_displayButtonFill = Content.createLocalLookAndFeel();
+	LAF_displayButtonFill.registerFunction('drawToggleButton', displayButtonFillLAF);
+	
+	inline function displayButtonFillLAF(g, obj) {
+		
+		local a = obj.area;
+		local paddedA = StyleHelpers.addPadding(a, 1);
+		local textA = StyleHelpers.addPadding(paddedA, 9);
+		local BORDER_RADIUS = 2;
+		
+		if (obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		} else {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		}
+		
+		if (obj.over) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		}
+		
+		g.fillRoundedRectangle(paddedA, BORDER_RADIUS);
+		g.setColour(Theme.THEME.Colors.Display.on_display_contrast);
 		
 		if (obj.value) {
 			g.setColour(Theme.THEME.Colors.Display.on_display);
@@ -131,7 +191,7 @@ namespace Styles {
 			g.setColour(Theme.THEME.Colors.Display.on_display_contrast);
 		}
 		
-		g.setFont(Theme.Regular, 16);
+		g.setFont(Theme.Regular, 18);
 		g.drawAlignedText(obj.text, textA, 'centred');
 	}
 	
@@ -162,6 +222,39 @@ namespace Styles {
 			g.fillPath(Assets.get['wtf_outline'], a);
 		}
 		
+	}
+	
+	const LAF_socials = Content.createLocalLookAndFeel();
+	LAF_socials.registerFunction("drawToggleButton", socialsLAF);
+	inline function socialsLAF(g, obj) {
+		local a = obj.area;
+		local iconArea = StyleHelpers.addPadding(a, 0);
+		local SIZE = 18;
+		
+		local width = a[2];
+		local height = a[3];
+		
+		
+		iconArea = StyleHelpers.withSizeKeepingCentre(a, 18, 18);
+		if (obj.text === 'youtube') {
+			iconArea = StyleHelpers.withSizeKeepingCentre(a, 22, 16);
+		}
+		
+		if (obj.text === 'instagram') {
+			iconArea = StyleHelpers.withSizeKeepingCentre(a, 18, 18);
+		}
+		
+		if (obj.text === 'soundcloud') {
+			iconArea = StyleHelpers.withSizeKeepingCentre(a, 25, 15);
+		}
+		
+		
+		
+		g.setColour(Theme.THEME.Colors.Display.on_display);
+		
+		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		
+		g.fillPath(Assets.get[obj.text], iconArea);
 	}
 	
 }
