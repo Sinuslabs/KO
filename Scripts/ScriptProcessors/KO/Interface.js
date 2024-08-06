@@ -37,12 +37,14 @@ const var OutGain = Synth.getEffect("OutGain");
 const var SoftClip = Synth.getEffect("SoftClip");
 
 Globals.x = false;
+Globals.xLocked = true;
 Globals.OS = Engine.getOS();
 Globals.activated = false;
 
 Supabase.getActivationStatus();
 UserSettings.load();
 
+const UP = Engine.createUserPresetHandler();
 
 if (Globals.OS === 'LINUX') {
 	Globals.canUpdate = UpdateChecker.checkUpdate(onUpdate);
@@ -53,7 +55,6 @@ inline function onClose_PresetBrowser_btnControl(component, value) {
 };
 
 Content.getComponent("Close_PresetBrowser_btn").setControlCallback(onClose_PresetBrowser_btnControl);
-
 
 Content.callAfterDelay(10, afterDelay, {});
 inline function afterDelay() {
@@ -67,6 +68,13 @@ inline function afterDelay() {
 	Router.goTo('Main');
 	
 	//Panic.panic();
+}
+
+// preventing initial x trigger
+Content.callAfterDelay(200, afterDelay, {});
+inline function afterDelay() {
+
+	Globals.xLocked = false;
 }
 
 const var GainReduction = Synth.getEffect("DemoGain");

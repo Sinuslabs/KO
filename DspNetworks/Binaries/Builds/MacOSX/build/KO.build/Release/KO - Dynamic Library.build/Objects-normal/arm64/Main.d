@@ -694,6 +694,21 @@ dependencies: \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/ClipSoftly/ClipSoftly.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/ClipSoftly/ClipSoftly.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/ClipSoftly/ClipSoftlyProc.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Density2.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Density2.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Density2/Density2.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Density2/Density2.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Density2/Density2Proc.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Drive.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Drive.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Drive/Drive.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Drive/Drive.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Drive/DriveProc.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/DrumSlam.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/DrumSlam.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/DrumSlam/DrumSlam.h \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/DrumSlam/DrumSlam.cpp \
+  /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/DrumSlam/DrumSlamProc.cpp \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/Focus.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/Focus.h \
   /Users/oskarsh/Documents/GitHub/KO/DspNetworks/Binaries/Source/../../ThirdParty/../../External/airwindows/plugins/LinuxVST/src/Focus/Focus.h \

@@ -105,8 +105,18 @@ namespace FXs {
 	
 	inline function onFX_btn(component, value) {
 		
-		Header.countClicks();
+		if (!value) return;
+		
+		Console.print('internal load: ' + UP.isInternalPresetLoad());
+		
+		local seconds = UP.getSecondsSinceLastPresetLoad();
+	
+		if (!Globals.xLocked && seconds >= 1) {
+			Header.countClicks();			
+		}
 			
+		Console.print(component.getId() + ' : value: ' + value);
+	
 		switch(component.getId()) {
 			case 'FX_1_btn':
 				KO_graphics.goTo('KO_1');
@@ -130,7 +140,6 @@ namespace FXs {
 				SumoFX.setBypassed(false);
 				Globals.currentEffect = 'Sumo';
 		}
-		
 		
 		KO_graphics.KO_panel.repaint();
 	}

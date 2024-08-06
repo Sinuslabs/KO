@@ -124,7 +124,7 @@ namespace Styles {
 		}
 		
 		g.setFont(Theme.Regular, 16);
-		g.drawAlignedText('LIMIT', a, 'left');
+		g.drawAlignedText('CLIP', a, 'left');
 		
 		g.fillEllipse(dotArea);
 		

@@ -10,6 +10,9 @@
 // Include third party header files ----------------
 
 #include "ClipSoftly.h"
+#include "Density2.h"
+#include "Drive.h"
+#include "DrumSlam.h"
 #include "Focus.h"
 #include "Logical4.h"
 #include "Mojo.h"

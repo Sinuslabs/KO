@@ -1,7 +1,9 @@
 #pragma once
 
+#include "Drive.h"
 #include "Tube2.h"
 #include "Tube2.h"
+#include "DrumSlam.h"
 #include "Logical4.h"
 #include "Logical4.h"
 #include "Focus.h"
@@ -33,10 +35,6 @@ using minmax2_t = control::minmax<NV,
                                   parameter::plain<faust_t<NV>, 1>>;
 
 template <int NV>
-using pma2_t = control::pma<NV, 
-                            parameter::plain<project::Focus<NV>, 0>>;
-
-template <int NV>
 using minmax_t = control::minmax<NV, 
                                  parameter::plain<core::gain<NV>, 0>>;
 
@@ -44,27 +42,19 @@ template <int NV>
 using split_t = container::split<parameter::empty, 
                                  wrap::fix<1, minmax1_t<NV>>, 
                                  minmax2_t<NV>, 
-                                 control::pma<NV, parameter::empty>, 
-                                 pma2_t<NV>, 
                                  minmax_t<NV>>;
 
 template <int NV>
+using pma1_t = control::pma<NV, 
+                            parameter::plain<project::Drive<NV>, 0>>;
+
+template <int NV>
 using modchain_t_ = container::chain<parameter::empty, 
-                                     wrap::fix<1, split_t<NV>>>;
+                                     wrap::fix<1, split_t<NV>>, 
+                                     pma1_t<NV>>;
 
 template <int NV>
 using modchain_t = wrap::control_rate<modchain_t_<NV>>;
-
-template <int NV>
-using pma_mod = parameter::chain<ranges::Identity, 
-                                 parameter::plain<project::Tube2<NV>, 1>, 
-                                 parameter::plain<project::Tube2<NV>, 1>>;
-
-template <int NV>
-using pma_t = control::pma<NV, pma_mod<NV>>;
-template <int NV>
-using envelope_follower_t = wrap::mod<parameter::plain<pma_t<NV>, 0>, 
-                                      wrap::no_data<dynamics::envelope_follower>>;
 
 DECLARE_PARAMETER_RANGE_SKEW(dry_wet_mixer_c0Range, 
                              -100., 
@@ -89,6 +79,14 @@ template <int NV>
 using dry_path_t = container::chain<parameter::empty, 
                                     wrap::fix<2, dry_wet_mixer_t<NV>>, 
                                     core::gain<NV>>;
+
+template <int NV>
+using pma_mod = parameter::chain<ranges::Identity, 
+                                 parameter::plain<project::Tube2<NV>, 1>, 
+                                 parameter::plain<project::Tube2<NV>, 1>>;
+
+template <int NV>
+using pma_t = control::pma<NV, pma_mod<NV>>;
 
 template <int NV>
 using band1_t = container::chain<parameter::empty, 
@@ -132,9 +130,11 @@ using soft_bypass_t = bypass::smoothed<20, soft_bypass_t_<NV>>;
 template <int NV>
 using chain_t = container::chain<parameter::empty, 
                                  wrap::fix<2, pma_t<NV>>, 
+                                 project::Drive<NV>, 
                                  project::Tube2<NV>, 
                                  project::Tube2<NV>, 
                                  faust_t<NV>, 
+                                 project::DrumSlam<NV>, 
                                  soft_bypass_t<NV>, 
                                  project::Focus<NV>, 
                                  core::gain<NV>>;
@@ -161,12 +161,23 @@ template <int NV>
 using Punch = parameter::chain<ranges::Identity, 
                                parameter::plain<Boxer_impl::minmax_t<NV>, 0>, 
                                parameter::plain<Boxer_impl::minmax1_t<NV>, 0>, 
-                               parameter::plain<Boxer_impl::minmax2_t<NV>, 0>>;
+                               parameter::plain<Boxer_impl::minmax2_t<NV>, 0>, 
+                               parameter::plain<project::DrumSlam<NV>, 0>, 
+                               parameter::plain<Boxer_impl::pma1_t<NV>, 0>>;
+
+DECLARE_PARAMETER_RANGE(Wut_1Range, 
+                        -1., 
+                        1.);
+
+template <int NV>
+using Wut_1 = parameter::from0To1<Boxer_impl::pma1_t<NV>, 
+                                  1, 
+                                  Wut_1Range>;
 
 template <int NV>
 using Wut = parameter::chain<ranges::Identity, 
-                             parameter::plain<control::pma<NV, parameter::empty>, 0>, 
-                             parameter::plain<Boxer_impl::pma2_t<NV>, 0>>;
+                             parameter::plain<Boxer_impl::pma_t<NV>, 0>, 
+                             Wut_1<NV>>;
 
 template <int NV>
 using _16oz = parameter::bypass<Boxer_impl::soft_bypass_t<NV>>;
@@ -184,7 +195,6 @@ using Boxer_t_plist = parameter::list<Punch<NV>,
 template <int NV>
 using Boxer_t_ = container::chain<Boxer_t_parameters::Boxer_t_plist<NV>, 
                                   wrap::fix<2, modchain_t<NV>>, 
-                                  envelope_follower_t<NV>, 
                                   dry_wet1_t<NV>>;
 
 // =================================| Root node initialiser class |=================================
@@ -205,9 +215,9 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		SNEX_METADATA_ENCODED_PARAMETERS(62)
 		{
 			0x005B, 0x0000, 0x5000, 0x6E75, 0x6863, 0x0000, 0x0000, 0x0000, 
-            0x8000, 0xA23F, 0x9209, 0x003E, 0x8000, 0x003F, 0x0000, 0x5B00, 
+            0x8000, 0x073F, 0xC67B, 0x003E, 0x8000, 0x003F, 0x0000, 0x5B00, 
             0x0001, 0x0000, 0x7557, 0x0074, 0x0000, 0x0000, 0x0000, 0x3F80, 
-            0x83E3, 0x3ED4, 0x0000, 0x3F80, 0x0000, 0x0000, 0x025B, 0x0000, 
+            0xBFDC, 0x3F2C, 0x0000, 0x3F80, 0x0000, 0x0000, 0x025B, 0x0000, 
             0x4D00, 0x7869, 0x0000, 0x0000, 0x0000, 0x8000, 0x003F, 0x8000, 
             0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0003, 0x0000, 0x315F, 
             0x6F36, 0x007A, 0x0000, 0x0000, 0x0000, 0x3F80, 0x0000, 0x0000, 
@@ -223,32 +233,32 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		auto& split = this->getT(0).getT(0);                                            // Boxer_impl::split_t<NV>
 		auto& minmax1 = this->getT(0).getT(0).getT(0);                                  // Boxer_impl::minmax1_t<NV>
 		auto& minmax2 = this->getT(0).getT(0).getT(1);                                  // Boxer_impl::minmax2_t<NV>
-		auto& pma1 = this->getT(0).getT(0).getT(2);                                     // control::pma<NV, parameter::empty>
-		auto& pma2 = this->getT(0).getT(0).getT(3);                                     // Boxer_impl::pma2_t<NV>
-		auto& minmax = this->getT(0).getT(0).getT(4);                                   // Boxer_impl::minmax_t<NV>
-		auto& envelope_follower = this->getT(1);                                        // Boxer_impl::envelope_follower_t<NV>
-		auto& dry_wet1 = this->getT(2);                                                 // Boxer_impl::dry_wet1_t<NV>
-		auto& dry_path = this->getT(2).getT(0);                                         // Boxer_impl::dry_path_t<NV>
-		auto& dry_wet_mixer = this->getT(2).getT(0).getT(0);                            // Boxer_impl::dry_wet_mixer_t<NV>
-		auto& dry_gain = this->getT(2).getT(0).getT(1);                                 // core::gain<NV>
-		auto& wet_path = this->getT(2).getT(1);                                         // Boxer_impl::wet_path_t<NV>
-		auto& chain = this->getT(2).getT(1).getT(0);                                    // Boxer_impl::chain_t<NV>
-		auto& pma = this->getT(2).getT(1).getT(0).getT(0);                              // Boxer_impl::pma_t<NV>
-		auto& Tube2 = this->getT(2).getT(1).getT(0).getT(1);                            // project::Tube2<NV>
-		auto& Tube3 = this->getT(2).getT(1).getT(0).getT(2);                            // project::Tube2<NV>
-		auto& faust = this->getT(2).getT(1).getT(0).getT(3);                            // Boxer_impl::faust_t<NV>
-		auto& soft_bypass = this->getT(2).getT(1).getT(0).getT(4);                      // Boxer_impl::soft_bypass_t<NV>
-		auto& freq_split3 = this->getT(2).getT(1).getT(0).getT(4).getT(0);              // Boxer_impl::freq_split3_t<NV>
-		auto& band1 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(0);            // Boxer_impl::band1_t<NV>
-		auto& lr1_1 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(0).getT(0);    // jdsp::jlinkwitzriley
-		auto& Logical4 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(0).getT(1); // project::Logical4<NV>
-		auto& band2 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(1);            // Boxer_impl::band2_t<NV>
-		auto& lr2_1 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(1).getT(0);    // jdsp::jlinkwitzriley
-		auto& Logical5 = this->getT(2).getT(1).getT(0).getT(4).getT(0).getT(1).getT(1); // project::Logical4<NV>
-		auto& gain1 = this->getT(2).getT(1).getT(0).getT(4).getT(1);                    // core::gain<NV>
-		auto& Focus = this->getT(2).getT(1).getT(0).getT(5);                            // project::Focus<NV>
-		auto& gain = this->getT(2).getT(1).getT(0).getT(6);                             // core::gain<NV>
-		auto& wet_gain = this->getT(2).getT(1).getT(1);                                 // core::gain<NV>
+		auto& minmax = this->getT(0).getT(0).getT(2);                                   // Boxer_impl::minmax_t<NV>
+		auto& pma1 = this->getT(0).getT(1);                                             // Boxer_impl::pma1_t<NV>
+		auto& dry_wet1 = this->getT(1);                                                 // Boxer_impl::dry_wet1_t<NV>
+		auto& dry_path = this->getT(1).getT(0);                                         // Boxer_impl::dry_path_t<NV>
+		auto& dry_wet_mixer = this->getT(1).getT(0).getT(0);                            // Boxer_impl::dry_wet_mixer_t<NV>
+		auto& dry_gain = this->getT(1).getT(0).getT(1);                                 // core::gain<NV>
+		auto& wet_path = this->getT(1).getT(1);                                         // Boxer_impl::wet_path_t<NV>
+		auto& chain = this->getT(1).getT(1).getT(0);                                    // Boxer_impl::chain_t<NV>
+		auto& pma = this->getT(1).getT(1).getT(0).getT(0);                              // Boxer_impl::pma_t<NV>
+		auto& Drive = this->getT(1).getT(1).getT(0).getT(1);                            // project::Drive<NV>
+		auto& Tube2 = this->getT(1).getT(1).getT(0).getT(2);                            // project::Tube2<NV>
+		auto& Tube3 = this->getT(1).getT(1).getT(0).getT(3);                            // project::Tube2<NV>
+		auto& faust = this->getT(1).getT(1).getT(0).getT(4);                            // Boxer_impl::faust_t<NV>
+		auto& DrumSlam = this->getT(1).getT(1).getT(0).getT(5);                         // project::DrumSlam<NV>
+		auto& soft_bypass = this->getT(1).getT(1).getT(0).getT(6);                      // Boxer_impl::soft_bypass_t<NV>
+		auto& freq_split3 = this->getT(1).getT(1).getT(0).getT(6).getT(0);              // Boxer_impl::freq_split3_t<NV>
+		auto& band1 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(0);            // Boxer_impl::band1_t<NV>
+		auto& lr1_1 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(0).getT(0);    // jdsp::jlinkwitzriley
+		auto& Logical4 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(0).getT(1); // project::Logical4<NV>
+		auto& band2 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(1);            // Boxer_impl::band2_t<NV>
+		auto& lr2_1 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(1).getT(0);    // jdsp::jlinkwitzriley
+		auto& Logical5 = this->getT(1).getT(1).getT(0).getT(6).getT(0).getT(1).getT(1); // project::Logical4<NV>
+		auto& gain1 = this->getT(1).getT(1).getT(0).getT(6).getT(1);                    // core::gain<NV>
+		auto& Focus = this->getT(1).getT(1).getT(0).getT(7);                            // project::Focus<NV>
+		auto& gain = this->getT(1).getT(1).getT(0).getT(8);                             // core::gain<NV>
+		auto& wet_gain = this->getT(1).getT(1).getT(1);                                 // core::gain<NV>
 		
 		// Parameter Connections -------------------------------------------------------------------
 		
@@ -257,13 +267,15 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		Band1_p.connectT(1, lr2_1);                           // Band1 -> lr2_1::Frequency
 		dry_wet1.getParameterT(0).connectT(0, dry_wet_mixer); // DryWet -> dry_wet_mixer::Value
 		auto& Punch_p = this->getParameterT(0);
-		Punch_p.connectT(0, minmax);  // Punch -> minmax::Value
-		Punch_p.connectT(1, minmax1); // Punch -> minmax1::Value
-		Punch_p.connectT(2, minmax2); // Punch -> minmax2::Value
+		Punch_p.connectT(0, minmax);   // Punch -> minmax::Value
+		Punch_p.connectT(1, minmax1);  // Punch -> minmax1::Value
+		Punch_p.connectT(2, minmax2);  // Punch -> minmax2::Value
+		Punch_p.connectT(3, DrumSlam); // Punch -> DrumSlam::Drive
+		Punch_p.connectT(4, pma1);     // Punch -> pma1::Value
 		
 		auto& Wut_p = this->getParameterT(1);
-		Wut_p.connectT(0, pma1); // Wut -> pma1::Value
-		Wut_p.connectT(1, pma2); // Wut -> pma2::Value
+		Wut_p.connectT(0, pma);  // Wut -> pma::Value
+		Wut_p.connectT(1, pma1); // Wut -> pma1::Multiply
 		
 		this->getParameterT(2).connectT(0, dry_wet1); // Mix -> dry_wet1::DryWet
 		
@@ -274,14 +286,13 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		auto& faust_p = faust.getWrappedObject().getParameter();
 		minmax1.getWrappedObject().getParameter().connectT(0, faust); // minmax1 -> faust::Attack
 		minmax2.getWrappedObject().getParameter().connectT(0, faust); // minmax2 -> faust::Sustain
-		pma2.getWrappedObject().getParameter().connectT(0, Focus);    // pma2 -> Focus::Boost
 		minmax.getWrappedObject().getParameter().connectT(0, gain);   // minmax -> gain::Gain
-		pma.getWrappedObject().getParameter().connectT(0, Tube2);     // pma -> Tube2::Tube
-		pma.getWrappedObject().getParameter().connectT(1, Tube3);     // pma -> Tube3::Tube
-		envelope_follower.getParameter().connectT(0, pma);            // envelope_follower -> pma::Value
+		pma1.getWrappedObject().getParameter().connectT(0, Drive);    // pma1 -> Drive::Drive
 		auto& dry_wet_mixer_p = dry_wet_mixer.getWrappedObject().getParameter();
-		dry_wet_mixer_p.getParameterT(0).connectT(0, dry_gain); // dry_wet_mixer -> dry_gain::Gain
-		dry_wet_mixer_p.getParameterT(1).connectT(0, wet_gain); // dry_wet_mixer -> wet_gain::Gain
+		dry_wet_mixer_p.getParameterT(0).connectT(0, dry_gain);   // dry_wet_mixer -> dry_gain::Gain
+		dry_wet_mixer_p.getParameterT(1).connectT(0, wet_gain);   // dry_wet_mixer -> wet_gain::Gain
+		pma.getWrappedObject().getParameter().connectT(0, Tube2); // pma -> Tube2::Tube
+		pma.getWrappedObject().getParameter().connectT(1, Tube3); // pma -> Tube3::Tube
 		
 		// Default Values --------------------------------------------------------------------------
 		
@@ -299,24 +310,16 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		minmax2.setParameterT(4, 0.);          // control::minmax::Step
 		minmax2.setParameterT(5, 0.);          // control::minmax::Polarity
 		
-		;                           // pma1::Value is automated
-		pma1.setParameterT(1, 0.5); // control::pma::Multiply
-		pma1.setParameterT(2, 0.5); // control::pma::Add
+		;                                  // minmax::Value is automated
+		minmax.setParameterT(1, -8.9);     // control::minmax::Minimum
+		minmax.setParameterT(2, 0.);       // control::minmax::Maximum
+		minmax.setParameterT(3, 0.376976); // control::minmax::Skew
+		minmax.setParameterT(4, 0.1);      // control::minmax::Step
+		minmax.setParameterT(5, 1.);       // control::minmax::Polarity
 		
-		;                               // pma2::Value is automated
-		pma2.setParameterT(1, 0.15972); // control::pma::Multiply
-		pma2.setParameterT(2, 0.);      // control::pma::Add
-		
-		;                                 // minmax::Value is automated
-		minmax.setParameterT(1, -2);      // control::minmax::Minimum
-		minmax.setParameterT(2, 0.);      // control::minmax::Maximum
-		minmax.setParameterT(3, 5.42227); // control::minmax::Skew
-		minmax.setParameterT(4, 0.1);     // control::minmax::Step
-		minmax.setParameterT(5, 1.);      // control::minmax::Polarity
-		
-		envelope_follower.setParameterT(0, 0.);   // dynamics::envelope_follower::Attack
-		envelope_follower.setParameterT(1, 98.1); // dynamics::envelope_follower::Release
-		envelope_follower.setParameterT(2, 0.);   // dynamics::envelope_follower::ProcessSignal
+		;                          // pma1::Value is automated
+		;                          // pma1::Multiply is automated
+		pma1.setParameterT(2, 0.); // control::pma::Add
 		
 		; // dry_wet1::DryWet is automated
 		
@@ -326,9 +329,14 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		dry_gain.setParameterT(1, 20.); // core::gain::Smoothing
 		dry_gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
-		;                                 // pma::Value is automated
-		pma.setParameterT(1, 1.54824);    // control::pma::Multiply
-		pma.setParameterT(2, 0.00247339); // control::pma::Add
+		;                         // pma::Value is automated
+		pma.setParameterT(1, 1.); // control::pma::Multiply
+		pma.setParameterT(2, 0.); // control::pma::Add
+		
+		;                           // Drive::Drive is automated
+		Drive.setParameterT(1, 0.); // project::Drive::Highpass
+		Drive.setParameterT(2, 1.); // project::Drive::OutLevel
+		Drive.setParameterT(3, 1.); // project::Drive::DryWet
 		
 		Tube2.setParameterT(0, 0.496235); // project::Tube2::Input
 		;                                 // Tube2::Tube is automated
@@ -341,6 +349,10 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		faust.setParameterT(2, 10.);    // core::faust::LowCutoff
 		faust.setParameterT(3, 20000.); // core::faust::HighCutoff
 		faust.setParameterT(4, 0.);     // core::faust::Monitorselectedband
+		
+		;                              // DrumSlam::Drive is automated
+		DrumSlam.setParameterT(1, 1.); // project::DrumSlam::Output
+		DrumSlam.setParameterT(2, 1.); // project::DrumSlam::DryWet
 		
 		freq_split3.setParameterT(0, 239.723); // container::split::Band1
 		
@@ -366,7 +378,7 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		gain1.setParameterT(1, 20.);  // core::gain::Smoothing
 		gain1.setParameterT(2, 0.);   // core::gain::ResetValue
 		
-		;                           // Focus::Boost is automated
+		Focus.setParameterT(0, 0.); // project::Focus::Boost
 		Focus.setParameterT(1, 0.); // project::Focus::Focus
 		Focus.setParameterT(2, 0.); // project::Focus::Mode
 		Focus.setParameterT(3, 1.); // project::Focus::Output
@@ -380,17 +392,10 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 		wet_gain.setParameterT(1, 20.); // core::gain::Smoothing
 		wet_gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
-		this->setParameterT(0, 0.28523);
-		this->setParameterT(1, 0.415069);
+		this->setParameterT(0, 0.387657);
+		this->setParameterT(1, 0.674803);
 		this->setParameterT(2, 1.);
 		this->setParameterT(3, 0.);
-		this->setExternalData({}, -1);
-	}
-	~instance() override
-	{
-		// Cleanup external data references --------------------------------------------------------
-		
-		this->setExternalData({}, -1);
 	}
 	
 	static constexpr bool isPolyphonic() { return NV > 1; };
@@ -398,13 +403,6 @@ template <int NV> struct instance: public Boxer_impl::Boxer_t_<NV>
 	static constexpr bool hasTail() { return true; };
 	
 	static constexpr bool isSuspendedOnSilence() { return false; };
-	
-	void setExternalData(const ExternalData& b, int index)
-	{
-		// External Data Connections ---------------------------------------------------------------
-		
-		this->getT(1).setExternalData(b, index); // Boxer_impl::envelope_follower_t<NV>
-	}
 };
 }
 

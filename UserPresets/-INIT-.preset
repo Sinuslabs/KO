@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Preset Version="1.0.0">
+  <Content Processor="Interface">
+    <Control type="ScriptButton" id="Limit_Button" value="1.0"/>
+    <Control type="ScriptSlider" id="Boxer_Punch_knb" value="0.5"/>
+    <Control type="ScriptSlider" id="Boxer_Wut_knb" value="0.5"/>
+    <Control type="ScriptButton" id="Boxer_6oz_knb" value="0.0"/>
+    <Control type="ScriptSlider" id="Karate_Speed_knb" value="0.300000011920929"/>
+    <Control type="ScriptSlider" id="Karate_Focus_knb" value="0.5"/>
+    <Control type="ScriptSlider" id="Karate_Pressure_knb" value="0.5"/>
+    <Control type="ScriptSlider" id="Karate_Air_knb" value="0.25"/>
+    <Control type="ScriptSlider" id="Sumo_Heavy_knb" value="0.5"/>
+    <Control type="ScriptSlider" id="Sumo_Weight_knb" value="0.5"/>
+    <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.0"/>
+    <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.3199999928474426"/>
+    <Control type="ScriptButton" id="FX_1_btn" value="1.0"/>
+    <Control type="ScriptButton" id="FX_2_btn" value="0"/>
+    <Control type="ScriptButton" id="FX_3_btn" value="0"/>
+    <Control type="ScriptSlider" id="OutputPeakMeterFillL" value="-22.20627522007491"/>
+    <Control type="ScriptSlider" id="OutputPeakMeterPointL" value="-20.21633758063307"/>
+    <Control type="ScriptSlider" id="GainSlider" value="1.490116119384766e-6"/>
+    <Control type="ScriptButton" id="Update_btn" value="0.0"/>
+    <Control type="ScriptButton" id="Close_PresetBrowser_btn" value="0.0"/>
+  </Content>
+  <MidiAutomation/>
+  <MPEData Enabled="0"/>
+</Preset>
