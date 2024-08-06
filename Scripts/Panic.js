@@ -43,8 +43,6 @@ namespace Panic {
 		
 		counter = counter + 1;
 		
-		Console.print(counter);
-		
 		if (counter > 8 && anomaly) {
 			FXs.FX_Selector[idx].setValue(1);
 			FXs.FX_Selector[idx].changed();

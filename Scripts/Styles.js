@@ -104,6 +104,10 @@ namespace Styles {
 		
 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		
+		if (obj.hover || obj.clicked) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		}
+		
 		g.setFont(Theme.Regular, 18);
 		g.drawAlignedText(text.toUpperCase(), text_area, 'centred');
 	}

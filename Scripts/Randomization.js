@@ -1,5 +1,22 @@
 namespace Randomization {
 	
+	const var Boxer_knbs = [Content.getComponent("Boxer_Wut_knb"),
+	                        Content.getComponent("Boxer_Punch_knb")];
+	
+	const var FX_selectors = [Content.getComponent("FX_1_btn"),
+	                          Content.getComponent("FX_2_btn"),
+	                          Content.getComponent("FX_3_btn")];
+	
+	const var Karate_knbs = [Content.getComponent("Karate_Pressure_knb"),
+	                        Content.getComponent("Karate_Focus_knb"),
+	                        Content.getComponent("Karate_Air_knb"),
+	                        Content.getComponent("Karate_Speed_knb")];
+	
+	const var Sumo_knbs = [Content.getComponent("Sumo_Stomp_knb"),
+	                       Content.getComponent("Sumo_Crush_knb"),
+	                       Content.getComponent("Sumo_Weight_knb"),
+	                       Content.getComponent("Sumo_Heavy_knb")];
+	
 	const var randomPanelButton = Content.getComponent("randomize_pnl_btn");
 	
 	randomPanelButton.setPaintRoutine(randomPanelRoutine);
@@ -25,7 +42,8 @@ namespace Randomization {
 		}
 		
 		if (p.clicked) {
-			randomPreset();
+			//randomPreset();
+			randomizeAllKnobs();
 			calculateEllipses(); // Calculate ellipses on click
 		}
 		
@@ -41,6 +59,41 @@ namespace Randomization {
 				if (isUndo) Engine.loadPreviousUserPreset(true);
 			});
 		
+	}
+	
+	inline function randomizeAllKnobs() {
+		
+		local idx = getRandomInt(3);
+		FX_selectors[idx].setValue(1);
+		FX_selectors[idx].changed();
+		
+		
+		if (idx == 0) {
+			randomizeKnobs(Boxer_knbs);
+		}
+		
+		if (idx == 1) {
+			randomizeKnobs(Karate_knbs);
+		}
+		
+		if (idx == 2) {
+			randomizeKnobs(Sumo_knbs);
+		}
+		
+	}
+	
+	inline function randomizeKnobs(knobs) {
+	    for (knob in knobs) {
+	        local u = Math.random();
+	        local v = Math.random();
+	        local randomValue = (u + v) / 2; // Triangular distribution
+	        knob.setValueNormalized(randomValue);
+	        knob.changed();
+	    }
+	}
+	
+	inline function getRandomInt(upperBound) {
+		return parseInt(Math.floor(Math.random() * upperBound));
 	}
 	
 	inline function calculateEllipses() {

@@ -56,23 +56,27 @@ inline function onClose_PresetBrowser_btnControl(component, value) {
 
 Content.getComponent("Close_PresetBrowser_btn").setControlCallback(onClose_PresetBrowser_btnControl);
 
+KO_graphics.initAni();
+
 Content.callAfterDelay(10, afterDelay, {});
 inline function afterDelay() {
 
 	Globals.currentEffect = 'Boxer';
-	KO_graphics.KO_panel.repaint();
 	
 	FXs.FX_Selector[0].setValue(1);
 	FXs.FX_Selector[0].changed();
 	
 	Router.goTo('Main');
+	Console.print('yes');
 	
 	//Panic.panic();
 }
 
+
+
 // preventing initial x trigger
-Content.callAfterDelay(200, afterDelay, {});
-inline function afterDelay() {
+Content.callAfterDelay(200, afterDelay2, {});
+inline function afterDelay2() {
 
 	Globals.xLocked = false;
 }

@@ -5,9 +5,11 @@ namespace KO_graphics {
 	const animation = Animations.kokook;
 	
 	reg frame = 27;
+	const startFrame = 20;
 	const frames = 83;
 	const speed = 1;
 	const timer = 20;
+	
 	reg frame_stop = 0;
 	reg reverse = false;
 	
@@ -15,11 +17,10 @@ namespace KO_graphics {
 	reg currentAnimation = "KO_1";
 	
 	KO_panel.setAnimation(animation);
+	KO_panel.setAnimationFrame(startFrame);
 	KO_panel.setTimerCallback(nextFrame);
 	
 	inline function goTo(ani) {
-		
-		
 		if (currentAnimation == 'KO_1') {
 			if (ani == 'KO_1') {return;}
 			if (ani == 'KO_2') {
@@ -27,6 +28,7 @@ namespace KO_graphics {
 				reverse = false;
 				frame_stop = 27;
 			}
+			
 			if (ani == 'KO_3') {
 				frame = 79;
 				reverse = true;
@@ -70,6 +72,15 @@ namespace KO_graphics {
 			KO_panel.startTimer(timer);
 			return;
 		}
+	}
+	
+	inline function initAni() {
+		Console.print('lets go');
+	
+		frame = startFrame;
+		reverse = true;
+		frame_stop = 5;
+		KO_panel.startTimer(timer);
 	}
 	
 	inline function nextFrame() {	

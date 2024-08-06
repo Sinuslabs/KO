@@ -2,7 +2,7 @@ namespace ZoomHandler
 {
 	const var MIN_ZOOM = 0.50;
 	const var MAX_ZOOM = 2.0;
-	const var ZOOM_STEP = 0.12;
+	const var ZOOM_STEP = 0.08;
 	const var INTERFACE_WIDTH = 1134;
 	const var INTERFACE_HEIGHT = 510;
 
