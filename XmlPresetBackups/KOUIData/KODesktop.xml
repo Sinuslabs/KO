@@ -68,11 +68,14 @@
         <Component type="ScriptPanel" id="KO_panel" x="-75.0" y="0.0" parentComponent="Main_Route"
                    width="470.0" height="320.0"/>
         <Component type="ScriptButton" id="FX_1_btn" x="315.0" y="75.0" parentComponent="Main_Route"
-                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"/>
+                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
+                   saveInPreset="0" isPluginParameter="1" pluginParameterName="Algo 1"/>
         <Component type="ScriptButton" id="FX_2_btn" x="345.0" y="130.0" parentComponent="Main_Route"
-                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"/>
+                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
+                   saveInPreset="0" pluginParameterName="Algo 2" isPluginParameter="1"/>
         <Component type="ScriptButton" id="FX_3_btn" x="375.0" y="185.0" parentComponent="Main_Route"
-                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"/>
+                   width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
+                   saveInPreset="0" pluginParameterName="Algo 3" isPluginParameter="1"/>
         <Component type="ScriptSlider" id="OutputPeakMeterFillL" x="715.0" y="55.0"
                    parentComponent="Main_Route" width="10.0" height="195.0" text="PeakMeterVertFill"
                    mode="Decibel" min="-100.0" max="24.0" stepSize="0.1000000014901161"

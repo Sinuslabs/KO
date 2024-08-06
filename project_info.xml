@@ -20,7 +20,7 @@
   <RedirectSampleFolder value=""/>
   <AAXCategoryFX value="AAX_ePlugInCategory_Modulation"/>
   <VST3Category value=""/>
-  <SupportMonoFX value="1"/>
+  <SupportMonoFX value="0"/>
   <EnableMidiInputFX value="No"/>
   <EnableMidiOut value="No"/>
   <EnableSoundGeneratorsFX value="No"/>
