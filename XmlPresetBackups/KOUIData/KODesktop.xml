@@ -85,7 +85,7 @@
                    width="40" height="230" text="PeakMeterVertPointer" mode="Decibel"
                    min="-100.0" max="24.0" stepSize="0.1000000014901161" suffix=" dB"
                    middlePosition="-18.0" isPluginParameter="1" pluginParameterName="Out Gain"/>
-        <Component type="ScriptButton" id="Update_btn" x="630.0" y="5.0" parentComponent="Main_Route"
+        <Component type="ScriptButton" id="Update_btn" x="605.0" y="5.0" parentComponent="Main_Route"
                    width="30.0" height="30.0" visible="0"/>
       </Component>
       <Component type="ScriptPanel" id="PresetBrowser_Route" x="0.0" y="0.0" parentComponent="display"
@@ -133,6 +133,8 @@
           <Component type="ScriptPanel" id="version_pnl" x="100.0" y="10.0" parentComponent="About_Container"
                      width="52.0" height="25.0"/>
         </Component>
+        <Component type="ScriptButton" id="update_now_btn" x="280.0" y="245.0" parentComponent="About_Route"
+                   width="160" height="45" text="Update Now"/>
       </Component>
       <Component type="ScriptPanel" id="x_Route" x="-2.0" y="0.0" parentComponent="display"
                  width="750.0" height="320.0" visible="0">

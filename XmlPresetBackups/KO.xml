@@ -22,13 +22,14 @@
             <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.0"/>
             <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.300000011920929"/>
             <Control type="ScriptButton" id="FX_1_btn" value="1"/>
-            <Control type="ScriptButton" id="FX_2_btn" value="0.0"/>
-            <Control type="ScriptButton" id="FX_3_btn" value="0.0"/>
+            <Control type="ScriptButton" id="FX_2_btn" value="0"/>
+            <Control type="ScriptButton" id="FX_3_btn" value="1.0"/>
             <Control type="ScriptSlider" id="OutputPeakMeterFillL" value="-100.0"/>
             <Control type="ScriptSlider" id="OutputPeakMeterPointL" value="-100.0"/>
             <Control type="ScriptSlider" id="GainSlider" value="1.490116119384766e-6"/>
             <Control type="ScriptButton" id="Update_btn" value="0.0"/>
             <Control type="ScriptButton" id="Close_PresetBrowser_btn" value="0.0"/>
+            <Control type="ScriptButton" id="update_now_btn" value="0.0"/>
           </Content>
           <UIData Source="KOUIData"/>
         </Processor>

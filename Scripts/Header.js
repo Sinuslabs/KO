@@ -6,6 +6,27 @@ namespace Header {
 	
 	const var About_btn = Content.getComponent("About_btn");
 	
+	const var update_now_btn = Content.getComponent("update_now_btn");
+	
+	update_now_btn.setLocalLookAndFeel(Styles.LAF_displayButtonOutline);
+	update_now_btn.setControlCallback(onUpdateNow);
+	
+	inline function onUpdateNow(component, value) {		
+		if (value) {		
+			switch(Globals.OS) {
+				case 'WIN':
+					Engine.openWebsite(INFO.repository + INFO.latest_release_windows);
+					break;
+				case 'OSX':
+					Engine.openWebsite(INFO.repository + INFO.latest_release_macos);
+					break;
+				case 'LINUX':
+					Engine.openWebsite(INFO.repository + INFO.latest_release_linux);
+					break;
+			}	
+		}		
+	}
+	
 	About_btn.setControlCallback(onAbout);
 	About_btn.setLocalLookAndFeel(Styles.LAF_displayIconButton);
 	

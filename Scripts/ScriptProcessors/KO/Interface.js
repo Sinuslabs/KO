@@ -46,8 +46,13 @@ UserSettings.load();
 
 const UP = Engine.createUserPresetHandler();
 
-if (Globals.OS === 'LINUX') {
+if (Globals.OS !== 'LINUX') {
 	Globals.canUpdate = UpdateChecker.checkUpdate(onUpdate);
+}
+
+inline function onUpdate(canUpdate) {
+	Header.Update_btn.showControl(canUpdate);
+	About.UpdateNow_btn.showControl(canUpdate);
 }
 
 inline function onClose_PresetBrowser_btnControl(component, value) {
