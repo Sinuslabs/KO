@@ -219,13 +219,11 @@ namespace Styles {
 		
 		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
 		
-		
 		if (!obj.value) {
 			g.fillPath(Assets.get['wtf_selected'], a);
 		} else {
 			g.fillPath(Assets.get['wtf_outline'], a);
 		}
-		
 	}
 	
 	const LAF_socials = Content.createLocalLookAndFeel();

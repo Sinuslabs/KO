@@ -19,6 +19,9 @@ namespace x {
 	wtf_btn.setLocalLookAndFeel(Styles.LAF_displayButtonOutline);
 	
 	wtf_icon_btn.set('visible', false);
+	wtf_icon_btn.setValue(1);
+	wtf_icon_btn.changed();
+	wtf_icon_btn.sendRepaintMessage();
 	
 	inline function code_routine(g) {
 		
@@ -28,11 +31,8 @@ namespace x {
 		g.fillPath(Assets.get['code'], a);
 	}
 	
-	
 	inline function onWtfIcon(component, value) {
-		
 		x_fx.setBypassed(value);
-		
 	}
 	
 	inline function on_wtf(component, value) {
@@ -41,7 +41,6 @@ namespace x {
 		Router.goTo('Main');
 		UserSettings.save('wtf', true);
 		wtf_icon_btn.set('visible', true);
-		
 	} 
 	
 	reg frame = 0;
