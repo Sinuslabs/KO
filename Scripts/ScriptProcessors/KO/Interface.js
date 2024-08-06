@@ -52,7 +52,7 @@ if (Globals.OS !== 'LINUX') {
 
 inline function onUpdate(canUpdate) {
 	Header.Update_btn.showControl(canUpdate);
-	About.UpdateNow_btn.showControl(canUpdate);
+	Header.update_now_btn.showControl(canUpdate);
 }
 
 inline function onClose_PresetBrowser_btnControl(component, value) {

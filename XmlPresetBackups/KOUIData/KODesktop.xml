@@ -137,7 +137,7 @@
                      width="52.0" height="25.0"/>
         </Component>
         <Component type="ScriptButton" id="update_now_btn" x="280.0" y="245.0" parentComponent="About_Route"
-                   width="160" height="45" text="Update Now"/>
+                   width="160" height="45" text="Update Now" visible="0"/>
       </Component>
       <Component type="ScriptPanel" id="x_Route" x="-2.0" y="0.0" parentComponent="display"
                  width="750.0" height="320.0" visible="0">
@@ -187,7 +187,7 @@
                width="40.0" height="40.0" text="x" enableMidiLearn="0" isMomentary="1"
                saveInPreset="0" parentComponent="Activation_pnl"/>
     <Component type="ScriptPanel" id="loading_indicator" x="195.0" y="200.0"
-               parentComponent="Activation_pnl" width="30.0" height="30.0" visible="0"/>
+               parentComponent="Activation_pnl" width="30.0" height="30.0"/>
     <Component type="ScriptLabel" id="serial_error_label" x="130.0" y="200.0"
                parentComponent="Activation_pnl" width="160.0" height="30.0"
                text="License Key not found :()" textColour="4294394187" editable="0"

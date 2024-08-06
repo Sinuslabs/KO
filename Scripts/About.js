@@ -96,9 +96,3 @@ namespace About {
 	
 	
 }
-
-inline function onUpdate(canUpdate) {
-	
-	Header.Update_btn.showControl(canUpdate);
-	About.UpdateNow_btn.showControl(canUpdate);
-}
