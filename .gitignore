@@ -8,4 +8,8 @@ logs/
 **/.DS_Store
 DspNetwork/.DS_Store
 .DS_Store
-
+.pkg
+**.pkg
+Packaging/OSX/vst3/
+Packaging/OSX/au/
+license.dat

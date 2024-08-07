@@ -156,16 +156,16 @@
                  width="30.0" height="30.0" text="settings" saveInPreset="0" enableMidiLearn="0"/>
       <Component type="ScriptButton" id="not_activated_btn" x="510.0" y="10.0"
                  parentComponent="display" text="NOT ACTIVATED" enableMidiLearn="0"
-                 saveInPreset="0" isMomentary="1" visible="0"/>
+                 saveInPreset="0" isMomentary="1"/>
     </Component>
     <Component type="ScriptPanel" id="ZoomPanel" x="755.0" y="329.0" parentComponent="background"
                width="30.0" height="25.0" allowCallbacks="Clicks, Hover &amp; Dragging"/>
   </Component>
   <Component type="ScriptPanel" id="Backdrop_overlay_pnl" x="0.0" y="0.0"
              width="780.0" height="350.0" itemColour2="2499805184" itemColour="2499805184"
-             allowCallbacks="Clicks Only" visible="0"/>
+             allowCallbacks="Clicks Only"/>
   <Component type="ScriptPanel" id="Activation_pnl" x="180.0" y="30.0" width="420.0"
-             height="280.0" visible="0">
+             height="280.0">
     <Component type="ScriptLabel" id="title_lbl1" x="10.0" y="10.0" parentComponent="Activation_pnl"
                text="Activate" width="265.0" height="30.0" fontName="inter-reg"
                fontSize="32.0" editable="0" textColour="4294573052" alignment="left"/>
@@ -187,7 +187,7 @@
                width="40.0" height="40.0" text="x" enableMidiLearn="0" isMomentary="1"
                saveInPreset="0" parentComponent="Activation_pnl"/>
     <Component type="ScriptPanel" id="loading_indicator" x="195.0" y="200.0"
-               parentComponent="Activation_pnl" width="30.0" height="30.0"/>
+               parentComponent="Activation_pnl" width="30.0" height="30.0" visible="0"/>
     <Component type="ScriptLabel" id="serial_error_label" x="130.0" y="200.0"
                parentComponent="Activation_pnl" width="160.0" height="30.0"
                text="License Key not found :()" textColour="4294394187" editable="0"
