@@ -8,7 +8,7 @@
 #define MyAppExeName "KO.vst3"
 
 [Setup]
-AppId={{714C974F-D5D1-4585-B8D6-FFB183A2E195}
+AppId={{350F55AB-BFA1-4805-8DB0-4F386306C534}}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
@@ -24,15 +24,17 @@ Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
 AppCopyright=2024 {#MyAppPublisher}
-WizardImageFile=C:\Users\sinus\Documents\GitHub\{#MyAppName}\Packaging\Windows\Resources\Background.bmp
-WizardSmallImageFile=C:\Users\sinus\Documents\GitHub\{#MyAppName}\Packaging\Windows\Resources\SmallLogo.bmp
-DefaultDirName="C:\Program Files\Common Files\VST3\{#MyAppName}\"
+WizardImageFile=C:\Users\sinus\Documents\GitHub\KO\Packaging\Windows\Resources\Background.bmp
+WizardSmallImageFile=C:\Users\sinus\Documents\GitHub\KO\Packaging\Windows\Resources\SmallLogo.bmp
+DefaultDirName="C:\Program Files\Common Files\VST3"
 DisableDirPage=no
 DirExistsWarning=no
-LicenseFile=C:\Users\sinus\Documents\GitHub\{#MyAppName}\Packaging\Windows\Resources\license.txt
+LicenseFile=C:\Users\sinus\Documents\GitHub\KO\Packaging\Windows\Resources\license.txt
+DisableProgramGroupPage=yes
+Uninstallable=no
 
 [Files]
-Source: "C:\Users\sinus\Documents\GitHub\{#MyAppName}\Binaries\Compiled\VST3\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\sinus\Documents\GitHub\{#MyAppName}\Binaries\Compiled\VST3\{#MyAppExeName}"; DestDir: "C:\Program Files\Common Files\VST3"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
