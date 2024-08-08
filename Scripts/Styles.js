@@ -19,6 +19,14 @@ namespace Styles {
 		if (obj.text === 'FX_3_btn') {
 			g.setColour(Primitives.Colors.Purple['500']);
 		}
+		
+		if (obj.text === 'bypass') {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
 	
 		g.drawEllipse(a, 2);
 		
@@ -32,12 +40,12 @@ namespace Styles {
 	inline function displayIconButtonLAF(g, obj) {
 		local a = obj.area;
 		local iconArea = StyleHelpers.addPadding(a, 0);
-		local SIZE = 18;
+		local SIZE = 15;
 		
 		local width = a[2];
 		local height = a[3];
 		
-		iconArea = StyleHelpers.withSizeKeepingCentre(a, 18, 18);
+		iconArea = StyleHelpers.withSizeKeepingCentre(a, SIZE, SIZE);
 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		
 		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
@@ -65,7 +73,7 @@ namespace Styles {
 		local end = start * 2 * obj.valueNormalized - start;
 		local text = obj.text;
 		
-		if (obj.hover || obj.clicked) {
+		if ((obj.hover || obj.clicked) && obj.enabled) {
 			text = obj.valueAsText;
 		}
 		
@@ -96,6 +104,10 @@ namespace Styles {
 		 
 		 
  		g.setColour(Theme.THEME.Colors.Display.on_display);
+ 		
+ 		if (!obj.enabled) {
+	 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+ 		}
 		
 		local pathArea2 = arcPath_value.getBounds(a[2]);
 		pathArea2 = [pathArea2[0], pathArea2[1], pathArea2[2], pathArea2[3]];
@@ -106,6 +118,10 @@ namespace Styles {
 		
 		if (obj.hover || obj.clicked) {
 			g.setColour(Theme.THEME.Colors.Display.on_display);
+		}
+		
+		if (!obj.enabled) {
+			 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
 		}
 		
 		g.setFont(Theme.Regular, 18);

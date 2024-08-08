@@ -38,9 +38,12 @@ namespace x {
 	inline function on_wtf(component, value) {
 		if (!value) return;
 		
+		Globals.x = true;
+		
 		Router.goTo('Main');
 		UserSettings.save('wtf', true);
 		wtf_icon_btn.set('visible', true);
+		Header.formatHeader();
 	} 
 	
 	reg frame = 0;

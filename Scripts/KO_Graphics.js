@@ -2,89 +2,85 @@ namespace KO_graphics {
 	
 	const var KO_panel = Content.getComponent("KO_panel");
 	
-	const animation = Animations.kokook;
-	
-	reg frame = 27;
-	const startFrame = 20;
-	const frames = 83;
-	const speed = 1;
-	const timer = 20;
-	
-	reg frame_stop = 0;
-	reg reverse = false;
-	
-	const animations = ["KO_1", "KO_2", "KO_3"];
-	reg currentAnimation = "KO_1";
-	
+    const animation = Animations.kokook_new;
+    const speed = 1;
+    const timer = 20;
+
+    reg frame = 0;
+    reg reverse = false;
+    reg frame_stop = 0;
+    reg currentAnimation = "init";
+    
+    const animations = {
+        "init": {"start": 0, "end": 10},
+        "ani_1_ani_2": {"start": 10, "end": 30},
+        "ani_2_disable": {"start": 30, "end": 39},
+        "ani_2_ani_3": {"start": 40, "end": 60},
+        "ani_3_disable": {"start": 60, "end": 69},
+        "ani_3_ani_1": {"start": 70, "end": 90},
+        "ani_1_disable": {"start": 90, "end": 99}
+    };
+    
 	KO_panel.setAnimation(animation);
-	KO_panel.setAnimationFrame(startFrame);
 	KO_panel.setTimerCallback(nextFrame);
 	
-	inline function goTo(ani) {
-		if (currentAnimation == 'KO_1') {
-			if (ani == 'KO_1') {return;}
-			if (ani == 'KO_2') {
-				frame = 9;
-				reverse = false;
-				frame_stop = 27;
-			}
-			
-			if (ani == 'KO_3') {
-				frame = 79;
-				reverse = true;
-				frame_stop = 54;
-			}
-			currentAnimation = ani;
-			KO_panel.startTimer(timer);
-			return;
-		}
-		
-		if (currentAnimation == 'KO_2') {
-			if (ani == 'KO_1') {
-				frame = 27;
-				reverse = true;
-				frame_stop = 5;
-			}
-			if (ani == 'KO_2') {return;}
-			if (ani == 'KO_3') {
-				frame = 33;
-				reverse = false;
-				frame_stop = 54;
-			}
-			currentAnimation = ani;
-			KO_panel.startTimer(timer);
-			return;
-		}
-		
-		if (currentAnimation == 'KO_3') {
-			if (ani == 'KO_1') {
-				frame = 54;
-				reverse = false;
-				frame_stop = 79;
-			}
-			if (ani == 'KO_2') {
-				frame = 54;
-				reverse = true;
-				frame_stop = 27;
-			}
-			if (ani == 'KO_3') { return;}
-			currentAnimation = 'KO_1';
-			KO_panel.startTimer(timer);
-			return;
-		}
+	init();
+
+	inline function setAnimationFrames(start, end, rev) {
+	    frame = start;
+	    frame_stop = end;
+	    reverse = rev;
+	    KO_panel.startTimer(timer);
 	}
 	
-	inline function initAni() {
-		Console.print('lets go');
-	
-		frame = startFrame;
-		reverse = true;
-		frame_stop = 5;
-		KO_panel.startTimer(timer);
+	inline function init() {
+	    currentAnimation = "init";
+	    setAnimationFrames(animations["init"].start, animations["init"].end, false);
 	}
+	
+	inline function disable(isDisabled) {
+	    if (currentAnimation == "ani_2") {
+	        if (isDisabled) {
+	            setAnimationFrames(animations["ani_2_disable"].start, animations["ani_2_disable"].end, false);
+	        } else {
+	            setAnimationFrames(animations["ani_2_disable"].end, animations["ani_2_disable"].start, true);
+	        }
+	    } else if (currentAnimation == "ani_3") {
+	        if (isDisabled) {
+	            setAnimationFrames(animations["ani_3_disable"].start, animations["ani_3_disable"].end, false);
+	        } else {
+	            setAnimationFrames(animations["ani_3_disable"].end, animations["ani_3_disable"].start, true);
+	        }
+	    } else if (currentAnimation == "ani_1") {
+	        if (isDisabled) {
+	            setAnimationFrames(animations["ani_1_disable"].start, animations["ani_1_disable"].end, false);
+	        } else {
+	            setAnimationFrames(animations["ani_1_disable"].end, animations["ani_1_disable"].start, true);
+	        }
+	    }
+	}
+	
+    inline function goTo(ani) {
+        if (currentAnimation == "ani_1" && ani == "ani_2") {
+            setAnimationFrames(animations["ani_1_ani_2"].start, animations["ani_1_ani_2"].end, false);
+        } else if (currentAnimation == "ani_2" && ani == "ani_3") {
+            setAnimationFrames(animations["ani_2_ani_3"].start, animations["ani_2_ani_3"].end, false);
+        } else if (currentAnimation == "ani_3" && ani == "ani_1") {
+            setAnimationFrames(animations["ani_3_ani_1"].start, animations["ani_3_ani_1"].end, false);
+        } else if (currentAnimation == "ani_2" && ani == "ani_1") {
+            setAnimationFrames(animations["ani_1_ani_2"].end, animations["ani_1_ani_2"].start, true);
+        } else if (currentAnimation == "ani_3" && ani == "ani_2") {
+            setAnimationFrames(animations["ani_2_ani_3"].end, animations["ani_2_ani_3"].start, true);
+        } else if (currentAnimation == "ani_1" && ani == "ani_3") {
+            setAnimationFrames(animations["ani_3_ani_1"].end, animations["ani_3_ani_1"].start, true);
+        }
+        
+        currentAnimation = ani;
+    }
 	
 	inline function nextFrame() {	
 		KO_panel.setAnimationFrame(frame);
+		
 		if (reverse) {
 			frame -= speed;
 		} else {

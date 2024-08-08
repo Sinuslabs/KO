@@ -10,6 +10,7 @@ namespace Header {
 	
 	update_now_btn.setLocalLookAndFeel(Styles.LAF_displayButtonOutline);
 	update_now_btn.setControlCallback(onUpdateNow);
+	update_now_btn.set('visible', false);
 	
 	inline function onUpdateNow(component, value) {		
 		if (value) {		
@@ -45,6 +46,25 @@ namespace Header {
 		if (!easteregg_timer.isTimerRunning()) {
 				easteregg_timer.startTimer(decreaseInterval);
 		}
+	}
+	
+	inline function formatHeader() {
+		
+		local Activation_x = 480;
+		local Limit_x = 615;
+		
+		if (Globals.x) {
+			Activation_x = Activation_x - 40;
+			Limit_x = Limit_x - 40;
+		}
+		
+		if (Globals.canUpdate) {
+			Activation_x = Activation_x - 45;
+		}
+		
+		FXs.Limit_Button.set('x', Limit_x);
+		Activation.not_activated_btn.set('x', Activation_x);
+		
 	}
 	
 	inline function onEastereggTimer() {

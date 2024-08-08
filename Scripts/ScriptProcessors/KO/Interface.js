@@ -40,6 +40,7 @@ Globals.x = false;
 Globals.xLocked = true;
 Globals.OS = Engine.getOS();
 Globals.activated = false;
+Globals.canUpdate = false;
 
 Supabase.getActivationStatus();
 UserSettings.load();
@@ -61,7 +62,7 @@ inline function onClose_PresetBrowser_btnControl(component, value) {
 
 Content.getComponent("Close_PresetBrowser_btn").setControlCallback(onClose_PresetBrowser_btnControl);
 
-KO_graphics.initAni();
+//KO_graphics.initAni();
 
 Content.callAfterDelay(10, afterDelay, {});
 inline function afterDelay() {
@@ -84,6 +85,7 @@ Content.callAfterDelay(200, afterDelay2, {});
 inline function afterDelay2() {
 
 	Globals.xLocked = false;
+	Header.formatHeader();
 }
 
 const var GainReduction = Synth.getEffect("DemoGain");

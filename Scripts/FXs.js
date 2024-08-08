@@ -3,10 +3,19 @@ namespace FXs {
 	const var FX_Selector = [Content.getComponent("FX_1_btn"),
 	                         Content.getComponent("FX_2_btn"),
 	                         Content.getComponent("FX_3_btn")];
-	                         
+	
+	const var Knobs_Container = [Content.getComponent("Algo3_AlgoRoute"),
+	                             Content.getComponent("Algo1_AlgoRoute"),
+	                             Content.getComponent("Algo2_AlgoRoute")];
+	
     const var BoxerFX = Synth.getEffect("BoxerFX");
     const var KarateFX = Synth.getEffect("KarateFX");
     const var SumoFX = Synth.getEffect("SumoFX");
+    
+    const var bypass = Content.getComponent("bypass");
+    
+    bypass.setControlCallback(onBypass);
+    bypass.setLocalLookAndFeel(Styles.LAF_FXSelectorBtn);
     
     const var Limit_Button = Content.getComponent("Limit_Button");
     
@@ -72,6 +81,23 @@ namespace FXs {
 		
 	}
 	
+	inline function onBypass(component, value) {
+		
+		KO_graphics.disable(value);
+		for (btn in FX_Selector) {
+			btn.set('enabled', !value);
+		}
+		
+		BoxerFX.isBypassed();
+		KarateFX.isBypassed();
+		x.x_fx.isBypassed();
+		SumoFX.isBypassed();
+		
+		for (container in Knobs_Container) {
+			container.set('enabled', !value);
+		}
+	}
+	
 	inline function onKarateKnbs(component, value) {
 		
 		switch(component.getId()) {
@@ -101,13 +127,10 @@ namespace FXs {
 	}
 	
 	const var up = Engine.createUserPresetHandler();
-	Console.print(up.isInternalPresetLoad());
 	
 	inline function onFX_btn(component, value) {
 		
 		if (!value) return;
-		
-		Console.print('internal load: ' + UP.isInternalPresetLoad());
 		
 		local seconds = UP.getSecondsSinceLastPresetLoad();
 	
@@ -115,25 +138,23 @@ namespace FXs {
 			Header.countClicks();			
 		}
 			
-		Console.print(component.getId() + ' : value: ' + value);
-	
 		switch(component.getId()) {
 			case 'FX_1_btn':
-				KO_graphics.goTo('KO_1');
+				KO_graphics.goTo('ani_1');
 				Router.goToAlgoRoute('Algo1_AlgoRoute');
 				BoxerFX.setBypassed(false);
 				KarateFX.setBypassed(true);
 				SumoFX.setBypassed(true);
 				Globals.currentEffect = 'Boxer';
 			case 'FX_2_btn':
-				KO_graphics.goTo('KO_2');
+				KO_graphics.goTo('ani_2');
 				Router.goToAlgoRoute('Algo2_AlgoRoute');
 				BoxerFX.setBypassed(true);
 				KarateFX.setBypassed(false);
 				SumoFX.setBypassed(true);
 				Globals.currentEffect = 'Karate';
 			case 'FX_3_btn':
-				KO_graphics.goTo('KO_3');
+				KO_graphics.goTo('ani_3');
 				Router.goToAlgoRoute('Algo3_AlgoRoute');
 				BoxerFX.setBypassed(true);
 				KarateFX.setBypassed(true);
