@@ -13,6 +13,10 @@ namespace FXs {
     const var SumoFX = Synth.getEffect("SumoFX");
     
     const var bypass = Content.getComponent("bypass");
+    const var Mix_knb = Content.getComponent("Mix_knb");
+    
+    Mix_knb.setControlCallback(onMix);
+    Mix_knb.setLocalLookAndFeel(Styles.LAF_Mix);
     
     bypass.setControlCallback(onBypass);
     bypass.setLocalLookAndFeel(Styles.LAF_FXSelectorBtn);
@@ -62,6 +66,14 @@ namespace FXs {
 		knb.setControlCallback(onKarateKnbs);
 	}
 	
+	inline function onMix(component, value) {
+		DryGain.setAttribute(DryGain.Gain, Engine.getDecibelsForGainFactor(1 - value));
+		WetGain.setAttribute(WetGain.Gain, Engine.getDecibelsForGainFactor(value));
+		
+		local dryAmount = parseInt((1 - value) * 100);
+		local wetAmount = parseInt(value * 100);
+	};
+	
 	inline function onLimit(component, value) {
 		SoftClip.setBypassed(value);
 	}
@@ -78,20 +90,52 @@ namespace FXs {
 			case 'Boxer_Wut_knb':
 				BoxerFX.setAttribute(BoxerFX.Wut, value);
 		}
-		
 	}
+	
+	reg BoxerFX_bypassed = false;
+	reg KarateFX_bypassed = false;
+	reg xFx_bypassed = false;
+	reg SumoFX_bypassed = false;
+	reg SoftClip_bypassed = false;
 	
 	inline function onBypass(component, value) {
 		
+		Globals.bypassed = value;
+		BypassGain.setBypassed(!value);
 		KO_graphics.disable(value);
+		WetGain.setBypassed(value);
+		DryGain.setBypassed(value);
+		
 		for (btn in FX_Selector) {
 			btn.set('enabled', !value);
 		}
 		
-		BoxerFX.isBypassed();
-		KarateFX.isBypassed();
-		x.x_fx.isBypassed();
-		SumoFX.isBypassed();
+		x.wtf_icon_btn.set('enabled', !value);
+		Limit_Button.set('enabled', !value);
+		
+		if (value) {
+			BoxerFX_bypassed = BoxerFX.isBypassed();
+			KarateFX_bypassed = KarateFX.isBypassed();
+			xFx_bypassed = x.x_fx.isBypassed();
+			SumoFX_bypassed = SumoFX.isBypassed();
+			SoftClip_bypassed = SoftClip.isBypassed();
+			
+			BoxerFX.setBypassed(true);
+			KarateFX.setBypassed(true);
+			x.x_fx.setBypassed(true);
+			SumoFX.setBypassed(true);
+			SoftClip.setBypassed(true);
+			
+			
+		} else {
+			BoxerFX.setBypassed(BoxerFX_bypassed);
+			KarateFX.setBypassed(KarateFX_bypassed);
+			x.x_fx.setBypassed(xFx_bypassed);
+			SumoFX.setBypassed(SumoFX_bypassed);
+			SoftClip.setBypassed(SoftClip_bypassed);
+		}
+		
+		OutGain.setBypassed(value);
 		
 		for (container in Knobs_Container) {
 			container.set('enabled', !value);
@@ -99,7 +143,6 @@ namespace FXs {
 	}
 	
 	inline function onKarateKnbs(component, value) {
-		
 		switch(component.getId()) {
 			case 'Karate_Pressure_knb':
 				KarateFX.setAttribute(KarateFX.Pressure, value);
@@ -137,7 +180,9 @@ namespace FXs {
 		if (!Globals.xLocked && seconds >= 1) {
 			Header.countClicks();			
 		}
-			
+		
+		Console.print(component.getId());
+		
 		switch(component.getId()) {
 			case 'FX_1_btn':
 				KO_graphics.goTo('ani_1');

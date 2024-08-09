@@ -7,66 +7,70 @@
                width="750.0" height="320.0">
       <Component type="ScriptPanel" id="Main_Route" x="0.0" y="0.0" width="750.0"
                  height="320.0" parentComponent="display">
-        <Component type="ScriptButton" id="Limit_Button" x="575" y="10.0" width="60"
-                   height="25" parentComponent="Main_Route" isPluginParameter="1"
+        <Component type="ScriptButton" id="Limit_Button" x="575" y="10.0" width="60.0"
+                   height="25.0" parentComponent="Main_Route" isPluginParameter="1"
                    pluginParameterName="Limit"/>
         <Component type="ScriptPanel" id="Algo1_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
-                   width="305.0" height="240.0" visible="0">
-          <Component type="ScriptSlider" id="Boxer_Punch_knb" x="60.0" y="25.0" parentComponent="Algo1_AlgoRoute"
+                   width="305.0" height="240.0">
+          <Component type="ScriptSlider" id="Boxer_Punch_knb" x="65.0" y="20.0" parentComponent="Algo1_AlgoRoute"
                      width="70.0" height="90.0" text="Punch" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Punch"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptSlider" id="Boxer_Wut_knb" x="185.0" y="25.0" parentComponent="Algo1_AlgoRoute"
+          <Component type="ScriptSlider" id="Boxer_Wut_knb" x="185.0" y="20.0" parentComponent="Algo1_AlgoRoute"
                      width="70.0" height="90.0" text="Wut" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Wut"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptButton" id="Boxer_6oz_knb" x="110.0" y="150.0" width="95.0"
-                     height="45.0" text="LOGIK" parentComponent="Algo1_AlgoRoute"
-                     isPluginParameter="1" pluginParameterName="Logik"/>
+          <Component type="ScriptButton" id="Boxer_6oz_knb" x="115.0" y="145.0" width="95"
+                     height="40" text="LOGIK" parentComponent="Algo1_AlgoRoute" isPluginParameter="1"
+                     pluginParameterName="Logik"/>
         </Component>
         <Component type="ScriptPanel" id="Algo2_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
                    width="305.0" height="240.0" visible="0">
-          <Component type="ScriptSlider" id="Karate_Speed_knb" x="80.0" y="130.0"
+          <Component type="ScriptSlider" id="Karate_Speed_knb" x="85.0" y="130.0"
                      parentComponent="Algo2_AlgoRoute" width="55.0" height="75.0"
                      text="Speed" mouseSensitivity="2.0" mode="NormalizedPercentage"
                      suffix="%" middlePosition="0.5" pluginParameterName="Speed" isPluginParameter="1"
                      defaultValue="0.300000011920929"/>
-          <Component type="ScriptSlider" id="Karate_Focus_knb" x="185.0" y="25.0"
+          <Component type="ScriptSlider" id="Karate_Focus_knb" x="175.0" y="20.0"
                      parentComponent="Algo2_AlgoRoute" width="70.0" height="90.0"
                      text="Focus" mouseSensitivity="2.0" mode="NormalizedPercentage"
                      suffix="%" middlePosition="0.5" pluginParameterName="Focus" isPluginParameter="1"
                      defaultValue="0.5"/>
-          <Component type="ScriptSlider" id="Karate_Pressure_knb" x="60.0" y="25.0"
+          <Component type="ScriptSlider" id="Karate_Pressure_knb" x="75.0" y="20.0"
                      parentComponent="Algo2_AlgoRoute" width="70.0" height="90.0"
                      text="Druck" mouseSensitivity="2.0" mode="NormalizedPercentage"
                      suffix="%" middlePosition="0.5" pluginParameterName="Druck" isPluginParameter="1"
                      defaultValue="0.5"/>
-          <Component type="ScriptSlider" id="Karate_Air_knb" x="205.0" y="130.0" parentComponent="Algo2_AlgoRoute"
+          <Component type="ScriptSlider" id="Karate_Air_knb" x="185.0" y="130.0" parentComponent="Algo2_AlgoRoute"
                      width="55.0" height="75.0" text="Air" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Air"
                      isPluginParameter="1" defaultValue="0.25"/>
         </Component>
         <Component type="ScriptPanel" id="Algo3_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
-                   width="305.0" height="240.0">
-          <Component type="ScriptSlider" id="Sumo_Heavy_knb" x="60.0" y="25.0" parentComponent="Algo3_AlgoRoute"
+                   width="305.0" height="240.0" visible="0">
+          <Component type="ScriptSlider" id="Sumo_Heavy_knb" x="75.0" y="20.0" parentComponent="Algo3_AlgoRoute"
                      width="70.0" height="90.0" text="Heavy" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Heavy"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptSlider" id="Sumo_Weight_knb" x="185.0" y="25.0" parentComponent="Algo3_AlgoRoute"
+          <Component type="ScriptSlider" id="Sumo_Weight_knb" x="175.0" y="20.0" parentComponent="Algo3_AlgoRoute"
                      width="70.0" height="90.0" text="Weight" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Weight"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptSlider" id="Sumo_Stomp_knb" x="80.0" y="130.0" parentComponent="Algo3_AlgoRoute"
+          <Component type="ScriptSlider" id="Sumo_Stomp_knb" x="85.0" y="130.0" parentComponent="Algo3_AlgoRoute"
                      width="55.0" height="75.0" text="Stomp" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Stomp"
                      isPluginParameter="1"/>
-          <Component type="ScriptSlider" id="Sumo_Crush_knb" x="205.0" y="130.0" parentComponent="Algo3_AlgoRoute"
+          <Component type="ScriptSlider" id="Sumo_Crush_knb" x="185.0" y="130.0" parentComponent="Algo3_AlgoRoute"
                      width="55.0" height="75.0" text="Crush" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Crush"
                      isPluginParameter="1" defaultValue="0.300000011920929"/>
         </Component>
         <Component type="ScriptPanel" id="KO_panel" x="-75.0" y="0.0" parentComponent="Main_Route"
-                   width="470.0" height="320.0"/>
+                   width="470.0" height="320.0">
+          <Component type="ScriptButton" id="KO_clicker" x="75.0" y="0.0" parentComponent="KO_panel"
+                     enableMidiLearn="0" isMomentary="1" saveInPreset="0" width="310.0"
+                     height="320.0"/>
+        </Component>
         <Component type="ScriptButton" id="FX_1_btn" x="315.0" y="75.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
                    saveInPreset="0" isPluginParameter="1" pluginParameterName="Algo 1"/>
@@ -76,22 +80,24 @@
         <Component type="ScriptButton" id="FX_3_btn" x="375.0" y="185.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
                    saveInPreset="0" pluginParameterName="Algo 3" isPluginParameter="1"/>
-        <Component type="ScriptSlider" id="OutputPeakMeterFillL" x="715.0" y="55.0"
-                   parentComponent="Main_Route" width="10.0" height="195.0" text="PeakMeterVertFill"
+        <Component type="ScriptSlider" id="OutputPeakMeterFillL" x="717.0" y="55.0"
+                   parentComponent="Main_Route" width="6.0" height="185.0" text="PeakMeterVertFill"
                    mode="Decibel" min="-100.0" max="24.0" stepSize="0.1000000014901161"
                    suffix=" dB" middlePosition="-18.0"/>
-        <Component type="ScriptSlider" id="OutputPeakMeterPointL" x="715.0" y="55.0"
-                   parentComponent="Main_Route" width="10.0" height="195.0" text="PeakMeterVertPointer"
+        <Component type="ScriptSlider" id="OutputPeakMeterPointL" x="717.0" y="55.0"
+                   parentComponent="Main_Route" width="6.0" height="185.0" text="PeakMeterVertPointer"
                    mode="Decibel" min="-100.0" max="24.0" stepSize="0.1000000014901161"
                    suffix=" dB" middlePosition="-18.0"/>
         <Component type="ScriptSlider" id="GainSlider" x="700.0" y="55.0" parentComponent="Main_Route"
-                   width="40" height="230" text="PeakMeterVertPointer" mode="Decibel"
+                   width="40.0" height="220.0" text="PeakMeterVertPointer" mode="Decibel"
                    min="-100.0" max="24.0" stepSize="0.1000000014901161" suffix=" dB"
                    middlePosition="-18.0" isPluginParameter="1" pluginParameterName="Out Gain"/>
         <Component type="ScriptButton" id="bypass" x="705.0" y="280.0" parentComponent="Main_Route"
-                   width="30" height="30"/>
-        <Component type="ScriptSlider" id="Mix_knb" x="445.0" y="260.0" parentComponent="Main_Route"
-                   width="235" height="40"/>
+                   width="30.0" height="30.0" saveInPreset="0"/>
+        <Component type="ScriptSlider" id="Mix_knb" x="475.0" y="270.0" parentComponent="Main_Route"
+                   width="180.0" height="30.0" isPluginParameter="1" pluginParameterName="Mix"
+                   middlePosition="0.5" mouseSensitivity="2.0" text="MIX" defaultValue="0.5"
+                   mode="NormalizedPercentage" suffix="%"/>
       </Component>
       <Component type="ScriptPanel" id="PresetBrowser_Route" x="0.0" y="0.0" parentComponent="display"
                  width="750.0" height="320.0" visible="0">
@@ -121,8 +127,9 @@
                      text="KO" width="70.0" height="40.0" fontName="inter-semi" fontSize="48.0"
                      alignment="left" editable="0" textColour="4294573052"/>
           <Component type="ScriptLabel" id="description_lbl" x="30.0" y="40.0" parentComponent="About_Container"
-                     text="knockout sound procession" width="250" height="25" editable="0"
-                     alignment="left" fontName="inter-reg" fontSize="20.0" textColour="4294573052"/>
+                     text="knockout sound procession" width="250.0" height="25.0"
+                     editable="0" alignment="left" fontName="inter-reg" fontSize="20.0"
+                     textColour="4294573052"/>
           <Component type="ScriptButton" id="more_btn" x="55.0" y="90.0" parentComponent="About_Container"
                      text="More like this" saveInPreset="0" width="170.0" height="40.0"
                      enableMidiLearn="0" isMomentary="1"/>
@@ -139,7 +146,7 @@
                      width="52.0" height="25.0"/>
         </Component>
         <Component type="ScriptButton" id="update_now_btn" x="220.0" y="245.0" parentComponent="About_Route"
-                   width="160" height="45" text="Update Now" visible="0"/>
+                   width="160.0" height="45.0" text="Update Now" visible="0"/>
       </Component>
       <Component type="ScriptPanel" id="x_Route" x="-2.0" y="0.0" parentComponent="display"
                  width="750.0" height="320.0" visible="0">
@@ -156,16 +163,16 @@
       </Component>
       <Component type="ScriptButton" id="About_btn" x="712.0" y="7.0" parentComponent="display"
                  width="30.0" height="30.0" text="settings" saveInPreset="0" enableMidiLearn="0"/>
-      <Component type="ScriptButton" id="not_activated_btn" x="440" y="10" text="NOT ACTIVATED"
-                 enableMidiLearn="0" saveInPreset="0" isMomentary="1" width="125"
-                 height="25" parentComponent="display"/>
-      <Component type="ScriptButton" id="Update_btn" x="535" y="5" width="30.0"
+      <Component type="ScriptButton" id="not_activated_btn" x="440" y="10.0" text="NOT ACTIVATED"
+                 enableMidiLearn="0" saveInPreset="0" isMomentary="1" width="125.0"
+                 height="25.0" parentComponent="display"/>
+      <Component type="ScriptButton" id="Update_btn" x="535.0" y="5.0" width="30.0"
                  height="30.0" text="doubleUp" visible="0" parentComponent="display"/>
-      <Component type="ScriptPanel" id="randomize_pnl_btn" x="675" y="5" width="35.0"
+      <Component type="ScriptPanel" id="randomize_pnl_btn" x="675.0" y="5.0" width="35.0"
                  height="35.0" allowCallbacks="Clicks, Hover &amp; Dragging" parentComponent="display"/>
-      <Component type="ScriptButton" id="wtf_icon_btn" x="640" y="5" width="30.0"
+      <Component type="ScriptButton" id="wtf_icon_btn" x="640.0" y="5.0" width="30.0"
                  height="30.0" text="wtf_selected" isPluginParameter="1" pluginParameterName="WTF"
-                 saveInPreset="0" defaultValue="1" parentComponent="display"/>
+                 saveInPreset="0" defaultValue="1.0" parentComponent="display"/>
     </Component>
     <Component type="ScriptPanel" id="ZoomPanel" x="755.0" y="329.0" parentComponent="background"
                width="30.0" height="25.0" allowCallbacks="Clicks, Hover &amp; Dragging"/>

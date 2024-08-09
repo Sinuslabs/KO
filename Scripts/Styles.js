@@ -26,11 +26,15 @@ namespace Styles {
 		
 		if (!obj.enabled) {
 			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+
 		}
-	
+		
 		g.drawEllipse(a, 2);
 		
 		if (obj.value) {
+			if (obj.text === 'bypass') {
+				g.setColour(Primitives.Colors.Red['500']);
+			}
 			g.fillEllipse(innerA);
 		}
 	}
@@ -143,6 +147,14 @@ namespace Styles {
 			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
 		}
 		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		if (obj.over) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		}
+		
 		g.setFont(Theme.Regular, 16);
 		g.drawAlignedText('CLIP', a, 'left');
 		
@@ -235,7 +247,7 @@ namespace Styles {
 		
 		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
 		
-		if (!obj.value) {
+		if (!obj.value && obj.enabled) {
 			g.fillPath(Assets.get['wtf_selected'], a);
 		} else {
 			g.fillPath(Assets.get['wtf_outline'], a);
@@ -273,6 +285,49 @@ namespace Styles {
 		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		
 		g.fillPath(Assets.get[obj.text], iconArea);
+	}
+	
+	const var LAF_Mix = Content.createLocalLookAndFeel();
+	LAF_Mix.registerFunction('drawRotarySlider', Mix_LAF);
+	
+	inline function Mix_LAF(g, obj) {
+		
+		local a = obj.area;
+		local GAP = 5;
+		local BAR_HEIGHT = 7;
+		
+		local upperA = [0, 0, a[2], BAR_HEIGHT];
+		local lowerA = [0, a[3] / 2 + GAP, a[2], a[3] / 2 - GAP];
+		local text = obj.text;
+		
+		if (obj.hover || obj.clicked) {
+			text = obj.valueAsText;
+		}
+		
+		local statusBarArea = [upperA[0], upperA[1], upperA[2] * obj.value, upperA[3]];
+		
+		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		} 
+		g.fillRoundedRectangle(upperA, 2);
+		g.setColour(Theme.THEME.Colors.Display.on_display);
+		
+		g.fillRoundedRectangle(statusBarArea, 2);
+		
+		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		
+		if (obj.hover || obj.clicked) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		}
+		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		g.setFont(Theme.Regular, 14);
+		g.drawAlignedText(text.toUpperCase(), lowerA, 'centred');
+		
 	}
 	
 }

@@ -35,12 +35,19 @@ Content.makeFrontInterface(780, 350);
 
 const var OutGain = Synth.getEffect("OutGain");
 const var SoftClip = Synth.getEffect("SoftClip");
+const var BypassGain = Synth.getEffect("BypassGain");
 
 Globals.x = false;
 Globals.xLocked = true;
 Globals.OS = Engine.getOS();
 Globals.activated = false;
 Globals.canUpdate = false;
+Globals.bypassed = false;
+
+const var DryGain = Synth.getEffect("DryGain");
+const var WetGain = Synth.getEffect("WetGain");
+const var Matrix1 = Synth.getEffect("Matrix1");
+const var Matrix2 = Synth.getEffect("Matrix2");
 
 Supabase.getActivationStatus();
 UserSettings.load();
@@ -96,7 +103,7 @@ var TimeoutCurrent = 0;
 	
 GainReductionTimer.setTimerCallback(function() {
 	
-	if (Globals.isBypassed) {return;}
+	if (Globals.bypassed) {return;}
 
     TimeoutCurrent += 1000;
     
@@ -109,6 +116,15 @@ GainReductionTimer.setTimerCallback(function() {
         GainReduction.setBypassed(true);
     }
 });
+
+inline function addVisualGuide() {
+	
+	Content.addVisualGuide([WIDTH / 2, 0], Colours.yellow);
+	Content.addVisualGuide([490, 0], Colours.red);
+	Content.addVisualGuide([670, 0], Colours.red);
+}
+
+//addVisualGuide();
 
 if (!Globals.activated) {
 	GainReduction.setBypassed(false);

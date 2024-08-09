@@ -2,7 +2,7 @@
 
 <ProjectSettings>
   <Name value="KO"/>
-  <Version value="1.0.0"/>
+  <Version value="1.1.0"/>
   <Description value=""/>
   <BundleIdentifier value="com.Sinuslabs.KO"/>
   <PluginCode value="Koko"/>
@@ -30,7 +30,7 @@
   <EncryptionKey value=""/>
   <LinkExpansionsToProject value="No"/>
   <ReadOnlyFactoryPresets value="No"/>
-  <ForceStereoOutput value="No"/>
+  <ForceStereoOutput value="1"/>
   <AdminPermissions value="No"/>
   <EmbedUserPresets value="Yes"/>
   <OverwriteOldUserPresets value="No"/>

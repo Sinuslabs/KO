@@ -82,8 +82,8 @@ DLL_EXPORT int getHash(int index)
 	static const int thirdPartyOffset = 11;
 	static const int hashIndexes[4] =
 	{
-		134894126,
-		814487498,
+		-1585814417,
+		-1976259364,
 		287783095,
 		-600751136
 	};

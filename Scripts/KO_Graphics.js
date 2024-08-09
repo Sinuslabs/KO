@@ -24,7 +24,41 @@ namespace KO_graphics {
 	KO_panel.setAnimation(animation);
 	KO_panel.setTimerCallback(nextFrame);
 	
+	const var KO_clicker = Content.getComponent("KO_clicker");
+	
+	const var LAF_Empty = Content.createLocalLookAndFeel();
+	LAF_Empty.registerFunction('drawToggleButton', function(g, obj){});
+	
+	KO_clicker.setControlCallback(onKO);
+	KO_clicker.setLocalLookAndFeel(LAF_Empty);
+	
 	init();
+	
+	inline function onKO(component, value) {
+		
+		if (!value) return;
+		
+		Console.print(Globals.currentEffect);
+		
+		if (Globals.currentEffect === 'Boxer') {
+			FXs.FX_Selector[1].setValue(1);
+			FXs.FX_Selector[1].changed();
+			return;
+		}
+		
+		if (Globals.currentEffect === 'Karate') {
+			FXs.FX_Selector[2].setValue(1);
+			FXs.FX_Selector[2].changed();
+			return;
+		}
+		
+		if (Globals.currentEffect === 'Sumo') {
+			FXs.FX_Selector[0].setValue(1);
+			FXs.FX_Selector[0].changed();
+			return;
+		}
+		
+	}
 
 	inline function setAnimationFrames(start, end, rev) {
 	    frame = start;

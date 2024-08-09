@@ -42,7 +42,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="0.0"/>
                         </Parameters>
                       </Node>
@@ -55,7 +55,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="2.0"/>
                         </Parameters>
                       </Node>
@@ -78,7 +78,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="1.0"/>
                         </Parameters>
                       </Node>
@@ -91,7 +91,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="0.0"/>
                         </Parameters>
                       </Node>
@@ -133,7 +133,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="2.0"/>
                         </Parameters>
                       </Node>
@@ -146,7 +146,7 @@
                         </ComplexData>
                         <Parameters>
                           <Parameter MinValue="20.0" MaxValue="20000.0" SkewFactor="0.2299045622348785"
-                                     ID="Frequency" Automated="1"/>
+                                     ID="Frequency"/>
                           <Parameter MinValue="0.0" MaxValue="2.0" StepSize="1.0" ID="Type" Value="1.0"/>
                         </Parameters>
                       </Node>

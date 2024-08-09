@@ -26,7 +26,7 @@
                   <Connection NodeId="Focus" ParameterId="Focus"/>
                 </ModulationTargets>
                 <Parameters>
-                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Value"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Value="0.0"/>
                   <Parameter MinValue="-1.0" MaxValue="1.0" ID="Multiply" Value="0.1244335937500001"/>
                   <Parameter MinValue="-1.0" MaxValue="1.0" ID="Add" Value="-0.002946289062500052"/>
                 </Parameters>
@@ -41,6 +41,17 @@
                   <Parameter MinValue="-1.0" MaxValue="1.0" ID="Add" Value="0.0"/>
                 </Parameters>
               </Node>
+              <Node ID="pressure_gain" FactoryPath="control.minmax" Bypassed="0">
+                <Parameters>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Value="0.0"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Minimum" Value="0.0"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Maximum" Value="1.0"/>
+                  <Parameter MinValue="0.1000000014901161" MaxValue="10.0" SkewFactor="0.2890648245811462"
+                             ID="Skew" Value="1.0"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Step" Value="0.0"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Polarity" Value="0.0"/>
+                </Parameters>
+              </Node>
             </Nodes>
             <Parameters/>
           </Node>
@@ -51,13 +62,13 @@
                   <Connection NodeId="gain1" ParameterId="Gain"/>
                 </ModulationTargets>
                 <Parameters>
-                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Value"/>
+                  <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Automated="1"/>
                   <Parameter MinValue="-100.0" MaxValue="0.0" StepSize="0.1" SkewFactor="5.422270979580217"
-                             ID="Minimum" Value="-7.899999999999995"/>
+                             ID="Minimum" Value="-0.7999999999999945"/>
                   <Parameter MinValue="-100.0" MaxValue="0.0" StepSize="0.1" SkewFactor="5.422270979580217"
                              ID="Maximum" Value="0.0"/>
                   <Parameter MinValue="0.1000000014901161" MaxValue="10.0" SkewFactor="0.2890648245811462"
-                             ID="Skew" Value="5.422270979580217"/>
+                             ID="Skew" Value="0.1003742570361645"/>
                   <Parameter MinValue="0.0" MaxValue="1.0" ID="Step" Value="0.1"/>
                   <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Polarity" Value="1.0"/>
                 </Parameters>
@@ -137,7 +148,7 @@
                   <Parameter MinValue="0.0" MaxValue="1.0" ID="Dry/Wet" Value="1.0"/>
                 </Parameters>
               </Node>
-              <Node ID="gain1" FactoryPath="core.gain" Bypassed="1">
+              <Node ID="gain1" FactoryPath="core.gain" Bypassed="0">
                 <Parameters>
                   <Parameter MinValue="-100.0" MaxValue="0.0" StepSize="0.1000000014901161"
                              SkewFactor="5.422270774841309" ID="Gain" Automated="1"/>
@@ -332,7 +343,7 @@
       </Node>
     </Nodes>
     <Parameters>
-      <Parameter ID="Focus" MinValue="0.0" MaxValue="1.0" Value="0.3183758544921875">
+      <Parameter ID="Focus" MinValue="0.0" MaxValue="1.0" Value="1.0">
         <Connections>
           <Connection NodeId="Pressure5" ParameterId="PawClaw"/>
         </Connections>
@@ -342,17 +353,18 @@
           <Connection NodeId="dry_wet1" ParameterId="DryWet"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Air" MinValue="0.0" MaxValue="1.0" Value="0.0">
+      <Parameter ID="Air" MinValue="0.0" MaxValue="1.0" Value="1.0">
         <Connections>
           <Connection NodeId="air" ParameterId="Value"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Pressure" MinValue="0.0" MaxValue="1.0" Value="0.3553861083984375">
+      <Parameter ID="Pressure" MinValue="0.0" MaxValue="1.0" Value="0.6058902587890624">
         <Connections>
           <Connection NodeId="Pressure5" ParameterId="Pressre"/>
+          <Connection NodeId="minmax1" ParameterId="Value"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Speed" MinValue="0.0" MaxValue="1.0" Value="0.725459716796875">
+      <Parameter ID="Speed" MinValue="0.0" MaxValue="1.0" Value="1.0">
         <Connections>
           <Connection NodeId="Pressure5" ParameterId="Speed"/>
         </Connections>
