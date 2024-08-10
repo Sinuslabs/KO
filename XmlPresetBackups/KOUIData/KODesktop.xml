@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <ContentProperties DeviceType="Desktop">
-  <Component type="ScriptPanel" id="background" x="0.0" y="0.0" width="780.0"
-             height="355.0">
+  <Component type="ScriptPanel" id="background" x="0.0" y="0.0" width="781.0"
+             height="356.0">
     <Component type="ScriptPanel" id="display" x="15.0" y="15.0" parentComponent="background"
                width="750.0" height="320.0">
       <Component type="ScriptPanel" id="Main_Route" x="0.0" y="0.0" width="750.0"
@@ -165,7 +165,7 @@
                  width="30.0" height="30.0" text="settings" saveInPreset="0" enableMidiLearn="0"/>
       <Component type="ScriptButton" id="not_activated_btn" x="440" y="10.0" text="NOT ACTIVATED"
                  enableMidiLearn="0" saveInPreset="0" isMomentary="1" width="125.0"
-                 height="25.0" parentComponent="display"/>
+                 height="25.0" parentComponent="display" visible="0"/>
       <Component type="ScriptButton" id="Update_btn" x="535.0" y="5.0" width="30.0"
                  height="30.0" text="doubleUp" visible="0" parentComponent="display"/>
       <Component type="ScriptPanel" id="randomize_pnl_btn" x="675.0" y="5.0" width="35.0"

@@ -61,8 +61,9 @@ namespace Activation {
     }
 
     inline function unlockDemoLimitations() {
-        Console.print('unlocking demo');
+	    Globals.activated = true;
         GainReduction.setBypassed(true);
+        GainReductionTimer.stopTimer();
         not_activated_btn.set('visible', false);
         
     }
