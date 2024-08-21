@@ -3,6 +3,7 @@
 #include "Mojo.h"
 #include "Mojo.h"
 #include "Tube2.h"
+#include "Tube2.h"
 // These will improve the readability of the connection definition
 
 #define getT(Idx) template get<Idx>()
@@ -155,6 +156,7 @@ template <int NV>
 using wet_path_t = container::chain<parameter::empty, 
                                     wrap::fix<2, chain_t<NV>>, 
                                     project::Tube2<NV>, 
+                                    project::Tube2<NV>, 
                                     Stomp_t<NV>, 
                                     fx::sampleandhold<NV>, 
                                     core::gain<NV>, 
@@ -174,13 +176,16 @@ namespace Sumo_t_parameters
 // Parameter list for Sumo_impl::Sumo_t ------------------------------------------------------------
 
 template <int NV>
+using Weight = parameter::chain<ranges::Identity, 
+                                parameter::plain<project::Tube2<NV>, 1>, 
+                                parameter::plain<project::Tube2<NV>, 1>>;
+
+template <int NV>
 using Heavy = parameter::plain<Sumo_impl::smoothed_parameter_t<NV>, 
                                0>;
 template <int NV>
 using Mix = parameter::plain<Sumo_impl::dry_wet1_t<NV>, 
                              0>;
-template <int NV>
-using Weight = parameter::plain<project::Tube2<NV>, 1>;
 template <int NV>
 using Stomp = parameter::plain<Sumo_impl::smoothed_parameter2_t<NV>, 
                                0>;
@@ -224,7 +229,7 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
             0x0001, 0x0000, 0x694D, 0x0078, 0x0000, 0x0000, 0x0000, 0x3F80, 
             0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 0x025B, 0x0000, 
             0x5700, 0x6965, 0x6867, 0x0074, 0x0000, 0x0000, 0x0000, 0x3F80, 
-            0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 0x035B, 0x0000, 
+            0x0B5B, 0x3F58, 0x0000, 0x3F80, 0x0000, 0x0000, 0x035B, 0x0000, 
             0x5300, 0x6F74, 0x706D, 0x0000, 0x0000, 0x0000, 0x8000, 0x003F, 
             0x8000, 0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0004, 0x0000, 
             0x7243, 0x7375, 0x0068, 0x0000, 0x0000, 0x0000, 0x3F80, 0x0000, 
@@ -257,18 +262,19 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		auto& Mojo = this->getT(3).getT(1).getT(0).getT(0);                           // project::Mojo<NV>
 		auto& Mojo1 = this->getT(3).getT(1).getT(0).getT(1);                          // project::Mojo<NV>
 		auto& Tube2 = this->getT(3).getT(1).getT(1);                                  // project::Tube2<NV>
-		auto& Stomp = this->getT(3).getT(1).getT(2);                                  // Sumo_impl::Stomp_t<NV>
-		auto& dry_wet2 = this->getT(3).getT(1).getT(2).getT(0);                       // Sumo_impl::dry_wet2_t<NV>
-		auto& dry_path1 = this->getT(3).getT(1).getT(2).getT(0).getT(0);              // Sumo_impl::dry_path1_t<NV>
-		auto& dry_wet_mixer1 = this->getT(3).getT(1).getT(2).getT(0).getT(0).getT(0); // Sumo_impl::dry_wet_mixer1_t<NV>
-		auto& dry_gain1 = this->getT(3).getT(1).getT(2).getT(0).getT(0).getT(1);      // core::gain<NV>
-		auto& wet_path1 = this->getT(3).getT(1).getT(2).getT(0).getT(1);              // Sumo_impl::wet_path1_t<NV>
-		auto& svf_eq = this->getT(3).getT(1).getT(2).getT(0).getT(1).getT(0);         // filters::svf_eq<NV>
-		auto& svf_eq1 = this->getT(3).getT(1).getT(2).getT(0).getT(1).getT(1);        // filters::svf_eq<NV>
-		auto& wet_gain1 = this->getT(3).getT(1).getT(2).getT(0).getT(1).getT(2);      // core::gain<NV>
-		auto& sampleandhold = this->getT(3).getT(1).getT(3);                          // fx::sampleandhold<NV>
-		auto& gain = this->getT(3).getT(1).getT(4);                                   // core::gain<NV>
-		auto& wet_gain = this->getT(3).getT(1).getT(5);                               // core::gain<NV>
+		auto& Tube3 = this->getT(3).getT(1).getT(2);                                  // project::Tube2<NV>
+		auto& Stomp = this->getT(3).getT(1).getT(3);                                  // Sumo_impl::Stomp_t<NV>
+		auto& dry_wet2 = this->getT(3).getT(1).getT(3).getT(0);                       // Sumo_impl::dry_wet2_t<NV>
+		auto& dry_path1 = this->getT(3).getT(1).getT(3).getT(0).getT(0);              // Sumo_impl::dry_path1_t<NV>
+		auto& dry_wet_mixer1 = this->getT(3).getT(1).getT(3).getT(0).getT(0).getT(0); // Sumo_impl::dry_wet_mixer1_t<NV>
+		auto& dry_gain1 = this->getT(3).getT(1).getT(3).getT(0).getT(0).getT(1);      // core::gain<NV>
+		auto& wet_path1 = this->getT(3).getT(1).getT(3).getT(0).getT(1);              // Sumo_impl::wet_path1_t<NV>
+		auto& svf_eq = this->getT(3).getT(1).getT(3).getT(0).getT(1).getT(0);         // filters::svf_eq<NV>
+		auto& svf_eq1 = this->getT(3).getT(1).getT(3).getT(0).getT(1).getT(1);        // filters::svf_eq<NV>
+		auto& wet_gain1 = this->getT(3).getT(1).getT(3).getT(0).getT(1).getT(2);      // core::gain<NV>
+		auto& sampleandhold = this->getT(3).getT(1).getT(4);                          // fx::sampleandhold<NV>
+		auto& gain = this->getT(3).getT(1).getT(5);                                   // core::gain<NV>
+		auto& wet_gain = this->getT(3).getT(1).getT(6);                               // core::gain<NV>
 		
 		// Parameter Connections -------------------------------------------------------------------
 		
@@ -278,7 +284,9 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		
 		this->getParameterT(1).connectT(0, dry_wet1); // Mix -> dry_wet1::DryWet
 		
-		this->getParameterT(2).connectT(0, Tube2); // Weight -> Tube2::Tube
+		auto& Weight_p = this->getParameterT(2);
+		Weight_p.connectT(0, Tube2); // Weight -> Tube2::Tube
+		Weight_p.connectT(1, Tube3); // Weight -> Tube3::Tube
 		
 		this->getParameterT(3).connectT(0, smoothed_parameter2); // Stomp -> smoothed_parameter2::Value
 		
@@ -348,7 +356,7 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		
 		;                                  // minmax4::Value is automated
 		minmax4.setParameterT(1, 0.);      // control::minmax::Minimum
-		minmax4.setParameterT(2, 2.89084); // control::minmax::Maximum
+		minmax4.setParameterT(2, 4.98228); // control::minmax::Maximum
 		minmax4.setParameterT(3, 1.);      // control::minmax::Skew
 		minmax4.setParameterT(4, 0.);      // control::minmax::Step
 		minmax4.setParameterT(5, 0.);      // control::minmax::Polarity
@@ -375,7 +383,10 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		Tube2.setParameterT(0, 0.5); // project::Tube2::Input
 		;                            // Tube2::Tube is automated
 		
-		dry_wet2.setParameterT(0, 0.505539); // container::split::DryWet
+		Tube3.setParameterT(0, 0.5); // project::Tube2::Input
+		;                            // Tube3::Tube is automated
+		
+		dry_wet2.setParameterT(0, 0.501264); // container::split::DryWet
 		
 		; // dry_wet_mixer1::Value is automated
 		
@@ -413,7 +424,7 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		
 		this->setParameterT(0, 1.);
 		this->setParameterT(1, 1.);
-		this->setParameterT(2, 1.);
+		this->setParameterT(2, 0.843923);
 		this->setParameterT(3, 1.);
 		this->setParameterT(4, 1.);
 	}

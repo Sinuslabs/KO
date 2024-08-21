@@ -2,7 +2,7 @@
 
 <ProjectSettings>
   <Name value="KO"/>
-  <Version value="1.1.0"/>
+  <Version value="1.2.0"/>
   <Description value=""/>
   <BundleIdentifier value="com.Sinuslabs.KO"/>
   <PluginCode value="Koko"/>

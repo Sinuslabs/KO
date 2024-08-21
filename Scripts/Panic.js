@@ -67,7 +67,7 @@ namespace Panic {
 	}
 	
 	inline function panic() {
-		PanicTimeoutTimer.startTimer(1000);
+		PanicTimeoutTimer.startTimer(1500);
 		PanicKnbsTimer.startTimer(200);
 	}
 	

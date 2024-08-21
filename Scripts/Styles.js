@@ -73,6 +73,8 @@ namespace Styles {
 		
 		local a = obj.area;
 		
+		a = StyleHelpers.addPadding(a, 0);
+		
 		local start = 2.5;
 		local end = start * 2 * obj.valueNormalized - start;
 		local text = obj.text;
@@ -85,12 +87,15 @@ namespace Styles {
 		local text_area = [a[0], a[3] * 0.8, a[2], a[3] * 0.2];
 		
 		local arcThickness = ARC_THICKNESS / 100;
+		local arcThickness_base = ARC_THICKNESS / 100;
+		local arcThickness_hover = ARC_THICKNESS / 100;
 		local arcWidth = (1.0 - 2.0 * arcThickness) + arcThickness;
+		local arcWidth_base = (1.0 - 2.0 * arcThickness_base) + arcThickness_base;
 		
-		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		g.setColour(Theme.THEME.Colors.UI.on_background_var);
 		local arcPath_static = Content.createPath();
 				arcPath_static.addArc(
-					[arcThickness / 2, arcThickness / 2,arcWidth , arcWidth],
+					[arcThickness_base / 2, arcThickness_base / 2,arcWidth_base , arcWidth_base],
 					-start,
 					2.5
 				 );
@@ -107,7 +112,12 @@ namespace Styles {
 		 );
 		 
 		 
- 		g.setColour(Theme.THEME.Colors.Display.on_display);
+ 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+ 		
+ 		
+ 		if (obj.hover || obj.clicked) {
+ 			g.setColour(Theme.THEME.Colors.Display.on_display);
+ 		}
  		
  		if (!obj.enabled) {
 	 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
@@ -119,10 +129,7 @@ namespace Styles {
 		
 		
 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
-		
-		if (obj.hover || obj.clicked) {
-			g.setColour(Theme.THEME.Colors.Display.on_display);
-		}
+
 		
 		if (!obj.enabled) {
 			 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
@@ -161,6 +168,39 @@ namespace Styles {
 		g.fillEllipse(dotArea);
 		
 	}
+	
+	const LAF_displayButtonLogic = Content.createLocalLookAndFeel();
+	LAF_displayButtonLogic.registerFunction('drawToggleButton', displayButtonLogic_LAF);
+	
+	inline function displayButtonLogic_LAF(g, obj) {
+		
+		local a = obj.area;
+		local paddedA = StyleHelpers.addPadding(a, 5);
+		local textA = StyleHelpers.addPadding(paddedA, 9);
+		local BORDER_RADIUS = 2;
+		
+		if (obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display);
+		} else {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		if (obj.over) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+		}
+		
+		g.drawRoundedRectangle(paddedA, BORDER_RADIUS, 1);
+		
+		if (obj.value) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_var);
+			g.fillRoundedRectangle(paddedA, BORDER_RADIUS);
+			g.setColour(Theme.THEME.Colors.Display.on_display_contrast);
+		}
+		
+		g.setFont(Theme.Regular, 18);
+		g.drawAlignedText(obj.text, textA, 'centred');
+	}
+	
 	
 	const LAF_displayButtonOutline = Content.createLocalLookAndFeel();
 	LAF_displayButtonOutline.registerFunction('drawToggleButton', displayButtonOutlineLAF);
@@ -303,19 +343,29 @@ namespace Styles {
 		if (obj.hover || obj.clicked) {
 			text = obj.valueAsText;
 		}
-		
+
 		local statusBarArea = [upperA[0], upperA[1], upperA[2] * obj.value, upperA[3]];
 		
 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
 		if (!obj.enabled) {
 			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
 		} 
+		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
+		
+		g.setColour(Theme.THEME.Colors.UI.on_background_var);
 		g.fillRoundedRectangle(upperA, 2);
 		g.setColour(Theme.THEME.Colors.Display.on_display);
 		
+		if (!obj.enabled) {
+			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
+		}
+		
 		g.fillRoundedRectangle(statusBarArea, 2);
 		
-		g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		
 		if (obj.hover || obj.clicked) {
 			g.setColour(Theme.THEME.Colors.Display.on_display);

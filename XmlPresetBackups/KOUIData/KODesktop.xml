@@ -11,7 +11,7 @@
                    height="25.0" parentComponent="Main_Route" isPluginParameter="1"
                    pluginParameterName="Limit"/>
         <Component type="ScriptPanel" id="Algo1_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
-                   width="305.0" height="240.0">
+                   width="305.0" height="240.0" visible="0">
           <Component type="ScriptSlider" id="Boxer_Punch_knb" x="65.0" y="20.0" parentComponent="Algo1_AlgoRoute"
                      width="70.0" height="90.0" text="Punch" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Punch"
@@ -20,12 +20,12 @@
                      width="70.0" height="90.0" text="Wut" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Wut"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptButton" id="Boxer_6oz_knb" x="115.0" y="145.0" width="95"
-                     height="40" text="LOGIK" parentComponent="Algo1_AlgoRoute" isPluginParameter="1"
-                     pluginParameterName="Logik"/>
+          <Component type="ScriptButton" id="Boxer_6oz_knb" x="115.0" y="145.0" width="95.0"
+                     height="40.0" text="LOGIC" parentComponent="Algo1_AlgoRoute"
+                     isPluginParameter="1" pluginParameterName="LogiC"/>
         </Component>
         <Component type="ScriptPanel" id="Algo2_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
-                   width="305.0" height="240.0" visible="0">
+                   width="305.0" height="240.0">
           <Component type="ScriptSlider" id="Karate_Speed_knb" x="85.0" y="130.0"
                      parentComponent="Algo2_AlgoRoute" width="55.0" height="75.0"
                      text="Speed" mouseSensitivity="2.0" mode="NormalizedPercentage"
@@ -73,13 +73,13 @@
         </Component>
         <Component type="ScriptButton" id="FX_1_btn" x="315.0" y="75.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
-                   saveInPreset="0" isPluginParameter="1" pluginParameterName="Algo 1"/>
+                   saveInPreset="0" pluginParameterName="Algo 1"/>
         <Component type="ScriptButton" id="FX_2_btn" x="345.0" y="130.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
-                   saveInPreset="0" pluginParameterName="Algo 2" isPluginParameter="1"/>
+                   saveInPreset="0" pluginParameterName="Algo 2"/>
         <Component type="ScriptButton" id="FX_3_btn" x="375.0" y="185.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"
-                   saveInPreset="0" pluginParameterName="Algo 3" isPluginParameter="1"/>
+                   saveInPreset="0" pluginParameterName="Algo 3"/>
         <Component type="ScriptSlider" id="OutputPeakMeterFillL" x="717.0" y="55.0"
                    parentComponent="Main_Route" width="6.0" height="185.0" text="PeakMeterVertFill"
                    mode="Decibel" min="-100.0" max="24.0" stepSize="0.1000000014901161"
@@ -127,9 +127,8 @@
                      text="KO" width="70.0" height="40.0" fontName="inter-semi" fontSize="48.0"
                      alignment="left" editable="0" textColour="4294573052"/>
           <Component type="ScriptLabel" id="description_lbl" x="30.0" y="40.0" parentComponent="About_Container"
-                     text="knockout sound procession" width="250.0" height="25.0"
-                     editable="0" alignment="left" fontName="inter-reg" fontSize="20.0"
-                     textColour="4294573052"/>
+                     text="knockout sound processor" width="250.0" height="25.0" editable="0"
+                     alignment="left" fontName="inter-reg" fontSize="20.0" textColour="4294573052"/>
           <Component type="ScriptButton" id="more_btn" x="55.0" y="90.0" parentComponent="About_Container"
                      text="More like this" saveInPreset="0" width="170.0" height="40.0"
                      enableMidiLearn="0" isMomentary="1"/>
@@ -209,4 +208,7 @@
                text="License Key not found :()" textColour="4294394187" editable="0"
                fontName="inter-reg" visible="0"/>
   </Component>
+  <Component type="ScriptSlider" id="fx_select" x="320.0" y="30.0" width="45.0"
+             height="50.0" pluginParameterName="FX Select" max="2.0" stepSize="1.0"
+             visible="0"/>
 </ContentProperties>

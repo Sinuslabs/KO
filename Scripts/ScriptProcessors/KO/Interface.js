@@ -75,17 +75,9 @@ Content.callAfterDelay(10, afterDelay, {});
 inline function afterDelay() {
 
 	Globals.currentEffect = 'Boxer';
-	
-	FXs.FX_Selector[0].setValue(1);
-	FXs.FX_Selector[0].changed();
-	
 	Router.goTo('Main');
-	Console.print('yes');
-	
 	//Panic.panic();
 }
-
-
 
 // preventing initial x trigger
 Content.callAfterDelay(200, afterDelay2, {});
