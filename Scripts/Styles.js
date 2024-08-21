@@ -112,7 +112,7 @@ namespace Styles {
 		 );
 		 
 		 
- 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
+ 		g.setColour(Theme.THEME.Colors.Display.on_display);
  		
  		
  		if (obj.hover || obj.clicked) {
@@ -126,10 +126,6 @@ namespace Styles {
 		local pathArea2 = arcPath_value.getBounds(a[2]);
 		pathArea2 = [pathArea2[0], pathArea2[1], pathArea2[2], pathArea2[3]];
 		g.drawPath(arcPath_value, pathArea2, a[2] * arcThickness );
-		
-		
-		g.setColour(Theme.THEME.Colors.Display.on_display_var);
-
 		
 		if (!obj.enabled) {
 			 		g.setColour(Theme.THEME.Colors.Display.on_display_disabled);

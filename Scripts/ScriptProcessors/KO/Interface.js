@@ -113,10 +113,11 @@ inline function addVisualGuide() {
 	
 	Content.addVisualGuide([WIDTH / 2, 0], Colours.yellow);
 	Content.addVisualGuide([490, 0], Colours.red);
+	Content.addVisualGuide([580, 0], Colours.red);
 	Content.addVisualGuide([670, 0], Colours.red);
 }
 
-//addVisualGuide();
+addVisualGuide();
 
 if (!Globals.activated) {
 	GainReduction.setBypassed(false);
