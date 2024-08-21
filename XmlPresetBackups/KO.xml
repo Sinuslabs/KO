@@ -28,7 +28,7 @@
             <Control type="ScriptButton" id="Close_PresetBrowser_btn" value="0.0"/>
             <Control type="ScriptButton" id="update_now_btn" value="0.0"/>
             <Control type="ScriptButton" id="Update_btn" value="1.0"/>
-            <Control type="ScriptSlider" id="fx_select" value="0"/>
+            <Control type="ScriptSlider" id="fx_select" value="0.0"/>
           </Content>
           <UIData Source="KOUIData"/>
         </Processor>
