@@ -23,17 +23,114 @@ template <int NV>
 using mojo1_t = control::pma<NV, 
                              parameter::plain<project::Mojo<NV>, 0>>;
 
+template <int NV> using pma_t = mojo1_t<NV>;
+
 template <int NV>
 using minmax_t = control::minmax<NV, 
                                  parameter::plain<core::gain<NV>, 0>>;
 
-template <int NV> using pma_t = mojo1_t<NV>;
+struct cable_table_t_data
+{
+	span<float, 512> data =
+	{
+		0.0898876f, 0.0896062f, 0.0893247f, 0.0890433f, 0.0887618f, 0.0884804f,
+		0.0881989f, 0.0879175f, 0.0876361f, 0.0873546f, 0.0870731f, 0.0867917f,
+		0.0865102f, 0.0862288f, 0.0859473f, 0.0856659f, 0.0853844f, 0.085103f,
+		0.0848215f, 0.0845401f, 0.0842587f, 0.0839772f, 0.0836958f, 0.0834143f,
+		0.0831329f, 0.0828514f, 0.08257f, 0.0822885f, 0.0820071f, 0.0817256f,
+		0.0814441f, 0.0811627f, 0.0808812f, 0.0805998f, 0.0803184f, 0.0800369f,
+		0.0797555f, 0.079474f, 0.0791926f, 0.0789111f, 0.0788186f, 0.0809556f,
+		0.0830925f, 0.0852294f, 0.0873663f, 0.0895032f, 0.0916402f, 0.0937771f,
+		0.095914f, 0.098051f, 0.100188f, 0.102325f, 0.104462f, 0.106599f,
+		0.108736f, 0.110873f, 0.113009f, 0.115146f, 0.117283f, 0.11942f,
+		0.121557f, 0.123694f, 0.125831f, 0.127968f, 0.130105f, 0.132242f,
+		0.134379f, 0.136516f, 0.138653f, 0.140789f, 0.142926f, 0.145063f,
+		0.1472f, 0.149337f, 0.151474f, 0.153611f, 0.155748f, 0.157885f,
+		0.160022f, 0.162159f, 0.164296f, 0.166432f, 0.168569f, 0.170706f,
+		0.172843f, 0.17498f, 0.177117f, 0.179254f, 0.181391f, 0.183528f,
+		0.185665f, 0.187802f, 0.189939f, 0.192076f, 0.194213f, 0.196349f,
+		0.198486f, 0.200623f, 0.20276f, 0.204897f, 0.207034f, 0.209171f,
+		0.211308f, 0.213445f, 0.215582f, 0.217719f, 0.219856f, 0.221993f,
+		0.224129f, 0.226266f, 0.228403f, 0.23054f, 0.232677f, 0.234814f,
+		0.236951f, 0.239088f, 0.241225f, 0.243362f, 0.245499f, 0.247636f,
+		0.249773f, 0.251909f, 0.254046f, 0.256183f, 0.25832f, 0.260457f,
+		0.262594f, 0.264731f, 0.266868f, 0.269005f, 0.271142f, 0.273279f,
+		0.275416f, 0.277553f, 0.27969f, 0.281826f, 0.283963f, 0.2861f,
+		0.288237f, 0.290374f, 0.292511f, 0.294648f, 0.296785f, 0.298922f,
+		0.301059f, 0.303196f, 0.305333f, 0.307469f, 0.309606f, 0.311743f,
+		0.31388f, 0.316017f, 0.318154f, 0.320291f, 0.322428f, 0.324565f,
+		0.326702f, 0.328839f, 0.330976f, 0.333113f, 0.33525f, 0.337386f,
+		0.339523f, 0.34166f, 0.343797f, 0.345934f, 0.348071f, 0.350208f,
+		0.352345f, 0.354482f, 0.356619f, 0.358756f, 0.360893f, 0.36303f,
+		0.365166f, 0.367303f, 0.36944f, 0.371577f, 0.373714f, 0.375851f,
+		0.377988f, 0.380125f, 0.382262f, 0.384399f, 0.386536f, 0.388673f,
+		0.39081f, 0.392946f, 0.395083f, 0.39722f, 0.399357f, 0.401494f,
+		0.403631f, 0.405768f, 0.407905f, 0.410042f, 0.412179f, 0.414316f,
+		0.416453f, 0.41859f, 0.420727f, 0.422863f, 0.425f, 0.427137f,
+		0.429274f, 0.431411f, 0.433548f, 0.435685f, 0.437822f, 0.439959f,
+		0.442096f, 0.444233f, 0.44637f, 0.448507f, 0.450643f, 0.45278f,
+		0.454917f, 0.457054f, 0.459191f, 0.461328f, 0.463465f, 0.465602f,
+		0.467739f, 0.469876f, 0.472013f, 0.47415f, 0.476287f, 0.478423f,
+		0.48056f, 0.482697f, 0.484834f, 0.486971f, 0.489108f, 0.491245f,
+		0.493382f, 0.495519f, 0.497656f, 0.499793f, 0.50193f, 0.504067f,
+		0.506204f, 0.50834f, 0.510477f, 0.512614f, 0.514751f, 0.516888f,
+		0.519025f, 0.521162f, 0.523299f, 0.525436f, 0.527573f, 0.52971f,
+		0.531847f, 0.533983f, 0.53612f, 0.538257f, 0.540394f, 0.542531f,
+		0.544668f, 0.546805f, 0.548942f, 0.551079f, 0.553216f, 0.555353f,
+		0.55749f, 0.559627f, 0.561764f, 0.5639f, 0.566037f, 0.568174f,
+		0.570311f, 0.572448f, 0.574585f, 0.576722f, 0.578859f, 0.580996f,
+		0.583133f, 0.58527f, 0.587407f, 0.589544f, 0.59168f, 0.593817f,
+		0.595954f, 0.598091f, 0.600228f, 0.602365f, 0.604502f, 0.606639f,
+		0.608776f, 0.610913f, 0.61305f, 0.615187f, 0.617324f, 0.619461f,
+		0.621597f, 0.623734f, 0.625871f, 0.628008f, 0.630145f, 0.632282f,
+		0.634419f, 0.636556f, 0.638693f, 0.64083f, 0.642967f, 0.645104f,
+		0.647241f, 0.649377f, 0.651514f, 0.653651f, 0.655788f, 0.657925f,
+		0.660062f, 0.662199f, 0.664336f, 0.666473f, 0.66861f, 0.670747f,
+		0.672884f, 0.675021f, 0.677157f, 0.679294f, 0.681431f, 0.683568f,
+		0.685705f, 0.687842f, 0.689979f, 0.692116f, 0.694253f, 0.69639f,
+		0.698527f, 0.700664f, 0.702801f, 0.704938f, 0.707074f, 0.709211f,
+		0.711348f, 0.713485f, 0.715622f, 0.717759f, 0.719896f, 0.722033f,
+		0.72417f, 0.726307f, 0.728444f, 0.730581f, 0.732717f, 0.734854f,
+		0.736991f, 0.739128f, 0.741265f, 0.743402f, 0.745539f, 0.747676f,
+		0.749813f, 0.75195f, 0.754087f, 0.756224f, 0.758361f, 0.760498f,
+		0.762634f, 0.764771f, 0.766908f, 0.769045f, 0.771182f, 0.773319f,
+		0.775456f, 0.777593f, 0.77973f, 0.781867f, 0.784004f, 0.786141f,
+		0.788278f, 0.790415f, 0.792551f, 0.794688f, 0.796825f, 0.798962f,
+		0.801099f, 0.803236f, 0.805373f, 0.80751f, 0.809647f, 0.811784f,
+		0.813921f, 0.816058f, 0.818194f, 0.820331f, 0.822468f, 0.824605f,
+		0.826742f, 0.828879f, 0.831016f, 0.833153f, 0.83529f, 0.837427f,
+		0.839564f, 0.841701f, 0.843838f, 0.845975f, 0.848111f, 0.850248f,
+		0.852385f, 0.854522f, 0.856659f, 0.858796f, 0.860933f, 0.86307f,
+		0.865207f, 0.867344f, 0.869481f, 0.871618f, 0.873755f, 0.875891f,
+		0.878028f, 0.880165f, 0.882302f, 0.884439f, 0.886576f, 0.888713f,
+		0.89085f, 0.892987f, 0.895124f, 0.897261f, 0.899398f, 0.901534f,
+		0.903671f, 0.905808f, 0.907945f, 0.910082f, 0.912219f, 0.914356f,
+		0.916493f, 0.91863f, 0.920767f, 0.922904f, 0.925041f, 0.927178f,
+		0.929315f, 0.931451f, 0.933588f, 0.935725f, 0.937862f, 0.939999f,
+		0.942136f, 0.944273f, 0.94641f, 0.948547f, 0.950684f, 0.952821f,
+		0.954958f, 0.957094f, 0.959232f, 0.961368f, 0.963505f, 0.965642f,
+		0.967779f, 0.969916f, 0.972053f, 0.97419f, 0.976327f, 0.978464f,
+		0.980601f, 0.982738f, 0.984875f, 0.987011f, 0.989148f, 0.991285f,
+		0.993422f, 0.995559f, 0.997696f, 0.999833f, 0.982616f, 0.963759f,
+		0.944902f, 0.926045f, 0.907188f, 0.888331f, 0.869474f, 0.850617f,
+		0.83176f, 0.812903f, 0.794046f, 0.775189f, 0.756331f, 0.737474f,
+		0.718617f, 0.69976f, 0.680903f, 0.662046f, 0.643189f, 0.624332f,
+		0.605475f, 0.586618f, 0.567761f, 0.548904f, 0.530047f, 0.51119f,
+		0.492333f, 0.473476f, 0.454618f, 0.435761f, 0.416904f, 0.398047f,
+		0.37919f, 0.360333f, 0.341476f, 0.322619f, 0.303762f, 0.284905f,
+		0.266048f, 0.247191f
+	};
+};
+
+template <int NV>
+using cable_table_t = wrap::data<control::cable_table<parameter::plain<minmax_t<NV>, 0>>, 
+                                 data::embedded::table<cable_table_t_data>>;
 
 template <int NV>
 using smoothed_parameter_mod = parameter::chain<ranges::Identity, 
                                                 parameter::plain<mojo1_t<NV>, 0>, 
-                                                parameter::plain<minmax_t<NV>, 0>, 
-                                                parameter::plain<pma_t<NV>, 0>>;
+                                                parameter::plain<pma_t<NV>, 0>, 
+                                                parameter::plain<cable_table_t<NV>, 0>>;
 
 template <int NV>
 using smoothed_parameter_t = wrap::mod<smoothed_parameter_mod<NV>, 
@@ -78,7 +175,8 @@ using split_t = container::split<parameter::empty,
 
 template <int NV>
 using split1_t = container::split<parameter::empty, 
-                                  wrap::fix<1, minmax_t<NV>>>;
+                                  wrap::fix<1, cable_table_t<NV>>, 
+                                  minmax_t<NV>>;
 
 template <int NV>
 using modchain_t_ = container::chain<parameter::empty, 
@@ -225,15 +323,15 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		SNEX_METADATA_ENCODED_PARAMETERS(78)
 		{
 			0x005B, 0x0000, 0x4800, 0x6165, 0x7976, 0x0000, 0x0000, 0x0000, 
-            0x8000, 0x003F, 0x8000, 0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 
+            0x8000, 0xDC3F, 0x001C, 0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 
             0x0001, 0x0000, 0x694D, 0x0078, 0x0000, 0x0000, 0x0000, 0x3F80, 
             0x0000, 0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 0x025B, 0x0000, 
             0x5700, 0x6965, 0x6867, 0x0074, 0x0000, 0x0000, 0x0000, 0x3F80, 
-            0x0B5B, 0x3F58, 0x0000, 0x3F80, 0x0000, 0x0000, 0x035B, 0x0000, 
+            0x0AE5, 0x3F01, 0x0000, 0x3F80, 0x0000, 0x0000, 0x035B, 0x0000, 
             0x5300, 0x6F74, 0x706D, 0x0000, 0x0000, 0x0000, 0x8000, 0x003F, 
-            0x8000, 0x003F, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0004, 0x0000, 
-            0x7243, 0x7375, 0x0068, 0x0000, 0x0000, 0x0000, 0x3F80, 0x0000, 
-            0x3F80, 0x0000, 0x3F80, 0x0000, 0x0000, 0x0000
+            0x0000, 0x0000, 0x8000, 0x003F, 0x0000, 0x5B00, 0x0004, 0x0000, 
+            0x7243, 0x7375, 0x0068, 0x0000, 0x0000, 0x0000, 0x3F80, 0xC073, 
+            0x3DD8, 0x0000, 0x3F80, 0x0000, 0x0000, 0x0000
 		};
 	};
 	
@@ -252,7 +350,8 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		auto& minmax3 = this->getT(2).getT(0).getT(4);                                // Sumo_impl::minmax3_t<NV>
 		auto& minmax4 = this->getT(2).getT(0).getT(5);                                // Sumo_impl::minmax4_t<NV>
 		auto& split1 = this->getT(2).getT(1);                                         // Sumo_impl::split1_t<NV>
-		auto& minmax = this->getT(2).getT(1).getT(0);                                 // Sumo_impl::minmax_t<NV>
+		auto& cable_table = this->getT(2).getT(1).getT(0);                            // Sumo_impl::cable_table_t<NV>
+		auto& minmax = this->getT(2).getT(1).getT(1);                                 // Sumo_impl::minmax_t<NV>
 		auto& dry_wet1 = this->getT(3);                                               // Sumo_impl::dry_wet1_t<NV>
 		auto& dry_path = this->getT(3).getT(0);                                       // Sumo_impl::dry_path_t<NV>
 		auto& dry_wet_mixer = this->getT(3).getT(0).getT(0);                          // Sumo_impl::dry_wet_mixer_t<NV>
@@ -295,11 +394,12 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		// Modulation Connections ------------------------------------------------------------------
 		
 		mojo1.getWrappedObject().getParameter().connectT(0, Mojo);            // mojo1 -> Mojo::Input
-		minmax.getWrappedObject().getParameter().connectT(0, gain);           // minmax -> gain::Gain
 		pma.getWrappedObject().getParameter().connectT(0, Mojo1);             // pma -> Mojo1::Input
+		minmax.getWrappedObject().getParameter().connectT(0, gain);           // minmax -> gain::Gain
+		cable_table.getWrappedObject().getParameter().connectT(0, minmax);    // cable_table -> minmax::Value
 		smoothed_parameter.getParameter().connectT(0, mojo1);                 // smoothed_parameter -> mojo1::Value
-		smoothed_parameter.getParameter().connectT(1, minmax);                // smoothed_parameter -> minmax::Value
-		smoothed_parameter.getParameter().connectT(2, pma);                   // smoothed_parameter -> pma::Value
+		smoothed_parameter.getParameter().connectT(1, pma);                   // smoothed_parameter -> pma::Value
+		smoothed_parameter.getParameter().connectT(2, cable_table);           // smoothed_parameter -> cable_table::Value
 		minmax1.getWrappedObject().getParameter().connectT(0, svf_eq);        // minmax1 -> svf_eq::Frequency
 		minmax1.getWrappedObject().getParameter().connectT(1, svf_eq1);       // minmax1 -> svf_eq1::Frequency
 		minmax2.getWrappedObject().getParameter().connectT(0, svf_eq);        // minmax2 -> svf_eq::Q
@@ -361,12 +461,14 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		minmax4.setParameterT(4, 0.);      // control::minmax::Step
 		minmax4.setParameterT(5, 0.);      // control::minmax::Polarity
 		
-		;                                 // minmax::Value is automated
-		minmax.setParameterT(1, -10.);    // control::minmax::Minimum
-		minmax.setParameterT(2, 0.);      // control::minmax::Maximum
-		minmax.setParameterT(3, 0.46819); // control::minmax::Skew
-		minmax.setParameterT(4, 0.1);     // control::minmax::Step
-		minmax.setParameterT(5, 1.);      // control::minmax::Polarity
+		; // cable_table::Value is automated
+		
+		;                                  // minmax::Value is automated
+		minmax.setParameterT(1, -7.4);     // control::minmax::Minimum
+		minmax.setParameterT(2, 0.1);      // control::minmax::Maximum
+		minmax.setParameterT(3, 0.116028); // control::minmax::Skew
+		minmax.setParameterT(4, 0.1);      // control::minmax::Step
+		minmax.setParameterT(5, 1.);       // control::minmax::Polarity
 		
 		; // dry_wet1::DryWet is automated
 		
@@ -422,11 +524,18 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 		wet_gain.setParameterT(1, 20.); // core::gain::Smoothing
 		wet_gain.setParameterT(2, 0.);  // core::gain::ResetValue
 		
-		this->setParameterT(0, 1.);
+		this->setParameterT(0, 0.50044);
 		this->setParameterT(1, 1.);
-		this->setParameterT(2, 0.843923);
-		this->setParameterT(3, 1.);
-		this->setParameterT(4, 1.);
+		this->setParameterT(2, 0.504073);
+		this->setParameterT(3, 0.);
+		this->setParameterT(4, 0.105836);
+		this->setExternalData({}, -1);
+	}
+	~instance() override
+	{
+		// Cleanup external data references --------------------------------------------------------
+		
+		this->setExternalData({}, -1);
 	}
 	
 	static constexpr bool isPolyphonic() { return NV > 1; };
@@ -434,6 +543,13 @@ template <int NV> struct instance: public Sumo_impl::Sumo_t_<NV>
 	static constexpr bool hasTail() { return true; };
 	
 	static constexpr bool isSuspendedOnSilence() { return false; };
+	
+	void setExternalData(const ExternalData& b, int index)
+	{
+		// External Data Connections ---------------------------------------------------------------
+		
+		this->getT(2).getT(1).getT(0).setExternalData(b, index); // Sumo_impl::cable_table_t<NV>
+	}
 };
 }
 

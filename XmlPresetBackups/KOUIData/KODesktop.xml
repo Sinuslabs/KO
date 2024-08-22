@@ -91,13 +91,14 @@
         <Component type="ScriptSlider" id="GainSlider" x="700.0" y="55.0" parentComponent="Main_Route"
                    width="40.0" height="220.0" text="PeakMeterVertPointer" mode="Decibel"
                    min="-100.0" max="24.0" stepSize="0.1000000014901161" suffix=" dB"
-                   middlePosition="-18.0" isPluginParameter="1" pluginParameterName="Wet Gain"/>
+                   middlePosition="-18.0" isPluginParameter="1" pluginParameterName="Wet Gain"
+                   defaultValue="-2.0"/>
         <Component type="ScriptButton" id="bypass" x="705.0" y="280.0" parentComponent="Main_Route"
                    width="30.0" height="30.0" saveInPreset="0" pluginParameterName="Bypass"
                    isPluginParameter="1"/>
         <Component type="ScriptSlider" id="Mix_knb" x="475.0" y="270.0" parentComponent="Main_Route"
                    width="180.0" height="30.0" isPluginParameter="1" pluginParameterName="Mix"
-                   middlePosition="0.5" mouseSensitivity="2.0" text="MIX" defaultValue="0.5"
+                   middlePosition="0.5" mouseSensitivity="2.0" text="MIX" defaultValue="0.75"
                    mode="NormalizedPercentage" suffix="%"/>
       </Component>
       <Component type="ScriptPanel" id="PresetBrowser_Route" x="0.0" y="0.0" parentComponent="display"

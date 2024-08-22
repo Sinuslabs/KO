@@ -308,7 +308,7 @@
       </Node>
     </Nodes>
     <Parameters>
-      <Parameter ID="Punch" MinValue="0.0" MaxValue="1.0" Value="0.3876573638916015">
+      <Parameter ID="Punch" MinValue="0.0" MaxValue="1.0" Value="0.4954386138916015">
         <Connections>
           <Connection NodeId="minmax" ParameterId="Value"/>
           <Connection NodeId="minmax1" ParameterId="Value"/>
@@ -317,7 +317,7 @@
           <Connection NodeId="pma1" ParameterId="Value"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Wut" MinValue="0.0" MaxValue="1.0" Value="0.6748025512695313">
+      <Parameter ID="Wut" MinValue="0.0" MaxValue="1.0" Value="0.5024900512695313">
         <Connections>
           <Connection NodeId="pma" ParameterId="Value"/>
           <Connection NodeId="pma1" ParameterId="Multiply"/>
