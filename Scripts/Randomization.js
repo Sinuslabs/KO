@@ -9,8 +9,7 @@ namespace Randomization {
 	
 	const var Karate_knbs = [Content.getComponent("Karate_Pressure_knb"),
 	                        Content.getComponent("Karate_Focus_knb"),
-	                        Content.getComponent("Karate_Air_knb"),
-	                        Content.getComponent("Karate_Speed_knb")];
+	                        Content.getComponent("Karate_Air_knb")];
 	
 	const var Sumo_knbs = [Content.getComponent("Sumo_Stomp_knb"),
 	                       Content.getComponent("Sumo_Crush_knb"),

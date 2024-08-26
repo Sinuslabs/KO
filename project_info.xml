@@ -19,8 +19,8 @@
   <AppGroupID value=""/>
   <RedirectSampleFolder value=""/>
   <AAXCategoryFX value="AAX_ePlugInCategory_Modulation"/>
-  <VST3Category value=""/>
-  <SupportMonoFX value="0"/>
+  <VST3Category value="Distortion"/>
+  <SupportMonoFX value="1"/>
   <EnableMidiInputFX value="No"/>
   <EnableMidiOut value="No"/>
   <EnableSoundGeneratorsFX value="No"/>

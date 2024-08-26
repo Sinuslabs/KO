@@ -3,6 +3,39 @@
 <Network ID="Boxer" Version="0.0.0" AllowCompilation="1">
   <Node FactoryPath="container.chain" ID="Boxer" Bypassed="0" ShowParameters="1">
     <Nodes>
+      <Node ID="wut_smooth" FactoryPath="control.smoothed_parameter" Bypassed="0">
+        <Properties>
+          <Property ID="Mode" Value="Linear Ramp"/>
+        </Properties>
+        <ModulationTargets>
+          <Connection NodeId="pma1" ParameterId="Multiply"/>
+          <Connection NodeId="pma" ParameterId="Value"/>
+        </ModulationTargets>
+        <Parameters>
+          <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Automated="1"/>
+          <Parameter MinValue="0.1000000014901161" MaxValue="1000.0" StepSize="0.1000000014901161"
+                     ID="SmoothingTime" Value="151.7000022605062"/>
+          <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Enabled" Value="1.0"/>
+        </Parameters>
+      </Node>
+      <Node ID="Punch_smooth" FactoryPath="control.smoothed_parameter" Bypassed="0">
+        <Properties>
+          <Property ID="Mode" Value="Linear Ramp"/>
+        </Properties>
+        <ModulationTargets>
+          <Connection NodeId="minmax1" ParameterId="Value"/>
+          <Connection NodeId="minmax2" ParameterId="Value"/>
+          <Connection NodeId="minmax" ParameterId="Value"/>
+          <Connection NodeId="pma1" ParameterId="Value"/>
+          <Connection NodeId="DrumSlam" ParameterId="Drive"/>
+        </ModulationTargets>
+        <Parameters>
+          <Parameter MinValue="0.0" MaxValue="1.0" ID="Value" Automated="1"/>
+          <Parameter MinValue="0.1000000014901161" MaxValue="1000.0" StepSize="0.1000000014901161"
+                     ID="SmoothingTime" Value="250.600003734231"/>
+          <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Enabled" Value="1.0"/>
+        </Parameters>
+      </Node>
       <Node ID="modchain" FactoryPath="container.modchain" Bypassed="0">
         <Nodes>
           <Node ID="split" FactoryPath="container.split" Bypassed="0">
@@ -124,7 +157,7 @@
                       <Parameter MinValue="-1.0" MaxValue="1.0" ID="Add" Value="0.0"/>
                     </Parameters>
                   </Node>
-                  <Node ID="Drive" FactoryPath="project.Drive" Bypassed="0">
+                  <Node ID="Drive" FactoryPath="project.Drive" Bypassed="0" Folded="1">
                     <Parameters>
                       <Parameter MinValue="0.0" MaxValue="1.0" ID="Drive" Automated="1"/>
                       <Parameter MinValue="0.0" MaxValue="1.0" ID="Highpass" Value="0.0"/>
@@ -308,19 +341,14 @@
       </Node>
     </Nodes>
     <Parameters>
-      <Parameter ID="Punch" MinValue="0.0" MaxValue="1.0" Value="0.4954386138916015">
+      <Parameter ID="Punch" MinValue="0.0" MaxValue="1.0" Value="0.7136158447265626">
         <Connections>
-          <Connection NodeId="minmax" ParameterId="Value"/>
-          <Connection NodeId="minmax1" ParameterId="Value"/>
-          <Connection NodeId="minmax2" ParameterId="Value"/>
-          <Connection NodeId="DrumSlam" ParameterId="Drive"/>
-          <Connection NodeId="pma1" ParameterId="Value"/>
+          <Connection NodeId="Punch_smooth" ParameterId="Value"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Wut" MinValue="0.0" MaxValue="1.0" Value="0.5024900512695313">
+      <Parameter ID="Wut" MinValue="0.0" MaxValue="1.0" Value="0.5313251342773438">
         <Connections>
-          <Connection NodeId="pma" ParameterId="Value"/>
-          <Connection NodeId="pma1" ParameterId="Multiply"/>
+          <Connection NodeId="wut_smooth" ParameterId="Value"/>
         </Connections>
       </Parameter>
       <Parameter ID="Mix" MinValue="0.0" MaxValue="1.0" Value="1.0">

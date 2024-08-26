@@ -27,10 +27,14 @@ using band2_t = container::chain<parameter::empty,
                                  wrap::fix<2, jdsp::jlinkwitzriley>, 
                                  jdsp::jlinkwitzriley, 
                                  updown_comp1_t>;
+
+using chain_t = container::chain<parameter::empty, 
+                                 wrap::fix<2, core::empty>>;
 using updown_comp2_t = updown_comp1_t;
 
 using band3_t = container::chain<parameter::empty, 
                                  wrap::fix<2, jdsp::jlinkwitzriley>, 
+                                 chain_t, 
                                  jdsp::jlinkwitzriley, 
                                  updown_comp2_t>;
 
@@ -152,8 +156,9 @@ template <int NV> struct instance: public wtf_impl::wtf_t_<NV>
 		auto& updown_comp1 = this->getT(0).getT(0).getT(0).getT(1).getT(2);          // wtf_impl::updown_comp1_t
 		auto& band3 = this->getT(0).getT(0).getT(0).getT(2);                         // wtf_impl::band3_t
 		auto& lr3_1 = this->getT(0).getT(0).getT(0).getT(2).getT(0);                 // jdsp::jlinkwitzriley
-		auto& lr3_2 = this->getT(0).getT(0).getT(0).getT(2).getT(1);                 // jdsp::jlinkwitzriley
-		auto& updown_comp2 = this->getT(0).getT(0).getT(0).getT(2).getT(2);          // wtf_impl::updown_comp2_t
+		auto& chain = this->getT(0).getT(0).getT(0).getT(2).getT(1);                 // wtf_impl::chain_t
+		auto& lr3_2 = this->getT(0).getT(0).getT(0).getT(2).getT(2);                 // jdsp::jlinkwitzriley
+		auto& updown_comp2 = this->getT(0).getT(0).getT(0).getT(2).getT(3);          // wtf_impl::updown_comp2_t
 		auto& mid_side1 = this->getT(0).getT(0).getT(1);                             // wtf_impl::mid_side1_t<NV>
 		auto& decoder = this->getT(0).getT(0).getT(1).getT(0);                       // routing::ms_decode
 		auto& ms_splitter = this->getT(0).getT(0).getT(1).getT(1);                   // wtf_impl::ms_splitter_t<NV>
@@ -250,7 +255,7 @@ template <int NV> struct instance: public wtf_impl::wtf_t_<NV>
 		// External Data Connections ---------------------------------------------------------------
 		
 		this->getT(0).getT(0).getT(0).getT(1).getT(2).setExternalData(b, index); // wtf_impl::updown_comp1_t
-		this->getT(0).getT(0).getT(0).getT(2).getT(2).setExternalData(b, index); // wtf_impl::updown_comp2_t
+		this->getT(0).getT(0).getT(0).getT(2).getT(3).setExternalData(b, index); // wtf_impl::updown_comp2_t
 	}
 };
 }

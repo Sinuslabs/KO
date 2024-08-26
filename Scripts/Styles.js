@@ -53,6 +53,8 @@ namespace Styles {
 		g.setColour(Theme.THEME.Colors.Display.on_display_var);
 		
 		obj.over && g.setColour(Theme.THEME.Colors.Display.on_display);
+		obj.value && g.setColour(Theme.THEME.Colors.Display.on_display);
+		
 		
 		if (!obj.enabled) {
 			g.setColour(Theme.THEME.Colors.Display.on_display_disabled);
@@ -155,7 +157,11 @@ namespace Styles {
 		}
 		
 		if (obj.over) {
-			g.setColour(Theme.THEME.Colors.Display.on_display);
+			g.setColour(Primitives.Colors.Yellow['200']);
+		}
+		
+		if (obj.over && !obj.value) {
+			g.setColour(Primitives.Colors.Yellow['500']);
 		}
 		
 		g.setFont(Theme.Regular, 16);

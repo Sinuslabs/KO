@@ -13,21 +13,19 @@
             <Control type="ScriptSlider" id="Boxer_Punch_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Boxer_Wut_knb" value="0.5"/>
             <Control type="ScriptButton" id="Boxer_6oz_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Karate_Speed_knb" value="0.300000011920929"/>
             <Control type="ScriptSlider" id="Karate_Focus_knb" value="0.5"/>
-            <Control type="ScriptSlider" id="Karate_Pressure_knb" value="0.25"/>
+            <Control type="ScriptSlider" id="Karate_Pressure_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Karate_Air_knb" value="0.25"/>
             <Control type="ScriptSlider" id="Sumo_Heavy_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Sumo_Weight_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.0"/>
-            <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.300000011920929"/>
+            <Control type="ScriptSlider" id="Sumo_Crush_knb" value="0.0"/>
             <Control type="ScriptSlider" id="OutputPeakMeterFillL" value="-100.0"/>
             <Control type="ScriptSlider" id="OutputPeakMeterPointL" value="-100.0"/>
-            <Control type="ScriptSlider" id="GainSlider" value="-1.999998569488525"/>
-            <Control type="ScriptSlider" id="Mix_knb" value="0.75"/>
+            <Control type="ScriptSlider" id="GainSlider" value="0.2000014930963516"/>
+            <Control type="ScriptSlider" id="Mix_knb" value="1.0"/>
             <Control type="ScriptButton" id="Close_PresetBrowser_btn" value="0.0"/>
             <Control type="ScriptButton" id="update_now_btn" value="0.0"/>
-            <Control type="ScriptButton" id="Update_btn" value="1.0"/>
             <Control type="ScriptSlider" id="fx_select" value="0.0"/>
           </Content>
           <UIData Source="KOUIData"/>
@@ -54,13 +52,13 @@
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
         </Processor>
         <Processor Type="Hardcoded Master FX" ID="KarateFX" Bypassed="1" Network="Karate"
-                   Focus="0.5" Mix="1.0" Air="0.25" Pressure="0.25" Speed="0.300000011920929">
+                   Focus="0.5" Mix="1.0" Air="0.25" Pressure="0.5" Speed="0.300000011920929">
           <ChildProcessors/>
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
         </Processor>
         <Processor Type="Hardcoded Master FX" ID="SumoFX" Bypassed="1" Network="Sumo"
-                   Heavy="0.5" Mix="1.0" Weight="0.5" Stomp="0.0" Crush="0.300000011920929">
+                   Heavy="0.5" Mix="1.0" Weight="0.5" Stomp="0.0" Crush="0.0">
           <ChildProcessors/>
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
@@ -89,8 +87,8 @@
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
         </Processor>
-        <Processor Type="SimpleGain" ID="WetGain" Bypassed="0" Gain="-2.498774766921997"
-                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+        <Processor Type="SimpleGain" ID="WetGain" Bypassed="0" Gain="0.0" Delay="0.0"
+                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
           <ChildProcessors>
             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
               <ChildProcessors/>
@@ -108,8 +106,8 @@
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
         </Processor>
-        <Processor Type="SimpleGain" ID="DryGain" Bypassed="0" Gain="-12.04120063781738"
-                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+        <Processor Type="SimpleGain" ID="DryGain" Bypassed="0" Gain="-100.0" Delay="0.0"
+                   Width="100.0" Balance="0.0" InvertPolarity="0.0">
           <ChildProcessors>
             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
               <ChildProcessors/>
@@ -127,7 +125,7 @@
           <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
                          Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
         </Processor>
-        <Processor Type="SimpleGain" ID="OutGain" Bypassed="0" Gain="-1.999998211860657"
+        <Processor Type="SimpleGain" ID="OutGain" Bypassed="0" Gain="0.2000012248754501"
                    Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
           <ChildProcessors>
             <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">

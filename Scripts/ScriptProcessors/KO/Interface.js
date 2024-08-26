@@ -71,6 +71,7 @@ Content.getComponent("Close_PresetBrowser_btn").setControlCallback(onClose_Prese
 
 //KO_graphics.initAni();
 
+
 Content.callAfterDelay(10, afterDelay, {});
 inline function afterDelay() {
 
@@ -117,7 +118,7 @@ inline function addVisualGuide() {
 	Content.addVisualGuide([670, 0], Colours.red);
 }
 
-addVisualGuide();
+//addVisualGuide();
 
 if (!Globals.activated) {
 	GainReduction.setBypassed(false);

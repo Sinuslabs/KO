@@ -45,7 +45,7 @@ namespace FXs {
 	                       Content.getComponent("Sumo_Crush_knb")];
 	
 	
-	const var Karate_knbs = [Content.getComponent("Karate_Speed_knb"),
+	const var Karate_knbs = [
 	                         Content.getComponent("Karate_Focus_knb"),
 	                         Content.getComponent("Karate_Air_knb"),
 	                         Content.getComponent("Karate_Pressure_knb")

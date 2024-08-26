@@ -1,7 +1,7 @@
 /* ------------------------------------------------------------
 name: "Transient"
-Code generated with Faust 2.69.3 (https://faust.grame.fr)
-Compilation options: -lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -uim -single -ftz 0
+Code generated with Faust 2.74.6 (https://faust.grame.fr)
+Compilation options: -lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -mdd 1024 -mdy 33 -uim -single -ftz 0
 ------------------------------------------------------------ */
 
 #ifndef  ___Transient_H__
@@ -40,6 +40,7 @@ class _Transient final : public ::faust::dsp {
  public:
 	
 	int fSampleRate;
+	float fConst0;
 	float fConst1;
 	FAUSTFLOAT fHslider0;
 	float fConst2;
@@ -72,15 +73,16 @@ class _Transient final : public ::faust::dsp {
 	float fRec14[3];
 	
  public:
-	_Transient() {}
-
+	_Transient() {
+	}
+	
 	void metadata(Meta* m) { 
 		m->declare("basics.lib/bypass1:author", "Julius Smith");
 		m->declare("basics.lib/name", "Faust Basic Element Library");
 		m->declare("basics.lib/tabulateNd", "Copyright (C) 2023 Bart Brouns <bart@magnetophon.nl>");
 		m->declare("basics.lib/toggle:author", "Vince");
-		m->declare("basics.lib/version", "1.11.1");
-		m->declare("compile_options", "-lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -uim -single -ftz 0");
+		m->declare("basics.lib/version", "1.18.0");
+		m->declare("compile_options", "-lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -mdd 1024 -mdy 33 -uim -single -ftz 0");
 		m->declare("filename", "Transient.dsp");
 		m->declare("filters.lib/fir:author", "Julius O. Smith III");
 		m->declare("filters.lib/fir:copyright", "Copyright (C) 2003-2019 by Julius O. Smith III <jos@ccrma.stanford.edu>");
@@ -110,7 +112,7 @@ class _Transient final : public ::faust::dsp {
 		m->declare("maths.lib/copyright", "GRAME");
 		m->declare("maths.lib/license", "LGPL with exception");
 		m->declare("maths.lib/name", "Faust Math Library");
-		m->declare("maths.lib/version", "2.7.0");
+		m->declare("maths.lib/version", "2.8.0");
 		m->declare("name", "Transient");
 		m->declare("platform.lib/name", "Generic Platform Library");
 		m->declare("platform.lib/version", "1.3.0");
@@ -140,7 +142,7 @@ class _Transient final : public ::faust::dsp {
 	
 	void instanceConstants(int sample_rate) {
 		fSampleRate = sample_rate;
-		float fConst0 = std::min<float>(1.92e+05f, std::max<float>(1.0f, float(fSampleRate)));
+		fConst0 = std::min<float>(1.92e+05f, std::max<float>(1.0f, float(fSampleRate)));
 		fConst1 = 3.1415927f / fConst0;
 		fConst2 = 33.333332f / fConst0;
 		fConst3 = std::exp(-fConst2);
@@ -275,10 +277,10 @@ class _Transient final : public ::faust::dsp {
 		for (int i0 = 0; i0 < count; i0 = i0 + 1) {
 			float fTemp0 = float(input0[i0]);
 			fRec3[0] = fTemp0 - fSlow5 * (fSlow6 * fRec3[2] + fSlow7 * fRec3[1]);
-			float fTemp1 = 2.0f * fRec3[1];
-			fRec2[0] = fTemp0 - (fSlow5 * (fRec3[2] + fRec3[0] + fTemp1) + fSlow2 * (fSlow8 * fRec2[2] + fSlow9 * fRec2[1]));
-			float fTemp2 = 2.0f * fRec2[1];
-			fRec1[IOTA0 & 8191] = fRec1[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * (fRec2[2] + fRec2[0] + fTemp2));
+			float fTemp1 = fSlow5 * (fRec3[2] + fRec3[0] + 2.0f * fRec3[1]);
+			fRec2[0] = fTemp0 - (fTemp1 + fSlow2 * (fSlow8 * fRec2[2] + fSlow9 * fRec2[1]));
+			float fTemp2 = fRec2[2] + fRec2[0] + 2.0f * fRec2[1];
+			fRec1[IOTA0 & 8191] = fRec1[(IOTA0 - 1) & 8191] + _Transient_faustpower2_f(fSlow2 * fTemp2);
 			float fTemp3 = std::sqrt(fConst2 * (fRec1[IOTA0 & 8191] - fRec1[(IOTA0 - iConst5) & 8191]));
 			fRec4[0] = fConst4 * fTemp3 + fConst3 * fRec4[1];
 			fRec5[0] = fSlow10 + fConst7 * fRec5[1];
@@ -289,7 +291,7 @@ class _Transient final : public ::faust::dsp {
 			fVbargraph0 = FAUSTFLOAT(float(iRec7[0]));
 			int iTemp4 = fVbargraph0 != 1.0f;
 			fRec8[0] = fTemp0 - fSlow2 * (fSlow8 * fRec8[2] + fSlow9 * fRec8[1]);
-			output0[i0] = FAUSTFLOAT(fSlow2 * fRec0[0] * (fRec2[0] + fRec2[2] + fTemp2) + ((iTemp4) ? fTemp0 + fSlow5 * (fRec3[0] + fRec3[2] + fTemp1) - fSlow2 * (2.0f * fRec8[1] + fRec8[0] + fRec8[2]) : 0.0f));
+			output0[i0] = FAUSTFLOAT(fSlow2 * fRec0[0] * fTemp2 + ((iTemp4) ? fTemp0 + fTemp1 - fSlow2 * (fRec8[2] + fRec8[0] + 2.0f * fRec8[1]) : 0.0f));
 			float fTemp5 = float(input1[i0]);
 			fRec12[0] = fTemp5 - fSlow5 * (fSlow6 * fRec12[2] + fSlow7 * fRec12[1]);
 			float fTemp6 = fSlow5 * (fRec12[2] + fRec12[0] + 2.0f * fRec12[1]);
@@ -331,7 +333,7 @@ class _Transient final : public ::faust::dsp {
 	
 	#define FAUST_FILE_NAME "Transient.dsp"
 	#define FAUST_CLASS_NAME "_Transient"
-	#define FAUST_COMPILATION_OPIONS "-lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -uim -single -ftz 0"
+	#define FAUST_COMPILATION_OPIONS "-lang cpp -rui -nvi -ct 1 -cn _Transient -scn ::faust::dsp -es 1 -mcd 16 -mdd 1024 -mdy 33 -uim -single -ftz 0"
 	#define FAUST_INPUTS 2
 	#define FAUST_OUTPUTS 2
 	#define FAUST_ACTIVES 5
