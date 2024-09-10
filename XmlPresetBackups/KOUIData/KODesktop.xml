@@ -20,9 +20,10 @@
                      width="70.0" height="90.0" text="Wut" mouseSensitivity="2.0"
                      mode="NormalizedPercentage" suffix="%" middlePosition="0.5" pluginParameterName="Wut"
                      isPluginParameter="1" defaultValue="0.5"/>
-          <Component type="ScriptButton" id="Boxer_6oz_knb" x="110.0" y="145.0" width="95.0"
-                     height="40.0" text="LOGIC" parentComponent="Algo1_AlgoRoute"
-                     isPluginParameter="1" pluginParameterName="LogiC"/>
+          <Component type="ScriptSlider" id="Boxer_Filter_knb" x="130.0" y="130.0"
+                     text="Filter" width="60.0" height="80.0" parentComponent="Algo1_AlgoRoute"
+                     defaultValue="1.0" middlePosition="0.5" isPluginParameter="1"
+                     pluginParameterName="Filter" mouseSensitivity="2.0"/>
         </Component>
         <Component type="ScriptPanel" id="Algo2_AlgoRoute" x="405.0" y="40.0" parentComponent="Main_Route"
                    width="305.0" height="240.0" visible="0">
@@ -92,7 +93,7 @@
                    isPluginParameter="1"/>
         <Component type="ScriptSlider" id="Mix_knb" x="475.0" y="270.0" parentComponent="Main_Route"
                    width="180.0" height="30.0" isPluginParameter="1" pluginParameterName="Mix"
-                   middlePosition="0.5" mouseSensitivity="2.0" text="MIX" defaultValue="0.75"
+                   middlePosition="0.5" mouseSensitivity="1.5" text="MIX" defaultValue="0.75"
                    mode="NormalizedPercentage" suffix="%"/>
       </Component>
       <Component type="ScriptPanel" id="PresetBrowser_Route" x="0.0" y="0.0" parentComponent="display"

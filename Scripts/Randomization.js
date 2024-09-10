@@ -1,7 +1,8 @@
 namespace Randomization {
 	
 	const var Boxer_knbs = [Content.getComponent("Boxer_Wut_knb"),
-	                        Content.getComponent("Boxer_Punch_knb")];
+	                        Content.getComponent("Boxer_Punch_knb"),
+	                        Content.getComponent("Boxer_Filter_knb")];
 	
 	const var FX_selectors = [Content.getComponent("FX_1_btn"),
 	                          Content.getComponent("FX_2_btn"),
@@ -85,7 +86,16 @@ namespace Randomization {
 	    for (knob in knobs) {
 	        local u = Math.random();
 	        local v = Math.random();
-	        local randomValue = (u + v) / 2; // Triangular distribution
+	        local randomValue = (u + v) / 1.8;
+	        
+	        if (knob.getId() == "Karate_Air_knb" ||
+	          	knob.getId() == "Sumo_Crush_knb" ||
+	          	knob.getId() == "Sumo_Stomp_knb" ||
+	          	knob.getId() == "Boxer_Filter_knb" 
+	          	) {
+	            // Bias towards lower values
+            	local randomValue = Math.pow(Math.random(), 2); 
+	        }
 	        knob.setValueNormalized(randomValue);
 	        knob.changed();
 	    }

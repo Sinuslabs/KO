@@ -248,7 +248,7 @@ template <int NV> struct instance: public wtf_impl::wtf_t_<NV>
 	
 	static constexpr bool hasTail() { return true; };
 	
-	static constexpr bool isSuspendedOnSilence() { return false; };
+	static constexpr bool isSuspendedOnSilence() { return true; };
 	
 	void setExternalData(const ExternalData& b, int index)
 	{

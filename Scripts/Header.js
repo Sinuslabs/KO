@@ -34,7 +34,7 @@ namespace Header {
 	Update_btn.showControl(false);
 	
 	reg clickCounter = 0;
-	const var clickThreshold = 6; // Number of clicks required to trigger custom function
+	const var clickThreshold = 9; // Number of clicks required to trigger custom function
 	const var decreaseInterval = 200;
 	const var decraseClick = 0.5;
 	

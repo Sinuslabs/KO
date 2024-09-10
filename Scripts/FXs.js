@@ -35,10 +35,9 @@ namespace FXs {
 	Limit_Button.setLocalLookAndFeel(Styles.LAF_LimitBtn);
 	
 	const var Boxer_knbs = [Content.getComponent("Boxer_Punch_knb"),
-                        Content.getComponent("Boxer_Wut_knb")];
+                        Content.getComponent("Boxer_Wut_knb"),
+                        Content.getComponent("Boxer_Filter_knb")];
 
-	const var Boxer_6oz_knb = Content.getComponent("Boxer_6oz_knb");
-	
 	const var Sumo_knbs = [Content.getComponent("Sumo_Heavy_knb"),
 	                       Content.getComponent("Sumo_Weight_knb"),
 	                       Content.getComponent("Sumo_Stomp_knb"),
@@ -55,9 +54,6 @@ namespace FXs {
 		knb.setLocalLookAndFeel(Styles.LAF_DisplayKnobSimple);
 		knb.setControlCallback(onBoxerKnbs);
 	}
-	
-	Boxer_6oz_knb.setLocalLookAndFeel(Styles.LAF_displayButtonLogic);
-	Boxer_6oz_knb.setControlCallback(on6oz);
 	
 	for (knb in Sumo_knbs) {
 		knb.setLocalLookAndFeel(Styles.LAF_DisplayKnobSimple);
@@ -109,6 +105,8 @@ namespace FXs {
 				BoxerFX.setAttribute(BoxerFX.Punch, value);
 			case 'Boxer_Wut_knb':
 				BoxerFX.setAttribute(BoxerFX.Wut, value);
+			case 'Boxer_Filter_knb':
+				BoxerFX.setAttribute(BoxerFX.Filter, 1 - value);
 		}
 	}
 	
