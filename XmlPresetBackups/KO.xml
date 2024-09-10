@@ -12,10 +12,10 @@
             <Control type="ScriptButton" id="Limit_Button" value="1.0"/>
             <Control type="ScriptSlider" id="Boxer_Punch_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Boxer_Wut_knb" value="0.5"/>
-            <Control type="ScriptSlider" id="Boxer_Filter_knb" value="1.0"/>
+            <Control type="ScriptSlider" id="Boxer_Filter_knb" value="0.0"/>
             <Control type="ScriptSlider" id="Karate_Focus_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Karate_Pressure_knb" value="0.5"/>
-            <Control type="ScriptSlider" id="Karate_Air_knb" value="0.0"/>
+            <Control type="ScriptSlider" id="Karate_Air_knb" value="0.25"/>
             <Control type="ScriptSlider" id="Sumo_Heavy_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Sumo_Weight_knb" value="0.5"/>
             <Control type="ScriptSlider" id="Sumo_Stomp_knb" value="0.0"/>
@@ -46,13 +46,13 @@
                          Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
         </Processor>
         <Processor Type="Hardcoded Master FX" ID="BoxerFX" Bypassed="0" Network="Boxer"
-                   Punch="0.5" Wut="0.5" Mix="1.0" _16oz="0.0" Filter="1.0" OutGain="0.0">
+                   Punch="0.5" Wut="0.5" Mix="1.0" _16oz="0.0" Filter="1.0" OutGain="-0.9999985098838806">
           <ChildProcessors/>
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
                          Send1="-1" Channel2="2" Send2="-1" Channel3="3" Send3="-1"/>
         </Processor>
         <Processor Type="Hardcoded Master FX" ID="KarateFX" Bypassed="1" Network="Karate"
-                   Focus="0.5" Mix="1.0" Air="0.0" Pressure="0.5" Speed="0.300000011920929"
+                   Focus="0.5" Mix="1.0" Air="0.25" Pressure="0.5" Speed="0.300000011920929"
                    OutGain="0.0">
           <ChildProcessors/>
           <RoutingMatrix NumSourceChannels="4" Channel0="-1" Send0="-1" Channel1="-1"
@@ -169,8 +169,46 @@
           <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
                          Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
         </Processor>
+        <Processor Type="SimpleGain" ID="SoftClip_In_Gain" Bypassed="1" Gain="10.0"
+                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+          <ChildProcessors>
+            <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Delay Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Width Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Pan Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+          </ChildProcessors>
+          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
+                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+        </Processor>
         <Processor Type="Hardcoded Master FX" ID="SoftClip" Bypassed="1" Network="ClipSoftly">
           <ChildProcessors/>
+          <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
+                         Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
+        </Processor>
+        <Processor Type="SimpleGain" ID="SoftClip_Out_Gain" Bypassed="1" Gain="-10.0"
+                   Delay="0.0" Width="100.0" Balance="0.0" InvertPolarity="0.0">
+          <ChildProcessors>
+            <Processor Type="ModulatorChain" ID="Gain Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Delay Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Width Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+            <Processor Type="ModulatorChain" ID="Pan Modulation" Bypassed="0" Intensity="1.0">
+              <ChildProcessors/>
+            </Processor>
+          </ChildProcessors>
           <RoutingMatrix NumSourceChannels="4" Channel0="0" Send0="-1" Channel1="1" Send1="-1"
                          Channel2="-1" Send2="-1" Channel3="-1" Send3="-1"/>
         </Processor>

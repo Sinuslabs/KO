@@ -25,6 +25,8 @@ namespace FXs {
     bypass.setLocalLookAndFeel(Styles.LAF_FXSelectorBtn);
     
     const var Limit_Button = Content.getComponent("Limit_Button");
+    const var SoftClip_In_Gain = Synth.getEffect("SoftClip_In_Gain");
+    const var SoftClip_Out_Gain = Synth.getEffect("SoftClip_Out_Gain");
     
 	for (btn in FX_Selector) {
 		btn.setLocalLookAndFeel(Styles.LAF_FXSelectorBtn);
@@ -75,6 +77,8 @@ namespace FXs {
 	
 	inline function onLimit(component, value) {
 		SoftClip.setBypassed(value);
+		SoftClip_In_Gain.setBypassed(value);
+		SoftClip_Out_Gain.setBypassed(value);
 	}
 	
 	inline function on6oz(component, value) {
