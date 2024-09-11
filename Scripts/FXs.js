@@ -168,7 +168,6 @@ namespace FXs {
 		}
 		
 		OutGain.setBypassed(value);
-		fx_select.changed();
 	} 
 	
 	inline function onKarateKnbs(component, value) {
