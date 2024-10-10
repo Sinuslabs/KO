@@ -63,9 +63,9 @@
         </Component>
         <Component type="ScriptPanel" id="KO_panel" x="-75.0" y="0.0" parentComponent="Main_Route"
                    width="470.0" height="320.0">
-          <Component type="ScriptButton" id="KO_clicker" x="75.0" y="0.0" parentComponent="KO_panel"
-                     enableMidiLearn="0" isMomentary="1" saveInPreset="0" width="310.0"
-                     height="320.0"/>
+          <Component type="ScriptButton" id="KO_clicker" x="115.0" y="65.0" parentComponent="KO_panel"
+                     enableMidiLearn="0" isMomentary="1" saveInPreset="0" width="255"
+                     height="175"/>
         </Component>
         <Component type="ScriptButton" id="FX_1_btn" x="315.0" y="75.0" parentComponent="Main_Route"
                    width="40.0" height="40.0" enableMidiLearn="0" radioGroup="1.0"

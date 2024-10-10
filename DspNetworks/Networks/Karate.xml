@@ -142,7 +142,7 @@
         <Parameters/>
       </Node>
       <Node ID="pressure_smooth" FactoryPath="control.smoothed_parameter"
-            Bypassed="0" Folded="1">
+            Bypassed="0">
         <Properties>
           <Property ID="Mode" Value="Linear Ramp"/>
         </Properties>
@@ -157,8 +157,7 @@
           <Parameter MinValue="0.0" MaxValue="1.0" StepSize="1.0" ID="Enabled" Value="1.0"/>
         </Parameters>
       </Node>
-      <Node ID="focus_smooth" FactoryPath="control.smoothed_parameter" Bypassed="0"
-            Folded="1">
+      <Node ID="focus_smooth" FactoryPath="control.smoothed_parameter" Bypassed="0">
         <Properties>
           <Property ID="Mode" Value="Linear Ramp"/>
         </Properties>
@@ -436,7 +435,7 @@
       </Node>
     </Nodes>
     <Parameters>
-      <Parameter ID="Focus" MinValue="0.0" MaxValue="1.0" Value="0.4975502014160156">
+      <Parameter ID="Focus" MinValue="0.0" MaxValue="1.0" Value="0.5990511016845703">
         <Connections>
           <Connection NodeId="focus-slam-minmax" ParameterId="Value"/>
         </Connections>
@@ -452,7 +451,7 @@
           <Connection NodeId="Air-gain" ParameterId="Value"/>
         </Connections>
       </Parameter>
-      <Parameter ID="Pressure" MinValue="0.0" MaxValue="1.0" Value="0.5012918090820313">
+      <Parameter ID="Pressure" MinValue="0.0" MaxValue="1.0" Value="0.3742724304199219">
         <Connections>
           <Connection NodeId="pressure_smooth" ParameterId="Value"/>
         </Connections>

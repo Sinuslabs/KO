@@ -140,13 +140,7 @@ namespace FXs {
 		
 		x.wtf_icon_btn.set('enabled', !value);
 		Limit_Button.set('enabled', !value);
-		
-		Console.print('Boxer bypassed: ' + BoxerFX_bypassed);
-		Console.print('Karate bypassed: ' + KarateFX_bypassed);
-		Console.print('xFx bypassed: ' + xFx_bypassed);
-		Console.print('SumoFX bypassed: ' + SumoFX_bypassed);
-		Console.print('SoftClip bypassed: ' + SoftClip_bypassed);
-		
+	
 		if (value) {
 			BoxerFX_bypassed = BoxerFX.isBypassed();
 			KarateFX_bypassed = KarateFX.isBypassed();
