@@ -1,6 +1,6 @@
 # KO – Knockout Power, Analog Grunge, Digital Precision
 
-![Product Image of KO Audio Plugin](./Images/Product Shot 1 (main shot).png)
+![Product Image of KO Audio Plugin](https://github.com/Sinuslabs/KO/blob/main/Images/Product%20Shot%201%20(main%20shot).png)
 
 **KO** is a powerful audio plugin designed for producers who crave punchy, gritty sounds. It blends analog saturation with precise digital controls, adding serious weight to drums and bass.
 
